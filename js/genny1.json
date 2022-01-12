@@ -1,0 +1,21 @@
+{
+    "name": "HumanoidRoot",
+    "children": [
+	{
+	    "name": "hanim_vc7",
+	    "type": "Segment",
+	    "children": [
+		{
+		    "name": "Torso",
+		    "type": "Shape",
+		    "color": "#555",
+		    "geometry": {
+			"type": "Box",
+			"size": "3.684 2.508 1.08"
+		    }
+		}
+	    ]
+	}
+    ]
+			
+}
