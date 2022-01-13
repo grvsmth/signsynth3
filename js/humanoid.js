@@ -20,24 +20,67 @@ const bodyGeometry = new THREE.BoxGeometry(3.684, 2.508, 1.08);
 const bodyMesh = new THREE.Mesh( bodyGeometry, bodyMaterial );
 humanoid.add(bodyMesh);
 
-const forearmGeometry = new THREE.CylinderGeometry(0.288, 0.288, 1.92);
-const forearmMesh = new THREE.Mesh(forearmGeometry, skinMaterial2);
-forearmMesh.position.set(0, -0.96, 0);
+const skullBase = new THREE.Group();
+const skullGeometry = new THREE.SphereGeometry(1.032);
+const skullMesh = new THREE.Mesh(skullGeometry, skinMaterial);
+skullBase.add(skullMesh);
+skullBase.position.set(0, 2.532, 0);
+humanoid.add(skullBase);
 
-const elbow = new THREE.Group();
-elbow.add(forearmMesh);
-elbow.position.set(0, -2.28, 0);
+const neckGeometry = new THREE.CylinderGeometry(0.408, 0.408, 0.588);
+const neckMesh = new THREE.Mesh(neckGeometry, skinMaterial);
+neckMesh.position.set(0, 1.404, 0);
+humanoid.add(neckMesh);
 
-const upperArmGeometry = new THREE.CylinderGeometry(0.288, 0.288, 2.28);
-const upperArmMesh = new THREE.Mesh(upperArmGeometry, skinMaterial);
-upperArmMesh.position.set(0, -1.14, 0);
+const rightForearmGeometry = new THREE.CylinderGeometry(0.288,
+							0.288,
+							1.92,
+							32);
+const rightForearmMesh = new THREE.Mesh(rightForearmGeometry, skinMaterial);
+rightForearmMesh.position.set(0, -0.96, 0);
 
-const shoulder = new THREE.Group();
-shoulder.add(upperArmMesh);
-shoulder.add(elbow);
-shoulder.position.set(-1.8, 1.14, 0);
+const rightElbow = new THREE.Group();
+rightElbow.add(rightForearmMesh);
+rightElbow.position.set(0, -2.28, 0);
 
-humanoid.add(shoulder);
+const rightUpperArmGeometry = new THREE.CylinderGeometry(0.288,
+							 0.288,
+							 2.28,
+							 32);
+const rightUpperArmMesh = new THREE.Mesh(rightUpperArmGeometry, skinMaterial);
+rightUpperArmMesh.position.set(0, -1.14, 0);
+
+const rightShoulder = new THREE.Group();
+rightShoulder.add(rightUpperArmMesh);
+rightShoulder.add(rightElbow);
+rightShoulder.position.set(-1.8, 1.14, 0);
+
+humanoid.add(rightShoulder);
+
+const leftForearmGeometry = new THREE.CylinderGeometry(0.288,
+						       0.288,
+						       1.92,
+						       32);
+const leftForearmMesh = new THREE.Mesh(leftForearmGeometry, skinMaterial);
+leftForearmMesh.position.set(0, -0.96, 0);
+
+const leftElbow = new THREE.Group();
+leftElbow.add(leftForearmMesh);
+leftElbow.position.set(0, -2.28, 0);
+
+const leftUpperArmGeometry = new THREE.CylinderGeometry(0.288,
+							0.288,
+							2.28,
+							32);
+const leftUpperArmMesh = new THREE.Mesh(leftUpperArmGeometry, skinMaterial);
+leftUpperArmMesh.position.set(0, -1.14, 0);
+
+const leftShoulder = new THREE.Group();
+leftShoulder.add(leftUpperArmMesh);
+leftShoulder.add(leftElbow);
+leftShoulder.position.set(1.8, 1.14, 0);
+
+humanoid.add(leftShoulder);
 
 const signer = humanoid;
 
@@ -50,23 +93,19 @@ const totalFrames = 2000;
 let start, previousTimestamp;
 
 function animate(timestamp) {
-    console.log("animate()", timestamp);
     if (start === undefined) {
 	start = timestamp;
     }
 
     const elapsed = timestamp - start;
-    console.log("elapsed", elapsed);
 
     if (previousTimestamp !== timestamp) {
-	shoulder.rotation.x -= 0.01;
-	elbow.rotation.x += 0.005;
-	shoulder.rotation.y -= 0.01;
-	elbow.rotation.y -= 0.05;
+	rightShoulder.rotation.x -= 0.01;
+	rightElbow.rotation.x += 0.005;
+	rightShoulder.rotation.y -= 0.01;
+	rightElbow.rotation.y -= 0.05;
 	renderer.render( scene, camera );
     }
-
-    console.log("totalFrames", totalFrames);
 
     if (elapsed < totalFrames) {
 	previousTimstamp = timestamp;
