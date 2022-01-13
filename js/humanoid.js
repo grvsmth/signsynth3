@@ -1,4 +1,4 @@
-const threedDiv = document.querySelector("#3d-div");
+const threedDiv = document.querySelector("#threed-div");
 const startButton = document.querySelector("#start");
 
 const scene = new THREE.Scene();
@@ -11,10 +11,31 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize( threedDiv.offsetWidth, threedDiv.offsetHeight );
 threedDiv.appendChild( renderer.domElement );
 
-const geometry = new THREE.BoxGeometry(3.684, 2.508, 1.08);
-const material = new THREE.MeshBasicMaterial( { color: 0x505050 } );
-const cube = new THREE.Mesh( geometry, material );
-scene.add( cube );
+const humanoid = new THREE.Group();
+
+const bodyGeometry = new THREE.BoxGeometry(3.684, 2.508, 1.08);
+const bodyMaterial = new THREE.MeshBasicMaterial( { color: 0x505050 } );
+const bodyMesh = new THREE.Mesh( bodyGeometry, bodyMaterial );
+
+humanoid.add(bodyMesh);
+
+const shoulder = new THREE.Group();
+
+const armGeometry = new THREE.CylinderGeometry(0.288, 0.288, 2.28);
+const skinMaterial = new THREE.MeshBasicMaterial( {color: 0xFF9A66} );
+const armMesh = new THREE.Mesh(armGeometry, skinMaterial);
+
+armMesh.position.set(0, -1.14, 0);
+
+shoulder.add(armMesh);
+
+shoulder.position.set(-1.8, 1.14, 0);
+
+humanoid.add(shoulder);
+
+const signer = humanoid;
+
+scene.add( signer );
 
 camera.position.z = 5;
 
@@ -32,8 +53,8 @@ function animate(timestamp) {
     console.log("elapsed", elapsed);
 
     if (previousTimestamp !== timestamp) {
-	cube.rotation.x += 0.01;
-	cube.rotation.y += 0.01;
+	shoulder.rotation.x -= 0.01;
+	shoulder.rotation.y -= 0.01;
 	renderer.render( scene, camera );
     }
 
