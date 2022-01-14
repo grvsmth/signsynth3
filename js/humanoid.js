@@ -16,6 +16,7 @@ const bodyMaterial = new THREE.MeshBasicMaterial( { color: 0x505050 } );
 const skinMaterial = new THREE.MeshBasicMaterial( {color: 0xFF9A66} );
 const skinMaterial2 = new THREE.MeshBasicMaterial( {color: 0xFF9A66} );
 const hairMaterial = new THREE.MeshBasicMaterial( {color: 0xFF7F10} );
+const eyeballMaterial = new THREE.MeshBasicMaterial( {color: 0xEEEEEE} );
 
 const bodyGeometry = new THREE.BoxGeometry(3.684, 2.508, 1.08);
 const bodyMesh = new THREE.Mesh( bodyGeometry, bodyMaterial );
@@ -79,8 +80,39 @@ const hairGeometry = new THREE.PolyhedronGeometry(hairVertices,
 						  2);
 const hairMesh = new THREE.Mesh(hairGeometry, hairMaterial);
 
+
+const eyeVertices = new THREE.Float32BufferAttribute([-.2, 0, 0,
+						      -.13, -.06, 0,
+						      -.13, .07, 0,
+						      0, -.07, 0,
+						      0, .07, 0,
+						      .13, -.06, 0,
+						      .13, .07, 0,
+						      .2, 0, 0
+						     ], 3);
+
+const eyeIndices = [0, 1, 2,
+		    2, 1, 3,
+		    2, 3, 4,
+		    4, 3, 5,
+		    4, 5, 6,
+		    6, 5, 7
+		   ];
+const eyeGeometry = new THREE.BufferGeometry();
+eyeGeometry.setIndex(eyeIndices);
+eyeGeometry.setAttribute("position", eyeVertices);
+
+const rightEyeMesh = new THREE.Mesh(eyeGeometry, eyeballMaterial);
+rightEyeMesh.position.set(-0.35, 0.15, 0.99);
+
+const leftEyeMesh = new THREE.Mesh(eyeGeometry, eyeballMaterial);
+leftEyeMesh.position.set(0.35, 0.15, 0.99);
+
+
 skullBase.add(skullMesh);
 skullBase.add(hairMesh);
+skullBase.add(rightEyeMesh);
+skullBase.add(leftEyeMesh);
 skullBase.position.set(0, 2.532, 0);
 humanoid.add(skullBase);
 
