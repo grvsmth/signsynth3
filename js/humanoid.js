@@ -12,11 +12,14 @@ renderer.setSize( threedDiv.offsetWidth, threedDiv.offsetHeight );
 threedDiv.appendChild( renderer.domElement );
 
 const humanoid = new THREE.Group();
-const bodyMaterial = new THREE.MeshBasicMaterial( { color: 0x505050 } );
+const bodyMaterial = new THREE.MeshBasicMaterial( {"color": 0x505050 } );
 const skinMaterial = new THREE.MeshBasicMaterial( {color: 0xFF9A66} );
 const skinMaterial2 = new THREE.MeshBasicMaterial( {color: 0xFF9A66} );
 const hairMaterial = new THREE.MeshBasicMaterial( {color: 0xFF7F10} );
-const eyeballMaterial = new THREE.MeshBasicMaterial( {color: 0xEEEEEE} );
+const eyewhiteMaterial = new THREE.MeshBasicMaterial( {color: 0xEEEEEE} );
+const irisMaterial = new THREE.MeshBasicMaterial( {color: 0x198055} );
+const pupilMaterial = new THREE.MeshBasicMaterial( {color: 0x191919} );
+const lipMaterial = new THREE.MeshBasicMaterial( {"color": 0xC01414} );
 
 const bodyGeometry = new THREE.BoxGeometry(3.684, 2.508, 1.08);
 const bodyMesh = new THREE.Mesh( bodyGeometry, bodyMaterial );
@@ -102,17 +105,84 @@ const eyeGeometry = new THREE.BufferGeometry();
 eyeGeometry.setIndex(eyeIndices);
 eyeGeometry.setAttribute("position", eyeVertices);
 
-const rightEyeMesh = new THREE.Mesh(eyeGeometry, eyeballMaterial);
-rightEyeMesh.position.set(-0.35, 0.15, 0.99);
+const irisGeometry = new THREE.SphereGeometry(0.065);
+const pupilGeometry = new THREE.CylinderGeometry(0.025, 0.025, 0.13);
 
-const leftEyeMesh = new THREE.Mesh(eyeGeometry, eyeballMaterial);
-leftEyeMesh.position.set(0.35, 0.15, 0.99);
+const rightEyeMesh = new THREE.Mesh(eyeGeometry, eyewhiteMaterial);
+const rightIrisMesh = new THREE.Mesh(irisGeometry, irisMaterial);
 
+const rightPupilMesh = new THREE.Mesh(pupilGeometry, pupilMaterial);
+rightPupilMesh.quaternion.setFromAxisAngle(
+    new THREE.Vector3(1, 0, 0), Math.PI/2); 
+
+const rightEye = new THREE.Group();
+
+rightEye.add(rightEyeMesh);
+rightEye.add(rightIrisMesh);
+rightEye.add(rightPupilMesh);
+
+rightEye.position.set(-0.35, 0.08, 0.99);
+
+const leftEyeMesh = new THREE.Mesh(eyeGeometry, eyewhiteMaterial);
+const leftIrisMesh = new THREE.Mesh(irisGeometry, irisMaterial);
+
+const leftPupilMesh = new THREE.Mesh(pupilGeometry, pupilMaterial);
+leftPupilMesh.quaternion.setFromAxisAngle(
+    new THREE.Vector3(1, 0, 0), Math.PI/2);
+
+const leftEye = new THREE.Group();
+
+leftEye.add(leftEyeMesh);
+leftEye.add(leftIrisMesh);
+leftEye.add(leftPupilMesh);
+leftEye.position.set(0.35, 0.08, 0.99);
+
+const lipGeometry = new THREE.BufferGeometry();
+const lipVertices = new THREE.Float32BufferAttribute([-.4, .05, .82,
+						      -.2, .05, .97,
+						      -.1, .01, .97,
+						      .1, .01, .97,
+						      .2, .05, 1.02,
+						      .4, .05, .82,
+						      -.2, -.05, 1.02,
+						      -.15, -.1, 1.02,
+						      .15, -.1, 1.02,
+						      .2, -.05, 1.02,
+						      .1, .1, 1.02,
+						      0, .08, 1.02,
+						      -.1, .1, 1.02,
+						      -.2, .05, .97,
+						      -.1, .01, .97,
+						      .1, .01, .97,
+						      .2, .05, .97
+						     ], 3);
+const lipIndices = [0, 1, 12,
+		    1, 2, 12,
+		    2, 11, 12,
+		    2, 3, 11,
+		    3, 10, 11,
+		    3, 4, 10,
+		    4, 5, 10,
+		    0, 6, 13,
+		    6, 14, 13,
+		    6, 7, 14,
+		    7, 15, 14,
+		    7, 8, 15,
+		    8, 9, 15,
+		    9, 16, 15,
+		    9, 5, 16
+		   ];
+lipGeometry.setIndex(lipIndices);
+lipGeometry.setAttribute("position", lipVertices);
+
+const lipMesh = new THREE.Mesh(lipGeometry, lipMaterial);
+lipMesh.position.set(0, -0.9, 0.3);
 
 skullBase.add(skullMesh);
 skullBase.add(hairMesh);
-skullBase.add(rightEyeMesh);
-skullBase.add(leftEyeMesh);
+skullBase.add(rightEye);
+skullBase.add(leftEye);
+skullBase.add(lipMesh);
 skullBase.position.set(0, 2.532, 0);
 humanoid.add(skullBase);
 
