@@ -12,7 +12,6 @@ export default class animator {
     }
 
     animate(timestamp) {
-	console.log(timestamp, this);
 	if (this.start === undefined) {
 	    this.start = timestamp;
 	}
@@ -20,11 +19,10 @@ export default class animator {
 	const elapsed = timestamp - this.start;
 
 	if (this.previousTimestamp !== timestamp) {
-	    console.log("rendering", elapsed);
-	    this.humanoid.rightShoulder.rotation.x -= 0.01;
-            this.humanoid.rightElbow.rotation.x += 0.005;
-            this.humanoid.rightShoulder.rotation.y -= 0.01;
-            this.humanoid.rightElbow.rotation.y -= 0.05;
+	    this.humanoid.right.shoulder.rotation.x -= 0.01;
+            this.humanoid.right.elbow.rotation.x += 0.005;
+            this.humanoid.right.shoulder.rotation.y -= 0.01;
+            this.humanoid.right.elbow.rotation.y -= 0.05;
 
 	    this.renderer.render(this.scene, this.camera);
 	}

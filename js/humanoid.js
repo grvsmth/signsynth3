@@ -3,16 +3,24 @@
  *
  * Angus B. Grieve-Smith, 2022
  */
+
+const position = {
+    "left": {
+	"shoulder": [1.8, 1.14, 0]
+    },
+    "right": {
+	"shoulder": [-1.8, 1.14, 0]
+    }
+};
+
 export default class humanoid {
     constructor() {
 	this.body = new THREE.Group();
 	this.material = this.makeMaterials();
 	this.addTorso();
 
-	this.rightElbow = this.makeElbow();
-	this.rightShoulder = this.makeShoulder(this.rightElbow);
-	this.rightShoulder.position.set(-1.8, 1.14, 0);
-	this.body.add(this.rightShoulder);
+	this.addArm("right");
+	this.addArm("left");
     }
 
     colorMaterial(color) {
@@ -67,5 +75,15 @@ export default class humanoid {
 	shoulder.add(elbow);
 
 	return shoulder;
+    }
+
+    addArm(handedness) {
+	this[handedness] = {};
+
+	this[handedness].elbow = this.makeElbow();
+	this[handedness].shoulder = this.makeShoulder(this[handedness].elbow);
+	this[handedness].shoulder.position
+	    .set(...position[handedness].shoulder);
+	this.body.add(this[handedness].shoulder);
     }
 }
