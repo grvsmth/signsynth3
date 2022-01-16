@@ -1,4 +1,5 @@
 import Humanoid from "./humanoid.js";
+import Animator from "./animator.js";
 
 const threedDiv = document.querySelector("#threed-div");
 const startButton = document.querySelector("#start");
@@ -19,42 +20,14 @@ scene.add( signer.body );
 
 camera.position.z = 5;
 
-const totalFrames = 2000;
-
-const animationData = {
-    "start": undefined,
-    "previousTimestamp": undefined
-};
-
-const animate = function(timestamp) {
-    if (this.start === undefined) {
-	this.start = timestamp;
-    }
-
-    const elapsed = timestamp - start;
-
-    if (this.previousTimestamp !== timestamp) {
-/*
-	rightShoulder.rotation.x -= 0.01;
-	rightElbow.rotation.x += 0.005;
-	rightShoulder.rotation.y -= 0.01;
-	rightElbow.rotation.y -= 0.05;
-*/
-	renderer.render( scene, camera );
-    }
-
-    if (elapsed < totalFrames) {
-	this.previousTimstamp = timestamp;
-	requestAnimationFrame( animate );
-    }
-}({"start": start, "previousTimestamp": previousTimestamp});
+const animator = new Animator(scene, camera, renderer, 2000);
 
 startButton.addEventListener("click", () => {
-    start = undefined;
-    previousTimestamp = undefined;
-    animate(performance.now());
+    animator.start = undefined;
+    animator.previousTimestamp = undefined;
+    animator.animate(performance.now());
 });
 
 export default {
-    "animate": animate
+    "animator": animator
 };
