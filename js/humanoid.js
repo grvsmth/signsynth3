@@ -8,6 +8,11 @@ export default class humanoid {
 	this.body = new THREE.Group();
 	this.material = this.makeMaterials();
 	this.addTorso();
+
+	this.rightElbow = this.makeElbow();
+	this.rightShoulder = this.makeShoulder(this.rightElbow);
+	this.rightShoulder.position.set(-1.8, 1.14, 0);
+	this.body.add(this.rightShoulder);
     }
 
     colorMaterial(color) {
@@ -28,6 +33,39 @@ export default class humanoid {
 
     addTorso() {
 	const torsoGeometry = new THREE.BoxGeometry(3.684, 2.508, 1.08);
-	return new THREE.Mesh( torsoGeometry, this.torsoMaterial );
+	this.body.add(new THREE.Mesh( torsoGeometry, this.material.torso ));
+    }
+
+    makeElbow() {
+	const forearmGeometry = new THREE.CylinderGeometry(0.288,
+							   0.288,
+							   1.92,
+							   32);
+	const forearmMesh = new THREE.Mesh(forearmGeometry,
+					   this.material.skin);
+	forearmMesh.position.set(0, -0.96, 0);
+
+	const elbow = new THREE.Group();
+	elbow.add(forearmMesh);
+
+	return elbow;
+    }
+
+    makeShoulder(elbow) {
+	elbow.position.set(0, -2.28, 0);
+
+	const upperArmGeometry = new THREE.CylinderGeometry(0.288,
+                                                            0.288,
+                                                            2.28,
+                                                            32);
+	const upperArmMesh = new THREE.Mesh(upperArmGeometry,
+					    this.material.skin);
+	upperArmMesh.position.set(0, -1.14, 0);
+
+	const shoulder = new THREE.Group();
+	shoulder.add(upperArmMesh);
+	shoulder.add(elbow);
+
+	return shoulder;
     }
 }

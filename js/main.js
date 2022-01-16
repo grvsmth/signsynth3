@@ -20,7 +20,7 @@ scene.add( signer.body );
 
 camera.position.z = 5;
 
-const animator = new Animator(scene, camera, renderer, 2000);
+const animator = new Animator(scene, camera, renderer, signer, 2000);
 
 startButton.addEventListener("click", () => {
     animator.start = undefined;
