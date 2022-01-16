@@ -17,7 +17,7 @@ export default class humanoid {
     constructor() {
 	this.body = new THREE.Group();
 	this.material = this.makeMaterials();
-	this.addTorso();
+	this.addTrunk();
 
 	this.addArm("right");
 	this.addArm("left");
@@ -39,9 +39,46 @@ export default class humanoid {
 	};
     }
 
-    addTorso() {
+    makeTorso() {
 	const torsoGeometry = new THREE.BoxGeometry(3.684, 2.508, 1.08);
-	this.body.add(new THREE.Mesh( torsoGeometry, this.material.torso ));
+	return new THREE.Mesh( torsoGeometry, this.material.torso );
+    }
+
+    makeNeck() {
+	const neckGeometry = new THREE.CylinderGeometry(0.408, 0.408, 0.588);
+	return(new THREE.Mesh(neckGeometry, this.material.skin));
+    }
+
+    makeSkull() {
+	const skullGeometry = new THREE.SphereGeometry(1.032);
+	return (new THREE.Mesh(skullGeometry, this.material.skin));
+    }
+
+    addTrunk() {
+	this.torso = this.makeTorso();
+	this.body.add(this.torso);
+
+	this.head = new THREE.Group();
+
+	this.neck = this.makeNeck();
+	this.head.add(this.neck);
+
+	const skullBase = new THREE.Group();
+	const skull = this.makeSkull();
+	skullBase.add(skull);
+
+	skullBase.position.set(0, 1.1, 0);
+	this.head.add(skullBase);
+
+
+	this.head.position.set(0, 1.404, 0);
+	this.body.add(this.head);
+
+	// lips, outerLips, tongue, skull
+
+	// left and right
+	// eye, eyebrow, eyebrowwrinkle, topeyeline, toplid, bottomlid, 
+	// bottomeyeline
     }
 
     makeElbow() {
@@ -79,6 +116,8 @@ export default class humanoid {
 
     addArm(handedness) {
 	this[handedness] = {};
+
+	// thumb1,2,3k, index, middle, ring, pinky, wrist
 
 	this[handedness].elbow = this.makeElbow();
 	this[handedness].shoulder = this.makeShoulder(this[handedness].elbow);
