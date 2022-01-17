@@ -56,6 +56,7 @@ const exports = {
 
 	lipGeometry.setIndex(lipIndices);
 	lipGeometry.setAttribute("position", lipVertices);
+	lipGeometry.computeVertexNormals();
 
 	return lipGeometry;
     },
@@ -84,6 +85,8 @@ const exports = {
 				];
 	eyeWhiteGeometry.setIndex(eyeWhiteIndices);
 	eyeWhiteGeometry.setAttribute("position", eyeWhiteVertices);
+
+	eyeWhiteGeometry.computeVertexNormals();
 
 	const eyeWhiteMesh = new THREE.Mesh(eyeWhiteGeometry,
 					    material.eyeWhite);
@@ -127,6 +130,7 @@ const exports = {
 				];
 	eyeWhiteGeometry.setIndex(eyeWhiteIndices);
 	eyeWhiteGeometry.setAttribute("position", eyeWhiteVertices);
+	eyeWhiteGeometry.computeVertexNormals();
 
 	const eyeWhiteMesh = new THREE.Mesh(eyeWhiteGeometry,
 					    material.eyeWhite);
@@ -144,6 +148,56 @@ const exports = {
 	eye.add(irisMesh);
 	eye.add(pupilMesh);
 	return eye;
+    },
+
+    "makeNose": function(material) {
+	const noseGroup = new THREE.Group();
+
+	const noseGeometry = new THREE.BufferGeometry();
+	const noseVertices = new THREE.Float32BufferAttribute([.17, 0, 0,
+							       .04, .45, 0,
+							       .04, .17, .17,
+							       .03, .01, .25,
+							       -.17, 0, 0,
+							       -.03, .01, .25,
+							       -.04, .17, .17,
+							       -.04, .45, 0,
+							       .16, 0, .1,
+							       .1, 0, .16,
+							       -.16, 0, .1,
+							       -.1, 0, -.16,
+							       0, 0, .25,
+							       0, .35, 0
+							      ], 3);
+	    
+
+	const noseIndices = [0, 1, 2,
+			     0, 2, 3,
+			     4, 5, 6,
+			     4, 6, 7,
+			     3, 2, 6,
+			     3, 6, 5,
+			     2, 1, 7,
+			     2, 7, 6,
+			     8, 0, 13,
+			     9, 8, 13,
+			     12, 9, 13,
+			     11, 12, 13,
+			     10, 11, 13,
+			     4, 10, 13,
+			    ];
+
+	noseGeometry.setIndex(noseIndices);
+	noseGeometry.setAttribute("position", noseVertices);
+	noseGeometry.computeVertexNormals();
+
+	const noseMesh = new THREE.Mesh(noseGeometry,
+					    material.skin);
+
+
+	noseGroup.add(noseMesh);
+
+	return noseGroup;
     }
 
 };

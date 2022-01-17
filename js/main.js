@@ -20,6 +20,15 @@ scene.add( signer.body );
 
 camera.position.z = 5;
 
+const light = new THREE.DirectionalLight(0xffffee, 1);
+light.position.set(-0.25, 5, 30);
+scene.add(light);
+
+
+const lightHelper = new THREE.DirectionalLightHelper(light, 10);
+scene.add(lightHelper);
+
+
 const animator = new Animator(scene, camera, renderer, signer, 2000);
 
 startButton.addEventListener("click", () => {

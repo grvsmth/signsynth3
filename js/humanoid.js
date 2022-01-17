@@ -30,7 +30,7 @@ export default class humanoid {
     }
 
     colorMaterial(color) {
-	return new THREE.MeshBasicMaterial({"color": color});
+	return new THREE.MeshLambertMaterial({"color": color});
     }
 
     makeMaterials() {
@@ -41,7 +41,8 @@ export default class humanoid {
 	    "eyeWhite": this.colorMaterial(0xEEEEEE),
 	    "iris": this.colorMaterial(0x198055),
 	    "pupil": this.colorMaterial(0x191919),
-	    "lip": this.colorMaterial(0xC01414)
+	    "lip": this.colorMaterial(0xC01414),
+	    "nostril": this.colorMaterial(0x101010)
 	};
     }
 
@@ -69,17 +70,21 @@ export default class humanoid {
 	this.lipGeometry = head.makeLips();
 
 	const lipMesh = new THREE.Mesh(this.lipGeometry, this.material.lip);
-	lipMesh.position.set(0, -0.9, 0.3);
+	lipMesh.position.set(0, -0.5, 0.2);
 	skullBase.add(lipMesh);
+
+	const nose = head.makeNose(this.material);
+	nose.position.set(0, -0.2, 1.0);
+	skullBase.add(nose);
 
 	// outerLips, tongue
 
 	this.right.eye = head.makeRightEye(this.material);
-	this.right.eye.position.set(-0.35, .08, 0.99);
+	this.right.eye.position.set(-0.35, .08, 1.07);
 	skullBase.add(this.right.eye);
 
 	this.left.eye = head.makeLeftEye(this.material);
-	this.left.eye.position.set(0.35, .08, 0.99);
+	this.left.eye.position.set(0.35, .08, 1.07);
 	skullBase.add(this.left.eye);
 
 	// left and right
@@ -88,6 +93,11 @@ export default class humanoid {
 
 	this.head.position.set(0, 1.404, 0);
 	this.body.add(this.head);
+
+	this.body.quaternion.setFromAxisAngle(
+	    new THREE.Vector3(0.5, .3, 0), Math.PI/6);
+
+
     }
 
     makeElbow() {
