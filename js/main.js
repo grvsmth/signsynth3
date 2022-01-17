@@ -18,8 +18,9 @@ const signer = new Humanoid();
 
 scene.add( signer.body );
 
-camera.position.z = 8;
-camera.position.y = 1.2;
+camera.position.z = 7;
+camera.position.y = 1.9;
+// camera.position.x = -1;
 
 const light = new THREE.DirectionalLight(0xffffee, 1);
 light.position.set(-0.25, 5, 30);
@@ -30,10 +31,8 @@ const lightHelper = new THREE.DirectionalLightHelper(light, 10);
 scene.add(lightHelper);
 */
 
-/*
-signer.quaternion.setFromAxisAngle(new THREE.Vector3(0.5, .3, 0),
-				       Math.PI/6);
-*/
+
+// signer.body.quaternion.setFromAxisAngle(new THREE.Vector3(0, 1, 0), - Math.PI/12);
 
 
 const animator = new Animator(scene, camera, renderer, signer, 2000);
