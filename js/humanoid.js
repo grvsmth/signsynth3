@@ -197,10 +197,23 @@ export default class humanoid {
 	    .makeJoint(finger, "joint1", this[handedness][finger]["joint2"]);
 
 	const fingerPosition = position[handedness][finger];
-	console.log(`position[${handedness}][${finger}]`, fingerPosition);
 	this[handedness][finger]["joint1"].position.set(...fingerPosition);
 	this[handedness].wrist.add(this[handedness][finger]["joint1"]);
-	console.log(this[handedness].wrist);
+    }
+
+
+    addThumb(handedness) {
+	this[handedness].thumb = {};
+
+	this[handedness].thumb["joint3"] = this
+	    .makeThumbJoint("joint3");
+	this[handedness].thumb["joint2"] = this
+	    .makeThumbJoint("joint2", this[handedness].thumb["joint3"]);
+	this[handedness].thumb["joint1"] = this
+	    .makeThumbJoint("joint1", this[handedness].thumb["joint2"]);
+
+	this[handedness].thumb["joint1"].position.set(0, 0, 1);
+	this[handedness].wrist.add(this[handedness]thumb["joint1"]);
     }
 
     addHand(handedness) {
@@ -209,6 +222,8 @@ export default class humanoid {
 	fingers.forEach((finger) => {
 	    this.addFinger(handedness, finger);
 	});
+
+	this.addThumb(handedness);
     }
 
     addArm(handedness) {
