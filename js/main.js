@@ -5,10 +5,10 @@ const threedDiv = document.querySelector("#threed-div");
 const startButton = document.querySelector("#start");
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(80,
+const camera = new THREE.PerspectiveCamera(50,
 					   threedDiv.offsetWidth / threedDiv.offsetHeight,
 					   0.1,
-					   1000);
+					   2000);
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize( threedDiv.offsetWidth, threedDiv.offsetHeight );
@@ -18,15 +18,22 @@ const signer = new Humanoid();
 
 scene.add( signer.body );
 
-camera.position.z = 5;
+camera.position.z = 8;
+camera.position.y = 1.2;
 
 const light = new THREE.DirectionalLight(0xffffee, 1);
 light.position.set(-0.25, 5, 30);
 scene.add(light);
 
-
+/*
 const lightHelper = new THREE.DirectionalLightHelper(light, 10);
 scene.add(lightHelper);
+*/
+
+/*
+signer.quaternion.setFromAxisAngle(new THREE.Vector3(0.5, .3, 0),
+				       Math.PI/6);
+*/
 
 
 const animator = new Animator(scene, camera, renderer, signer, 2000);

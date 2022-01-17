@@ -94,10 +94,6 @@ export default class humanoid {
 	this.head.position.set(0, 1.404, 0);
 	this.body.add(this.head);
 
-	this.body.quaternion.setFromAxisAngle(
-	    new THREE.Vector3(0.5, .3, 0), Math.PI/6);
-
-
     }
 
     makeElbow() {

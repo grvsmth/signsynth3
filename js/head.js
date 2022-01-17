@@ -185,6 +185,9 @@ const exports = {
 			     11, 12, 13,
 			     10, 11, 13,
 			     4, 10, 13,
+			     0, 8, 9,
+			     8, 9, 11,
+			     11, 10, 4
 			    ];
 
 	noseGeometry.setIndex(noseIndices);
