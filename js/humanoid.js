@@ -8,11 +8,31 @@ import head from "./head.js";
 
 const position = {
     "left": {
-	"shoulder": [1.8, 1.14, 0]
+	"shoulder": [1.8, 1.14, 0],
+	"index": [0, -0.72, .18],
+	"middle": [0, -0.72, .06],
+	"ring": [0, -0.72, -.06],
+	"pinky": [0, -0.72, -.18]
     },
     "right": {
-	"shoulder": [-1.8, 1.14, 0]
+	"shoulder": [-1.8, 1.14, 0],
+	"index": [0, -0.72, .18],
+	"middle": [0, -0.72, .06],
+	"ring": [0, -0.72, -.06],
+	"pinky": [0, -0.72, -.18]
     }
+};
+
+const height = {
+    "joint1": 0.312,
+    "joint2": 0.228,
+    "joint3": 0.132
+};
+
+const rotation = {
+    "joint1": -0.785,
+    "joint2": -.5,
+    "joint3": -.5
 };
 
 export default class humanoid {
@@ -100,7 +120,18 @@ export default class humanoid {
 
     }
 
-    makeElbow() {
+    makeWrist() {
+	const geometry = new THREE.BoxGeometry(0.15, 0.588, 0.516);
+	const mesh = new THREE.Mesh(geometry, this.material.skin);
+	
+	const wrist = new THREE.Group();
+	mesh.position.set(0, -0.294, 0);
+	wrist.add(mesh);
+
+	return wrist;
+    }
+
+    makeElbow(wrist) {
 	const forearmGeometry = new THREE.CylinderGeometry(0.288,
 							   0.288,
 							   1.92,
@@ -111,6 +142,9 @@ export default class humanoid {
 
 	const elbow = new THREE.Group();
 	elbow.add(forearmMesh);
+
+	wrist.position.set(0, -1.92, 0);
+	elbow.add(wrist);
 
 	return elbow;
     }
@@ -133,10 +167,55 @@ export default class humanoid {
 	return shoulder;
     }
 
-    addArm(handedness) {
-	// thumb1,2,3k, index, middle, ring, pinky, wrist
+    makeJoint(finger, joint, extension) {
+	const group = new THREE.Group;
 
-	this[handedness].elbow = this.makeElbow();
+	const geometry = new THREE.CylinderGeometry(0.072,
+						    0.072,
+						    height[joint]);
+	const mesh = new THREE.Mesh(geometry, this.material.skin);
+	group.add(mesh);
+
+	group.quaternion.setFromAxisAngle(new THREE.Vector3(0, 0, 1),
+					 rotation[joint]);
+	if (extension !== undefined) {
+	    extension.position.set(0, - (height[joint] - .1), 0);
+	    group.add(extension);
+	}
+
+	return group;
+    }
+
+    addFinger(handedness, finger) {
+	this[handedness][finger] = {};
+
+	this[handedness][finger]["joint3"] = this
+	    .makeJoint(finger, "joint3");
+	this[handedness][finger]["joint2"] = this
+	    .makeJoint(finger, "joint2", this[handedness][finger]["joint3"]);
+	this[handedness][finger]["joint1"] = this
+	    .makeJoint(finger, "joint1", this[handedness][finger]["joint2"]);
+
+	const fingerPosition = position[handedness][finger];
+	console.log(`position[${handedness}][${finger}]`, fingerPosition);
+	this[handedness][finger]["joint1"].position.set(...fingerPosition);
+	this[handedness].wrist.add(this[handedness][finger]["joint1"]);
+	console.log(this[handedness].wrist);
+    }
+
+    addHand(handedness) {
+	// thumb1,2,3k, index, middle, ring, pinky
+	const fingers = ["index", "middle", "ring", "pinky"];
+	fingers.forEach((finger) => {
+	    this.addFinger(handedness, finger);
+	});
+    }
+
+    addArm(handedness) {
+
+	this[handedness].wrist = this.makeWrist();
+	this.addHand(handedness);
+	this[handedness].elbow = this.makeElbow(this[handedness].wrist);
 	this[handedness].shoulder = this.makeShoulder(this[handedness].elbow);
 	this[handedness].shoulder.position
 	    .set(...position[handedness].shoulder);
