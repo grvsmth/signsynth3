@@ -17,6 +17,10 @@ export default class humanoid {
     constructor() {
 	this.body = new THREE.Group();
 	this.material = this.makeMaterials();
+
+	this.right = {};
+	this.left = {};
+
 	this.addTrunk();
 
 	this.addArm("right");
@@ -32,7 +36,7 @@ export default class humanoid {
 	    "torso": this.colorMaterial(0x505050),
 	    "skin": this.colorMaterial(0xFF9a66),
 	    "hair": this.colorMaterial(0xFF7F10),
-	    "eyewhite": this.colorMaterial(0xEEEEEE),
+	    "eyeWhite": this.colorMaterial(0xEEEEEE),
 	    "iris": this.colorMaterial(0x198055),
 	    "pupil": this.colorMaterial(0x191919),
 	    "lip": this.colorMaterial(0xC01414)
@@ -99,6 +103,92 @@ export default class humanoid {
 	return lipGeometry;
     }
 
+    makeRightEye() {
+	const eye = new THREE.Group();
+
+	const eyeWhiteGeometry = new THREE.BufferGeometry();
+	const eyeWhiteVertices = new THREE.Float32BufferAttribute(
+	    [-.2, 0, 0,
+	     -.13, -.06, 0,
+             -.13, .07, 0,
+             0, -.07, 0,
+             0, .07, 0,
+             .13, -.06, 0,
+             .13, .07, 0,
+             .2, 0, 0
+ 	    ], 3);
+
+	const eyeWhiteIndices = [0, 1, 2,
+				 2, 1, 3,
+				 2, 3, 4,
+				 4, 3, 5,
+				 4, 5, 6,
+				 6, 5, 7
+				];
+	eyeWhiteGeometry.setIndex(eyeWhiteIndices);
+	eyeWhiteGeometry.setAttribute("position", eyeWhiteVertices);
+
+	const eyeWhiteMesh = new THREE.Mesh(eyeWhiteGeometry,
+					    this.material.eyeWhite);
+
+	eye.add(eyeWhiteMesh);
+
+	const irisGeometry = new THREE.SphereGeometry(0.065);
+	const irisMesh = new THREE.Mesh(irisGeometry, this.material.iris);
+
+	const pupilGeometry = new THREE.CylinderGeometry(0.025, 0.025, 0.13);
+	const pupilMesh = new THREE.Mesh(pupilGeometry, this.material.pupil);
+	pupilMesh.quaternion.setFromAxisAngle(
+	    new THREE.Vector3(1, 0, 0), Math.PI/2);
+
+	eye.add(irisMesh);
+	eye.add(pupilMesh);
+	return eye;
+    }
+
+    makeLeftEye() {
+	const eye = new THREE.Group();
+
+	const eyeWhiteGeometry = new THREE.BufferGeometry();
+	const eyeWhiteVertices = new THREE.Float32BufferAttribute(
+	    [-.2, 0, 0,
+	     -.13, -.06, 0,
+             -.13, .07, 0,
+             0, -.07, 0,
+             0, .07, 0,
+             .13, -.06, 0,
+             .13, .07, 0,
+             .2, 0, 0
+ 	    ], 3);
+
+	const eyeWhiteIndices = [0, 1, 2,
+				 2, 1, 3,
+				 2, 3, 4,
+				 4, 3, 5,
+				 4, 5, 6,
+				 6, 5, 7
+				];
+	eyeWhiteGeometry.setIndex(eyeWhiteIndices);
+	eyeWhiteGeometry.setAttribute("position", eyeWhiteVertices);
+
+	const eyeWhiteMesh = new THREE.Mesh(eyeWhiteGeometry,
+					    this.material.eyeWhite);
+
+	eye.add(eyeWhiteMesh);
+
+	const irisGeometry = new THREE.SphereGeometry(0.065);
+	const irisMesh = new THREE.Mesh(irisGeometry, this.material.iris);
+
+	const pupilGeometry = new THREE.CylinderGeometry(0.025, 0.025, 0.13);
+	const pupilMesh = new THREE.Mesh(pupilGeometry, this.material.pupil);
+	pupilMesh.quaternion.setFromAxisAngle(
+	    new THREE.Vector3(1, 0, 0), Math.PI/2);
+
+	eye.add(irisMesh);
+	eye.add(pupilMesh);
+	return eye;
+    }
+
     addTrunk() {
 	this.torso = this.makeTorso();
 	this.body.add(this.torso);
@@ -121,16 +211,22 @@ export default class humanoid {
 	lipMesh.position.set(0, -0.9, 0.3);
 	skullBase.add(lipMesh);
 
+	// outerLips, tongue
 
-	this.head.position.set(0, 1.404, 0);
-	this.body.add(this.head);
+	this.right.eye = this.makeRightEye();
+	this.right.eye.position.set(-0.35, .08, 0.99);
+	skullBase.add(this.right.eye);
 
-
-	// lips, outerLips, tongue, skull
+	this.left.eye = this.makeLeftEye();
+	this.left.eye.position.set(0.35, .08, 0.99);
+	skullBase.add(this.left.eye);
 
 	// left and right
 	// eye, eyebrow, eyebrowwrinkle, topeyeline, toplid, bottomlid, 
 	// bottomeyeline
+
+	this.head.position.set(0, 1.404, 0);
+	this.body.add(this.head);
     }
 
     makeElbow() {
@@ -167,8 +263,6 @@ export default class humanoid {
     }
 
     addArm(handedness) {
-	this[handedness] = {};
-
 	// thumb1,2,3k, index, middle, ring, pinky, wrist
 
 	this[handedness].elbow = this.makeElbow();
