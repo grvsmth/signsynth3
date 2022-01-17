@@ -54,6 +54,51 @@ export default class humanoid {
 	return (new THREE.Mesh(skullGeometry, this.material.skin));
     }
 
+    makeLips() {
+	const lipGeometry = new THREE.BufferGeometry();
+
+	const lipVertices = new THREE.Float32BufferAttribute([-.4, .05, .82,
+							      -.2, .05, .97,
+							      -.1, .01, .97,
+							      .1, .01, .97,
+							      .2, .05, .97,
+							      .4, .05, .82,
+							      -.2, -.05, 1.02,
+							      -.15, -.1, 1.02,
+							      .15, -.1, 1.02,
+							      .2, -.05, 1.02,
+							      .1, .1, 1.02,
+							      0, .08, 1.02,
+							      -.1, .1, 1.02,
+							      -.2, .05, .97,
+							      -.1, .01, .97,
+							      .1, .01, .97,
+							      .2, .05, .97,
+							      0, .3, 1.02
+							     ], 3);
+	const lipIndices = [0, 1, 12,
+			    1, 2, 12,
+			    2, 11, 12,
+			    2, 3, 11,
+			    3, 10, 11,
+			    3, 4, 10,
+			    4, 5, 10,
+			    0, 6, 13,
+			    6, 14, 13,
+			    6, 7, 14,
+			    7, 15, 14,
+			    7, 8, 15,
+			    8, 9, 15,
+			    9, 16, 15,
+			    9, 5, 16
+			   ];
+
+	lipGeometry.setIndex(lipIndices);
+	lipGeometry.setAttribute("position", lipVertices);
+
+	return lipGeometry;
+    }
+
     addTrunk() {
 	this.torso = this.makeTorso();
 	this.body.add(this.torso);
@@ -70,9 +115,16 @@ export default class humanoid {
 	skullBase.position.set(0, 1.1, 0);
 	this.head.add(skullBase);
 
+	this.lipGeometry = this.makeLips();
+
+	const lipMesh = new THREE.Mesh(this.lipGeometry, this.material.lip);
+	lipMesh.position.set(0, -0.9, 0.3);
+	skullBase.add(lipMesh);
+
 
 	this.head.position.set(0, 1.404, 0);
 	this.body.add(this.head);
+
 
 	// lips, outerLips, tongue, skull
 
