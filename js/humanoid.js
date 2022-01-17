@@ -77,6 +77,10 @@ export default class humanoid {
 	nose.position.set(0, -0.2, 1.0);
 	skullBase.add(nose);
 
+	const hair = head.makeHair(this.material.hair);
+	hair.position.set(0, 0, 0.2);
+	skullBase.add(hair);
+
 	// outerLips, tongue
 
 	this.right.eye = head.makeRightEye(this.material);

@@ -204,7 +204,66 @@ const exports = {
 	noseGroup.add(noseMesh);
 
 	return noseGroup;
+    },
+
+    makeHair(material) {
+	const geometry = new THREE.BufferGeometry();
+	const vertices = new THREE.Float32BufferAttribute([.7, .7, .7,
+							   .9, -.8, .6,
+							   1, -.8, .6,
+							   1, .4, .5,
+							   1.2, -.8, -.5,
+							   1.2, .6, -.5,
+							   0, -.8, -1.5,
+							   0, 0.6, -1.2,
+							   -1.1, -.8, -.5,
+							   -1, .6, -.5,
+							   -1.1, -.8, .6,
+							   -1, .6, .9,
+							   -.9, -.8, .6,
+							   -.5, .5, .8,
+							   .4, 1, .9,
+							   -.8, 1, .9,
+							   .4, 1.1, -.4,
+							   0, 1.1, -.8,
+							   -.4, 1.1, -.4
+							  ], 3);
+
+	const indices = [0, 1, 2,
+			 0, 2, 3,
+			 3, 2, 4,
+			 3, 4, 5,
+			 5, 4, 6,
+			 5, 6, 7,
+			 7, 6, 8,
+			 7, 8, 9,
+			 9, 8, 10,
+			 9, 10, 11,
+			 11, 10, 12,
+			 11, 12, 13,
+			 13, 0, 14,
+			 13, 14, 15,
+			 13, 15, 11,
+			 14, 3, 5,
+			 14, 5, 16,
+			 16, 5, 7,
+			 16, 7, 17,
+			 17, 7, 9,
+			 17, 9, 18,
+			 18, 9, 11,
+			 18, 11, 15,
+			 14, 16, 17,
+			 14, 17, 18,
+			 18, 15, 14
+			];
+
+	geometry.setIndex(indices);
+	geometry.setAttribute("position", vertices);
+	geometry.computeVertexNormals();
+
+	return new THREE.Mesh(geometry, material);
     }
+
 
 };
 
