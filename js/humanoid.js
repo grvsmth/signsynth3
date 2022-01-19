@@ -23,16 +23,30 @@ const position = {
     }
 };
 
-const height = {
-    "joint1": 0.312,
-    "joint2": 0.228,
-    "joint3": 0.132
+const finger = {
+    "height": {
+	"joint1": 0.312,
+	"joint2": 0.228,
+	"joint3": 0.132
+    },
+    "rotation":  {
+	"joint1": -0.785,
+	"joint2": -.5,
+	"joint3": -.5
+    }
 };
 
-const rotation = {
-    "joint1": -0.785,
-    "joint2": -.5,
-    "joint3": -.5
+const thumb = {
+    "height": {
+	"joint1": 0.288,
+	"joint2": 0.204,
+	"joint3": 0.108
+    },
+    "rotation":  {
+	"joint1": -0.8,
+	"joint2": 0,
+	"joint3": 0
+    }
 };
 
 export default class humanoid {
@@ -167,19 +181,38 @@ export default class humanoid {
 	return shoulder;
     }
 
-    makeJoint(finger, joint, extension) {
+    makeJoint(joint, extension) {
 	const group = new THREE.Group;
 
 	const geometry = new THREE.CylinderGeometry(0.072,
 						    0.072,
-						    height[joint]);
+						    finger.height[joint]);
 	const mesh = new THREE.Mesh(geometry, this.material.skin);
 	group.add(mesh);
 
 	group.quaternion.setFromAxisAngle(new THREE.Vector3(0, 0, 1),
-					 rotation[joint]);
+					 finger.rotation[joint]);
 	if (extension !== undefined) {
-	    extension.position.set(0, - (height[joint] - .1), 0);
+	    extension.position.set(0, - (finger.height[joint] - .1), 0);
+	    group.add(extension);
+	}
+
+	return group;
+    }
+
+    makeThumbJoint(joint, extension) {
+	const group = new THREE.Group;
+
+	const geometry = new THREE.CylinderGeometry(0.072,
+						    0.072,
+						    thumb.height[joint]);
+	const mesh = new THREE.Mesh(geometry, this.material.skin);
+	group.add(mesh);
+
+	group.quaternion.setFromAxisAngle(new THREE.Vector3(0, 0, 1),
+					  thumb.rotation[joint]);
+	if (extension !== undefined) {
+	    extension.position.set(0, - (thumb.height[joint] - .1), 0);
 	    group.add(extension);
 	}
 
@@ -189,24 +222,38 @@ export default class humanoid {
     addFinger(handedness, finger) {
 	this[handedness][finger] = {};
 
-	this[handedness][finger]["joint3"] = this
-	    .makeJoint(finger, "joint3");
-	this[handedness][finger]["joint2"] = this
-	    .makeJoint(finger, "joint2", this[handedness][finger]["joint3"]);
+	this[handedness][finger]["joint3"] = this.makeJoint("joint3");
+	this[handedness][finger]["joint2"] = this.makeJoint(
+	    "joint2", this[handedness][finger]["joint3"]);
 	this[handedness][finger]["joint1"] = this
-	    .makeJoint(finger, "joint1", this[handedness][finger]["joint2"]);
+	    .makeJoint("joint1", this[handedness][finger]["joint2"]);
 
 	const fingerPosition = position[handedness][finger];
 	this[handedness][finger]["joint1"].position.set(...fingerPosition);
 	this[handedness].wrist.add(this[handedness][finger]["joint1"]);
     }
 
+
+    addThumb(handedness) {
+	this[handedness].thumb = {};
+
+	this[handedness].thumb["joint3"] = this.makeThumbJoint("joint3");
+	this[handedness].thumb["joint2"] = this
+	    .makeThumbJoint("joint2", this[handedness].thumb["joint3"]);
+	this[handedness].thumb["joint1"] = this
+	    .makeThumbJoint("joint1", this[handedness].thumb["joint2"]);
+
+	this[handedness].thumb["joint1"].position.set(0, 0, -0.258);
+	this[handedness].wrist.add(this[handedness].thumb["joint1"]);
+    }
+
     addHand(handedness) {
-	// thumb1,2,3k, index, middle, ring, pinky
 	const fingers = ["index", "middle", "ring", "pinky"];
 	fingers.forEach((finger) => {
 	    this.addFinger(handedness, finger);
 	});
+
+	this.addThumb(handedness);
     }
 
     addArm(handedness) {

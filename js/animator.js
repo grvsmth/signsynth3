@@ -22,7 +22,7 @@ export default class animator {
 	    this.humanoid.right.shoulder.rotation.x -= 0.01;
             this.humanoid.right.elbow.rotation.x += 0.005;
             this.humanoid.right.shoulder.rotation.y -= 0.01;
-            this.humanoid.right.elbow.rotation.y -= 0.05;
+            // this.humanoid.right.elbow.rotation.y -= 0.05;
 
 	    this.renderer.render(this.scene, this.camera);
 	}
