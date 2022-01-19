@@ -1,6 +1,10 @@
 import Humanoid from "./humanoid.js";
 import Animator from "./animator.js";
 
+import ascsto from "./ascsto.js";
+
+console.log("ascsto", ascsto);
+
 const threedDiv = document.querySelector("#threed-div");
 const startButton = document.querySelector("#start");
 

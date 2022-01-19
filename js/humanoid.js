@@ -197,10 +197,8 @@ export default class humanoid {
 	    .makeJoint(finger, "joint1", this[handedness][finger]["joint2"]);
 
 	const fingerPosition = position[handedness][finger];
-	console.log(`position[${handedness}][${finger}]`, fingerPosition);
 	this[handedness][finger]["joint1"].position.set(...fingerPosition);
 	this[handedness].wrist.add(this[handedness][finger]["joint1"]);
-	console.log(this[handedness].wrist);
     }
 
     addHand(handedness) {

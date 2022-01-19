@@ -1,4 +1,4 @@
-{
+export default {
     "param": {
 	"dh": "dominant handshape",
 	"dl": "dominant location",
@@ -74,4 +74,4 @@
 	    }
 	}
     }
-}
+};
