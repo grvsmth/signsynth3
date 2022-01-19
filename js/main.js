@@ -1,52 +1,48 @@
-const threedDiv = document.querySelector("#3d-div");
+import Humanoid from "./humanoid.js";
+import Animator from "./animator.js";
+
+const threedDiv = document.querySelector("#threed-div");
 const startButton = document.querySelector("#start");
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75,
+const camera = new THREE.PerspectiveCamera(50,
 					   threedDiv.offsetWidth / threedDiv.offsetHeight,
 					   0.1,
-					   1000);
+					   2000);
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize( threedDiv.offsetWidth, threedDiv.offsetHeight );
 threedDiv.appendChild( renderer.domElement );
 
-const geometry = new THREE.BoxGeometry(3.684, 2.508, 1.08);
-const material = new THREE.MeshBasicMaterial( { color: 0x505050 } );
-const cube = new THREE.Mesh( geometry, material );
-scene.add( cube );
+const signer = new Humanoid();
 
-camera.position.z = 5;
+scene.add( signer.body );
 
-const totalFrames = 2000;
+camera.position.z = 7;
+camera.position.y = 1.9;
+// camera.position.x = -1;
 
-let start, previousTimestamp;
+const light = new THREE.DirectionalLight(0xffffee, 1);
+light.position.set(-0.25, 5, 30);
+scene.add(light);
 
-function animate(timestamp) {
-    console.log("animate()", timestamp);
-    if (start === undefined) {
-	start = timestamp;
-    }
+/*
+const lightHelper = new THREE.DirectionalLightHelper(light, 10);
+scene.add(lightHelper);
+*/
 
-    const elapsed = timestamp - start;
-    console.log("elapsed", elapsed);
 
-    if (previousTimestamp !== timestamp) {
-	cube.rotation.x += 0.01;
-	cube.rotation.y += 0.01;
-	renderer.render( scene, camera );
-    }
+// signer.body.quaternion.setFromAxisAngle(new THREE.Vector3(0, 1, 0), - Math.PI/12);
 
-    console.log("totalFrames", totalFrames);
 
-    if (elapsed < totalFrames) {
-	previousTimstamp = timestamp;
-	requestAnimationFrame( animate );
-    }
-}
+const animator = new Animator(scene, camera, renderer, signer, 2000);
 
 startButton.addEventListener("click", () => {
-    start = undefined;
-    previousTimestamp = undefined;
-    animate(performance.now());
+    animator.start = undefined;
+    animator.previousTimestamp = undefined;
+    animator.animate(performance.now());
 });
+
+export default {
+    "animator": animator
+};
