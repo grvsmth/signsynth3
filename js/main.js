@@ -11,26 +11,6 @@ const threedDiv = document.querySelector("#threed-div");
 const startButton = document.querySelector("#start");
 const ascstoForm = document.querySelector("#ascsto-form");
 
-const dominantLocationSelect = formUtil.makeSelect("dominantLocation",
-						   "Dominant Location",
-						   ascsto.menuText.dl,
-						   "rest");
-
-ascstoForm.append(dominantLocationSelect);
-
-const handleForm = function(event) {
-    console.log(event.target.name, event.target.value);
-    console.log(ascsto);
-    const rotations = formUtil.findRotations(signer.handed,
-					     ascsto.rotation,
-					     event.target.name,
-					     event.target.value);
-
-    console.log("rotations", rotations);
-};
-
-ascstoForm.addEventListener("change", handleForm);
-
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(50,
 					   threedDiv.offsetWidth / threedDiv.offsetHeight,
@@ -61,6 +41,29 @@ scene.add(lightHelper);
 
 
 const animator = new Animator(scene, camera, renderer, signer, 2000);
+
+const dominantLocationSelect = formUtil.makeSelect("dominantLocation",
+						   "Dominant Location",
+						   ascsto.menuText.dl,
+						   "rest");
+
+ascstoForm.append(dominantLocationSelect);
+
+const handleForm = function(event) {
+    console.log(event.target.name, event.target.value);
+    console.log(ascsto);
+
+    const rotations = formUtil.findRotations(signer.handed,
+					     ascsto.rotation,
+					     event.target.name,
+					     event.target.value);
+
+    console.log("rotations", rotations);
+    rotations.forEach(animator.processRotation);
+};
+
+ascstoForm.addEventListener("change", handleForm);
+
 
 startButton.addEventListener("click", () => {
     animator.start = undefined;
