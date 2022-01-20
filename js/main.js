@@ -5,9 +5,31 @@ import formUtil from "./formUtil.js";
 import ascsto from "./ascsto.js";
 
 
+const signer = new Humanoid();
+
 const threedDiv = document.querySelector("#threed-div");
 const startButton = document.querySelector("#start");
-const formDiv = document.querySelector("#form-div");
+const ascstoForm = document.querySelector("#ascsto-form");
+
+const dominantLocationSelect = formUtil.makeSelect("dominantLocation",
+						   "Dominant Location",
+						   ascsto.menuText.dl,
+						   "rest");
+
+ascstoForm.append(dominantLocationSelect);
+
+const handleForm = function(event) {
+    console.log(event.target.name, event.target.value);
+    console.log(ascsto);
+    const rotations = formUtil.findRotations(signer.handed,
+					     ascsto.rotation,
+					     event.target.name,
+					     event.target.value);
+
+    console.log("rotations", rotations);
+};
+
+ascstoForm.addEventListener("change", handleForm);
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(50,
@@ -18,8 +40,6 @@ const camera = new THREE.PerspectiveCamera(50,
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize( threedDiv.offsetWidth, threedDiv.offsetHeight );
 threedDiv.appendChild( renderer.domElement );
-
-const signer = new Humanoid();
 
 scene.add( signer.body );
 

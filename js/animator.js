@@ -33,4 +33,8 @@ export default class animator {
 	}
     }
 
+    setRotation(timestamp, joint, quaternion) {
+
+    }
+
 }

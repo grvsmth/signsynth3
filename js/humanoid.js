@@ -53,6 +53,7 @@ export default class humanoid {
     constructor() {
 	this.body = new THREE.Group();
 	this.material = this.makeMaterials();
+	this.handed = "right";
 
 	this.right = {};
 	this.left = {};
