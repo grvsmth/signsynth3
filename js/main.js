@@ -23,7 +23,7 @@ threedDiv.appendChild( renderer.domElement );
 
 scene.add( signer.body );
 
-camera.position.z = 7;
+camera.position.z = 8;
 camera.position.y = 1.9;
 // camera.position.x = -1;
 
