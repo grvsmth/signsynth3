@@ -1,24 +1,25 @@
 const formUtil = {
-    "makeSelect": function(name, label, options, defaultOption) {
+    "makeSelect": function(name, ascsto) {
+	const options = ascsto.menuText[name];
 	const selectDiv = document.createElement("div");
 
 	const labelElement = document.createElement("label");
 	labelElement.htmlFor = name;
-	labelElement.innerHTML = label;
+	labelElement.innerHTML = ascsto.param[name];
 
 	const select = document.createElement("select");
 	select.name = name;
 	select.id = name;
 
 	for(const option in options) {
-	    const defaultSelected = option === defaultOption;
+	    const defaultSelected = option === ascsto.defaultValue[name];
 	    select.add(new Option(options[option], option, defaultSelected));
 	}
 
 	selectDiv.append(labelElement);
 	selectDiv.append(select);
 
-	return select;
+	return selectDiv;
     },
     "articulator": function(signerHanded, holdParam) {
 	if (holdParam.startsWith("dominant")) {

@@ -42,12 +42,15 @@ scene.add(lightHelper);
 
 const animator = new Animator(scene, camera, renderer, signer, 2000);
 
+const params = ["dominantLocation", "nondominantLocation"];
+
 const dominantLocationSelect = formUtil.makeSelect("dominantLocation",
-						   "Dominant Location",
-						   ascsto.menuText.dl,
-						   "rest");
+						   ascsto);
+const nondominantLocationSelect = formUtil.makeSelect("nondominantLocation",
+						      ascsto);
 
 ascstoForm.append(dominantLocationSelect);
+ascstoForm.append(nondominantLocationSelect);
 
 const handleForm = function(event) {
     console.log(event.target.name, event.target.value);
