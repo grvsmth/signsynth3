@@ -24,6 +24,14 @@ export default {
 	    "j": "Nondominant lower arm (j)",
 	    "as": "Nondominant wrist (a/s)"
 	},
+	"dominantOrientation": {
+	    "f": "Away from signer (f)",
+	    "t": "Towards signer (t)",
+	    "lt": "Towards non-dominant side (&lt;)",
+	    "gt": "Towards dominant side (&gt;)",
+	    "^": "Upwards (^)",
+	    "v": "Downwards (v)"
+	},
 	"nondominantLocation": {
 	    "Q": "Neutral (Q)",
 	    "rest": "Rest",
@@ -37,10 +45,19 @@ export default {
 	    "i": "Dominant upper arm (i)",
 	    "j": "Dominant lower arm (j)",
 	    "as": "Dominant wrist (a/s)"	    
+	},
+	"nondominantOrientation": {
+	    "f": "Away from signer (f)",
+	    "t": "Towards signer (t)",
+	    "lt": "Towards non-dominant side (&lt;)",
+	    "gt": "Towards dominant side (&gt;)",
+	    "^": "Upwards (^)",
+	    "v": "Downwards (v)"
 	}
     },
     "defaultValue": {
 	"dominantLocation": "rest",
+	"dominantOrientation": "f",
 	"nondominantLocation": "rest"
     },
     "rotation": {
@@ -145,6 +162,40 @@ export default {
 		"side": {
 		    "vector": [1, 0, 0],
 		    "scalar": -1.57
+		}
+	    },
+	    "wrist": {
+		"f": {
+		    "vector": [-0.5, 0.5, -0.3],
+		    "scalar": 1.2
+		},
+		"gt": {
+		    "vector": [0, -1, 0.3],
+		    "scalar": 3.14
+		},
+		"lt": {
+		    "vector": [-1, 3, -2],
+		    "scalar": -1.5
+		},
+		"t": {
+		    "vector": [0, -1, 0.2],
+		    "scalar": 1.8
+		},
+		"*": {
+		    "vector": [0, 1.7, 0],
+		    "scalar": 3.14
+		},
+		"v": {
+		    "vector": [0, 0.7, 1],
+		    "scalar": 1.5,
+		},
+		"n": {
+		    "vector": [0, 0, 1],
+		    "scalar": 0
+		},
+		"z1": {
+		    "vector": [-0.5, 1, 1],
+		    "scalar": 1
 		}
 	    }
 	},
