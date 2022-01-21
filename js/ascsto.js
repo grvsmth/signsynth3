@@ -71,6 +71,59 @@ export default {
 		"side": {
 		    "copy": "below"
 		}
+	    },
+	    "elbow": {
+		"rest": {
+		    "vector": [1, 0, 0],
+		    "scalar": 0,
+		},
+		"Q": {
+		    "vector": [1, 0, 0],
+		    "scalar": -1.57,
+		},
+		"u": {
+		    "vector": [1, -0.1, 0],
+		    "scalar": -2
+		},
+		"m": {
+		    "vector": [1, -0.35, 0],
+		    "scalar": -2
+		},
+		"l": {
+		    "vector": [1, -.4, 0],
+		    "scalar": -2.6
+		},
+		"c": {
+		    "vector": [1, -0.2, 0],
+		    "scalar": -2.3
+		},
+		"k": {
+		    "vector": [1, -0.4, 0],
+		    "scalar": -2.6
+		},
+		"[": {
+		    "vector": [1, 0, 0],
+		    "scalar": -2.7
+		},
+		"h": {
+		    "copy": "c"
+		},
+		"j": {
+		    "vector": [1, -0.4, 0],
+		    "scalar": -1.5
+		},
+		"as": {
+		    "vector": [1, 0, 0],
+		    "scalar": -1.5
+		},
+		"below": {
+		    "vector": [1, 0, 0],
+		    "scalar": -1.1
+		},
+		"side": {
+		    "vector": [1, 0, 0],
+		    "scalar": -1.57
+		}
 	    }
 	}
     }
