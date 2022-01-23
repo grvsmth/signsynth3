@@ -27,10 +27,32 @@ export default {
 	"dominantOrientation": {
 	    "f": "Away from signer (f)",
 	    "t": "Towards signer (t)",
-	    "lt": "Towards non-dominant side (&lt;)",
-	    "gt": "Towards dominant side (&gt;)",
+	    "lt": "Towards non-dominant side (<)",
+	    "gt": "Towards dominant side (>)",
 	    "^": "Upwards (^)",
 	    "v": "Downwards (v)"
+	},
+	"dominantHandshape": {
+	    "A": "A",
+	    "B": "B",
+	    "B5": "B5",
+	    "bent-B5": "Bent 5 (B5\")*",
+	    "C": "C",
+	    "E": "E",
+	    "F": "F",
+	    "G": "G",
+	    "H": "H",
+	    "I": "I",
+	    "K": "K",
+	    "L": "L",
+	    "L3": "L3",
+	    "O": "O",
+	    "R": "R",
+	    "V": "V",
+	    "W": "W",
+	    "X": "X",
+	    "Y": "Y",
+	    "Y8": "Y8"
 	},
 	"nondominantLocation": {
 	    "Q": "Neutral (Q)",
@@ -49,10 +71,32 @@ export default {
 	"nondominantOrientation": {
 	    "f": "Away from signer (f)",
 	    "t": "Towards signer (t)",
-	    "lt": "Towards non-dominant side (&lt;)",
-	    "gt": "Towards dominant side (&gt;)",
+	    "lt": "Towards non-dominant side (<)",
+	    "gt": "Towards dominant side (>)",
 	    "^": "Upwards (^)",
 	    "v": "Downwards (v)"
+	},
+	"nondominantHanshape": {
+	    "A": "A",
+	    "B": "B",
+	    "B5": "B5",
+	    "bent-B5": "Bent 5 (B5\")*",
+	    "C": "C",
+	    "E": "E",
+	    "F": "F",
+	    "G": "G",
+	    "H": "H",
+	    "I": "I",
+	    "K": "K",
+	    "L": "L",
+	    "L3": "L3",
+	    "O": "O",
+	    "R": "R",
+	    "V": "V",
+	    "W": "W",
+	    "X": "X",
+	    "Y": "Y",
+	    "Y8": "Y8"
 	}
     },
     "defaultValue": {
@@ -174,7 +218,7 @@ export default {
 		    "scalar": 3.14
 		},
 		"lt": {
-		    "vector": [-1, 3, -2],
+		    "vector": [-1, 0.3, -0.2],
 		    "scalar": -1.5
 		},
 		"t": {
@@ -196,6 +240,84 @@ export default {
 		"z1": {
 		    "vector": [-0.5, 1, 1],
 		    "scalar": 1
+		}
+	    },
+	    "index1": {
+		"A": {
+		    "vector": [0, 0, 1],
+		    "scalar": 2
+		},
+		"B": {
+		    "vector": [0, 0, 1],
+		    "scalar": 0
+		},
+		"B5": {
+		    "copy": "B"
+		},
+		"bent-B5": {
+		    "vector": [0, 0, 1],
+		    "scalar": .5
+		},
+		"C": {
+		    "vector": [0, 0, 1],
+		    "scalar": .785
+		},
+		"E": {
+		    "copy": "A"
+		},
+		"F": {
+		    "copy": "C"
+		},
+		"G": {
+		    "copy": "B"
+		},
+		"H": {
+		    "copy": "B"
+		},
+		"I": {
+		    "copy": "C"
+		},
+		"K": {
+		    "copy": "B"
+		},
+		"L": {
+		    "copy": "B"
+		},
+		"L3": {
+		    "copy": "B"
+		},
+		"M": {
+		    "copy": "C"
+		},
+		"N": {
+		    "copy": "C"
+		},
+		"O": {
+		    "copy": "C"
+		},
+		"R": {
+		    "copy": "B"
+		},
+		"S": {
+		    "copy": "A"
+		},
+		"T": {
+		    "copy": "C"
+		},
+		"V": {
+		    "copy": "B"
+		},
+		"W": {
+		    "copy": "B"
+		},
+		"X": {
+		    "copy": "C"
+		},
+		"Y": {
+		    "copy": "A"
+		},
+		"Y8": {
+		    "copy": "B"
 		}
 	    }
 	},

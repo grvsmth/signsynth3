@@ -48,11 +48,14 @@ const dominantLocationSelect = formUtil.makeSelect("dominantLocation",
 						   ascsto);
 const dominantOrientationSelect = formUtil.makeSelect("dominantOrientation",
 						      ascsto);
+const dominantHandshapeSelect = formUtil.makeSelect("dominantHandshape",
+						      ascsto);
 const nondominantLocationSelect = formUtil.makeSelect("nondominantLocation",
 						      ascsto);
 
 ascstoForm.append(dominantLocationSelect);
 ascstoForm.append(dominantOrientationSelect);
+ascstoForm.append(dominantHandshapeSelect);
 ascstoForm.append(nondominantLocationSelect);
 
 const handleForm = function(event) {
