@@ -36,7 +36,7 @@ export default {
 	    "A": "A",
 	    "B": "B",
 	    "B5": "B5",
-	    "bent-B5": "Bent 5 (B5\")*",
+	    "bent-B5": "Bent 5 (B5)",
 	    "C": "C",
 	    "E": "E",
 	    "F": "F",
@@ -102,6 +102,7 @@ export default {
     "defaultValue": {
 	"dominantLocation": "rest",
 	"dominantOrientation": "f",
+	"dominantHandshape": "B5",
 	"nondominantLocation": "rest"
     },
     "rotation": {
@@ -263,7 +264,7 @@ export default {
 		    "scalar": .785
 		},
 		"E": {
-		    "copy": "A"
+		    "copy": "B"
 		},
 		"F": {
 		    "copy": "C"
@@ -318,6 +319,245 @@ export default {
 		},
 		"Y8": {
 		    "copy": "B"
+		}
+	    },
+	    "middle1": {
+		"A": {
+		    "vector": [0, 0, 1],
+		    "scalar": 1.57
+		},
+		"B": {
+		    "vector": [0, 0, 1],
+		    "scalar": 0
+		},
+		"B5": {
+		    "copy": "B"
+		},
+		"bent-B5": {
+		    "vector": [0, 0, 1],
+		    "scalar": .785
+		},
+		"C": {
+		    "vector": [0, 0, 1],
+		    "scalar": .785
+		},
+		"E": {
+		    "copy": "B"
+		},
+		"F": {
+		    "copy": "B"
+		},
+		"G": {
+		    "copy": "A"
+		},
+		"H": {
+		    "copy": "B"
+		},
+		"I": {
+		    "copy": "A"
+		},
+		"K": {
+		    "copy": "A"
+		},
+		"L": {
+		    "copy": "A"
+		},
+		"L3": {
+		    "copy": "B"
+		},
+		"M": {
+		    "vector": [-0.3, 0, 1],
+		    "scalar": 1.57
+		},
+		"N": {
+		    "copy": "M"
+		},
+		"O": {
+		    "copy": "A"
+		},
+		"R": {
+		    "vector": [0, 0, 1],
+		    "scalar": -0.3
+		},
+		"S": {
+		    "copy": "A"
+		},
+		"T": {
+		    "copy": "A"
+		},
+		"V": {
+		    "copy": "B"
+		},
+		"W": {
+		    "copy": "B"
+		},
+		"X": {
+		    "copy": "A"
+		},
+		"Y": {
+		    "copy": "A"
+		},
+		"Y8": {
+		    "copy": "C"
+		}
+	    },
+	    "ring1": {
+		"A": {
+		    "vector": [0, 0, 1],
+		    "scalar": 1.57
+		},
+		"B": {
+		    "vector": [0, 0, 1],
+		    "scalar": 0
+		},
+		"B5": {
+		    "vector": [1, 0, 0],
+		    "scalar": 0.2
+		},
+		"bent-B5": {
+		    "vector": [0.3, 0, 1],
+		    "scalar": 0.785
+		},
+		"C": {
+		    "vector": [0, 0, 1],
+		    "scalar": .785
+		},
+		"E": {
+		    "copy": "B"
+		},
+		"F": {
+		    "copy": "B5"
+		},
+		"G": {
+		    "copy": "A"
+		},
+		"H": {
+		    "copy": "A"
+		},
+		"I": {
+		    "copy": "A"
+		},
+		"K": {
+		    "copy": "A"
+		},
+		"L": {
+		    "copy": "A"
+		},
+		"L3": {
+		    "copy": "A"
+		},
+		"M": {
+		    "vector": [-0.3, 0, 1],
+		    "scalar": 1.57
+		},
+		"N": {
+		    "copy": "M"
+		},
+		"O": {
+		    "copy": "A"
+		},
+		"R": {
+		    "copy": "A"
+		},
+		"S": {
+		    "copy": "A"
+		},
+		"T": {
+		    "copy": "A"
+		},
+		"V": {
+		    "copy": "A"
+		},
+		"W": {
+		    "copy": "B5"
+		},
+		"X": {
+		    "copy": "A"
+		},
+		"Y": {
+		    "copy": "A"
+		},
+		"Y8": {
+		    "copy": "B5"
+		}
+	    },
+	    "pinky1": {
+		"A": {
+		    "vector": [0, 0, 1],
+		    "scalar": 1.57
+		},
+		"B": {
+		    "vector": [0, 0, 1],
+		    "scalar": 0
+		},
+		"B5": {
+		    "vector": [1, 0, 0],
+		    "scalar": 0.4
+		},
+		"bent-B5": {
+		    "vector": [-0.6, 0, 1],
+		    "scalar": 0.785
+		},
+		"C": {
+		    "vector": [0, 0, 1],
+		    "scalar": .785
+		},
+		"E": {
+		    "copy": "B"
+		},
+		"F": {
+		    "copy": "B5"
+		},
+		"G": {
+		    "copy": "A"
+		},
+		"H": {
+		    "copy": "A"
+		},
+		"I": {
+		    "copy": "B"
+		},
+		"K": {
+		    "copy": "A"
+		},
+		"L": {
+		    "copy": "A"
+		},
+		"L3": {
+		    "copy": "A"
+		},
+		"M": {
+		    "copy": "A"
+		},
+		"N": {
+		    "copy": "A"
+		},
+		"O": {
+		    "copy": "A"
+		},
+		"R": {
+		    "copy": "A"
+		},
+		"S": {
+		    "copy": "A"
+		},
+		"T": {
+		    "copy": "A"
+		},
+		"V": {
+		    "copy": "A"
+		},
+		"W": {
+		    "copy": "A"
+		},
+		"X": {
+		    "copy": "A"
+		},
+		"Y": {
+		    "copy": "A"
+		},
+		"Y8": {
+		    "copy": "B5"
 		}
 	    }
 	},

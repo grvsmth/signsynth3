@@ -213,7 +213,7 @@ export default class humanoid {
 	group.quaternion.setFromAxisAngle(new THREE.Vector3(0, 0, 1),
 					  thumb.rotation[joint]);
 	if (extension !== undefined) {
-	    extension.position.set(0, - (thumb.height[joint] - .1), 0);
+	    extension.position.set(0,- (thumb.height[joint] - .1), 0);
 	    group.add(extension);
 	}
 
@@ -244,7 +244,7 @@ export default class humanoid {
 	this[handedness].thumb1 = this
 	    .makeThumbJoint("joint1", this[handedness].thumb2);
 
-	this[handedness].thumb1.position.set(0, 0, -0.258);
+	this[handedness].thumb1.position.set(0, 0, 0.258);
 	this[handedness].wrist.add(this[handedness].thumb1);
     }
 
