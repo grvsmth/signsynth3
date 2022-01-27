@@ -243,7 +243,250 @@ export default {
 		    "scalar": 1
 		}
 	    },
+	    "thumb1": {
+		"A": {
+		    "vector": [1, 0, 0],
+		    "scalar": -0.5
+		},
+		"B": {
+		    "vector": [1, -1, 0.5],
+		    "scalar": 1.57
+		},
+		"B5": {
+		    "vector": [1, 0, 0],
+		    "scalar": -1.57
+		},
+		"bent-B5": {
+		    "vector": [0.5, -1, 0],
+		    "scalar": 2
+		},
+		"C": {
+		    "vector": [0.5, -1, -0.25],
+		    "scalar": 2.5
+		},
+		"E": {
+		    "vector": [0.5, -1, 0.5],
+		    "scalar": 1.5
+		},
+		"F": {
+		    "copy": "B"
+		},
+		"G": {
+		    "copy": "B"
+		},
+		"H": {
+		    "copy": "B"
+		},
+		"I": {
+		    "copy": "B"
+		},
+		"K": {
+		    "copy": "E"
+		},
+		"L": {
+		    "vector": [1, 0, 0],
+		    "scalar": -1.57
+		},
+		"L3": {
+		    "copy": "L"
+		},
+		"M": {
+		    "copy": "B"
+		},
+		"N": {
+		    "copy": "B"
+		},
+		"O": {
+		    "copy": "B"
+		},
+		"R": {
+		    "vector": [-0.1, 0.3, 0.2],
+		    "scalar": 2.5
+		},
+		"S": {
+		    "copy": "R"
+		},
+		"T": {
+		    "copy": "K"
+		},
+		"V": {
+		    "copy": "R"
+		},
+		"W": {
+		    "vector": [0.3, -1, -0.8],
+		    "scalar": -3
+		},
+		"X": {
+		    "copy": "B"
+		},
+		"Y": {
+		    "copy": "L"
+		},
+		"Y8": {
+		    "copy": "L"
+		}
+	    },
+	    "thumb2": {
+		"A": {
+		    "vector": [0, 0, 1],
+		    "scalar": 0
+		},
+		"B": {
+		    "vector": [1, 0.5, 0.5],
+		    "scalar": -0.5
+		},
+		"B5": {
+		    "copy": "A"
+		},
+		"bent-B5": {
+		    "copy": "A"
+		},
+		"C": {
+		    "copy": "A"
+		},
+		"E": {
+		    "vector": [0.1, 0.5, 0.1],
+		    "scalar": -1.5
+		},
+		"F": {
+		    "copy": "B"
+		},
+		"G": {
+		    "copy": "B"
+		},
+		"H": {
+		    "copy": "B"
+		},
+		"I": {
+		    "copy": "B"
+		},
+		"K": {
+		    "copy": "B"
+		},
+		"L": {
+		    "copy": "A"
+		},
+		"L3": {
+		    "copy": "A"
+		},
+		"M": {
+		    "copy": "E"
+		},
+		"N": {
+		    "copy": "E"
+		},
+		"O": {
+		    "copy": "A"
+		},
+		"R": {
+		    "vector": [0.5, 0.5, -1],
+		    "scalar": -0.3
+		},
+		"S": {
+		    "copy": "R"
+		},
+		"T": {
+		    "copy": "A"
+		},
+		"V": {
+		    "copy": "R"
+		},
+		"W": {
+		    "copy": "R"
+		},
+		"X": {
+		    "copy": "B"
+		},
+		"Y": {
+		    "copy": "B"
+		},
+		"Y8": {
+		    "copy": "A"
+		}
+	    },
 	    "index1": {
+		"A": {
+		    "vector": [0, 0, 1],
+		    "scalar": 1.57
+		},
+		"B": {
+		    "vector": [0, 0, 1],
+		    "scalar": 0
+		},
+		"B5": {
+		    "vector": [1, 0, 0],
+		    "scalar": -0.2
+		},
+		"bent-B5": {
+		    "vector": [-0.3, 0, 1],
+		    "scalar": 0.785
+		},
+		"C": {
+		    "vector": [0, 0, 1],
+		    "scalar": .785
+		},
+		"E": {
+		    "copy": "B"
+		},
+		"F": {
+		    "copy": "A"
+		},
+		"G": {
+		    "copy": "B"
+		},
+		"H": {
+		    "copy": "B"
+		},
+		"I": {
+		    "copy": "A"
+		},
+		"K": {
+		    "copy": "B"
+		},
+		"L": {
+		    "copy": "B"
+		},
+		"L3": {
+		    "copy": "B5"
+		},
+		"M": {	
+		    "vector": [0.3, 0, 1],
+		    "scalar": 1.57
+		},
+		"N": {
+		    "vector": [0.3, 0, 1],
+		    "scalar": 1.57
+		},
+		"O": {
+		    "copy": "A"
+		},
+		"R": {
+		    "vector": [1, 0, 0],
+		    "scalar": 0.3
+		},
+		"S": {
+		    "copy": "A"
+		},
+		"T": {
+		    "copy": "M"
+		},
+		"V": {
+		    "copy": "B5"
+		},
+		"W": {
+		    "copy": "B5"
+		},
+		"X": {
+		    "copy": "C"
+		},
+		"Y": {
+		    "copy": "A"
+		},
+		"Y8": {
+		    "copy": "B5"
+		}
+	    },
+	    "index2": {
 		"A": {
 		    "vector": [0, 0, 1],
 		    "scalar": 2
@@ -264,7 +507,7 @@ export default {
 		    "scalar": .785
 		},
 		"E": {
-		    "copy": "B"
+		    "copy": "A"
 		},
 		"F": {
 		    "copy": "C"
@@ -401,6 +644,84 @@ export default {
 		    "copy": "C"
 		}
 	    },
+	    "middle2": {
+		"A": {
+		    "vector": [0, 0, 1],
+		    "scalar": 2
+		},
+		"B": {
+		    "vector": [0, 0, 1],
+		    "scalar": 0
+		},
+		"B5": {
+		    "copy": "B"
+		},
+		"bent-B5": {
+		    "vector": [0, 0, 1],
+		    "scalar": .5
+		},
+		"C": {
+		    "vector": [0, 0, 1],
+		    "scalar": .785
+		},
+		"E": {
+		    "copy": "A"
+		},
+		"F": {
+		    "copy": "C"
+		},
+		"G": {
+		    "copy": "A"
+		},
+		"H": {
+		    "copy": "B"
+		},
+		"I": {
+		    "copy": "C"
+		},
+		"K": {
+		    "copy": "B"
+		},
+		"L": {
+		    "copy": "A"
+		},
+		"L3": {
+		    "copy": "B"
+		},
+		"M": {
+		    "copy": "C"
+		},
+		"N": {
+		    "copy": "C"
+		},
+		"O": {
+		    "copy": "C"
+		},
+		"R": {
+		    "copy": "B"
+		},
+		"S": {
+		    "copy": "A"
+		},
+		"T": {
+		    "copy": "A"
+		},
+		"V": {
+		    "copy": "B"
+		},
+		"W": {
+		    "copy": "B"
+		},
+		"X": {
+		    "copy": "C"
+		},
+		"Y": {
+		    "copy": "A"
+		},
+		"Y8": {
+		    "copy": "B"
+		}
+	    },
 	    "ring1": {
 		"A": {
 		    "vector": [0, 0, 1],
@@ -481,6 +802,84 @@ export default {
 		    "copy": "B5"
 		}
 	    },
+	    "ring2": {
+		"A": {
+		    "vector": [0, 0, 1],
+		    "scalar": 2
+		},
+		"B": {
+		    "vector": [0, 0, 1],
+		    "scalar": 0
+		},
+		"B5": {
+		    "copy": "B"
+		},
+		"bent-B5": {
+		    "vector": [0, 0, 1],
+		    "scalar": .5
+		},
+		"C": {
+		    "vector": [0, 0, 1],
+		    "scalar": .785
+		},
+		"E": {
+		    "copy": "A"
+		},
+		"F": {
+		    "copy": "B"
+		},
+		"G": {
+		    "copy": "A"
+		},
+		"H": {
+		    "copy": "A"
+		},
+		"I": {
+		    "copy": "C"
+		},
+		"K": {
+		    "copy": "A"
+		},
+		"L": {
+		    "copy": "A"
+		},
+		"L3": {
+		    "copy": "A"
+		},
+		"M": {
+		    "copy": "C"
+		},
+		"N": {
+		    "copy": "A"
+		},
+		"O": {
+		    "copy": "C"
+		},
+		"R": {
+		    "copy": "A"
+		},
+		"S": {
+		    "copy": "A"
+		},
+		"T": {
+		    "copy": "A"
+		},
+		"V": {
+		    "copy": "A"
+		},
+		"W": {
+		    "copy": "B"
+		},
+		"X": {
+		    "copy": "C"
+		},
+		"Y": {
+		    "copy": "B"
+		},
+		"Y8": {
+		    "copy": "B"
+		}
+	    },
 	    "pinky1": {
 		"A": {
 		    "vector": [0, 0, 1],
@@ -558,6 +957,84 @@ export default {
 		},
 		"Y8": {
 		    "copy": "B5"
+		}
+	    },
+	    "pinky2": {
+		"A": {
+		    "vector": [0, 0, 1],
+		    "scalar": 2
+		},
+		"B": {
+		    "vector": [0, 0, 1],
+		    "scalar": 0
+		},
+		"B5": {
+		    "copy": "B"
+		},
+		"bent-B5": {
+		    "vector": [0, 0, 1],
+		    "scalar": .5
+		},
+		"C": {
+		    "vector": [0, 0, 1],
+		    "scalar": .785
+		},
+		"E": {
+		    "copy": "A"
+		},
+		"F": {
+		    "copy": "B"
+		},
+		"G": {
+		    "copy": "A"
+		},
+		"H": {
+		    "copy": "A"
+		},
+		"I": {
+		    "copy": "B"
+		},
+		"K": {
+		    "copy": "A"
+		},
+		"L": {
+		    "copy": "A"
+		},
+		"L3": {
+		    "copy": "A"
+		},
+		"M": {
+		    "copy": "A"
+		},
+		"N": {
+		    "copy": "A"
+		},
+		"O": {
+		    "copy": "C"
+		},
+		"R": {
+		    "copy": "A"
+		},
+		"S": {
+		    "copy": "A"
+		},
+		"T": {
+		    "copy": "A"
+		},
+		"V": {
+		    "copy": "A"
+		},
+		"W": {
+		    "copy": "A"
+		},
+		"X": {
+		    "copy": "A"
+		},
+		"Y": {
+		    "copy": "B"
+		},
+		"Y8": {
+		    "copy": "B"
 		}
 	    }
 	},
