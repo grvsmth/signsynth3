@@ -8,7 +8,8 @@ import ascsto from "./ascsto.js";
 const signer = new Humanoid();
 
 const threedDiv = document.querySelector("#threed-div");
-const startButton = document.querySelector("#start");
+const startButton = document.querySelector("#start-button");
+const stopButton = document.querySelector("#stop-button");
 const ascstoForm = document.querySelector("#ascsto-form");
 
 const clock = new THREE.Clock();
@@ -70,16 +71,15 @@ const handleForm = function(event) {
 
     console.log("rotations", rotations);
     rotations.forEach(animator.processRotation);
+    // animator.start();
 };
 
 ascstoForm.addEventListener("change", handleForm);
 
 
-startButton.addEventListener("click", () => {
-    animator.start = undefined;
-    animator.previousTimestamp = undefined;
-    animator.animate(performance.now());
-});
+startButton.addEventListener("click", animator.start);
+stopButton.addEventListener("click", animator.stop);
+
 
 export default {
     "animator": animator

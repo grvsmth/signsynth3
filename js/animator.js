@@ -8,19 +8,26 @@ export default class animator {
 	this.totalFrames = totalFrames;
 	this.mixer = new THREE.AnimationMixer();
 
-	this.start = undefined;
+	this.mixers = {};
+
+	this.playing = false;
+
+	this.startTime = undefined;
 	this.previousTimestamp = undefined;
 
 	this.processRotation = this.processRotation.bind(this);
 	this.simpleAnimate = this.simpleAnimate.bind(this);
+
+	this.start = this.start.bind(this);
+	this.stop = this.stop.bind(this);
     }
 
     animate(timestamp) {
-	if (this.start === undefined) {
-	    this.start = timestamp;
+	if (this.startTime === undefined) {
+	    this.startTime = timestamp;
 	}
 
-	const elapsed = timestamp - this.start;
+	const elapsed = timestamp - this.startTime;
 
 	if (this.previousTimestamp !== timestamp) {
 	    this.humanoid.right.shoulder.rotation.x -= 0.01;
@@ -39,23 +46,28 @@ export default class animator {
 
     setRotation(joint, quaternion) {
 	const vector = new THREE.Vector3(...quaternion.vector);
-	console.log("vector", vector);
-	console.log("scalar", quaternion.scalar);
 	joint.quaternion.setFromAxisAngle(vector, quaternion.scalar);
 	this.renderer.render(this.scene, this.camera);
     }
 
     processRotation(rotation) {
-	console.log(rotation);
 	const joint = this.humanoid[rotation.articulator][rotation.joint];
 	// this.setRotation(joint, rotation.rotation);
-	this.moveJoint(joint, rotation.rotation);
+	const jointName = rotation.articulator + "_" + rotation.joint;
+	this.moveJoint(jointName, joint, rotation.rotation);
     }
 
 
     render() {
-	if (this.mixer) {
-	    this.mixer.update(this.clock.getDelta());
+	if (!this.playing) {
+	    return;
+	}
+        const delta = this.clock.getDelta();
+
+	for (const joint in this.mixers) {
+	    //console.log("isRunning?", this.mixers[joint].isRunning());
+	    console.log("Updating " + joint, delta);
+	    this.mixers[joint].update(delta);
 	}
 
 	this.renderer.render(this.scene, this.camera);
@@ -80,7 +92,18 @@ export default class animator {
 						 values);
     }
 
-    moveJoint(joint, finalValue) {
+    start() {
+        console.log("mixers", this.mixers);
+	this.simpleAnimate(performance.now());
+	this.playing = true;
+    }
+
+    stop() {
+	this.playing = false;
+    }
+
+    moveJoint(name, joint, finalValue) {
+	console.log(`moveJoint(${name})`, joint);
 	const initialQuaternion = joint.quaternion;
 	const finalQuaternion = this.makeQuaternion(finalValue.vector,
 						    finalValue.scalar);
@@ -89,12 +112,14 @@ export default class animator {
 	      .makeQuaternionKeyFrameTrack(initialQuaternion,
 					   finalQuaternion);
 
-	const clip = new THREE.AnimationClip("MoveJoint", 3, [keyFrameTrack]);
-	this.mixer = new THREE.AnimationMixer(joint);
+	const clip = new THREE.AnimationClip(name, 3, [keyFrameTrack]);
+	const mixer = new THREE.AnimationMixer(joint);
 
-	const clipAction = this.mixer.clipAction(clip);
-
+	const clipAction = mixer.clipAction(clip);
+	clipAction.loop = THREE.LoopOnce;
+	clipAction.clampWhenFinished = true;
 	clipAction.play();
-	// this.simpleAnimate(performance.now());
+
+	this.mixers[name] = mixer;
     }
 }
