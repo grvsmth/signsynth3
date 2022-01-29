@@ -24,37 +24,8 @@ export default class animator {
 	this.stop = this.stop.bind(this);
     }
 
-    animate(timestamp) {
-	if (this.startTime === undefined) {
-	    this.startTime = timestamp;
-	}
-
-	const elapsed = timestamp - this.startTime;
-
-	if (this.previousTimestamp !== timestamp) {
-	    this.humanoid.right.shoulder.rotation.x -= 0.01;
-            this.humanoid.right.elbow.rotation.x += 0.005;
-            this.humanoid.right.shoulder.rotation.y -= 0.01;
-            // this.humanoid.right.elbow.rotation.y -= 0.05;
-
-	    this.renderer.render(this.scene, this.camera);
-	}
-
-	if (elapsed < this.totalFrames) {
-	    this.previousTimestamp = timestamp;
-	    requestAnimationFrame(this.animate.bind(this));
-	}
-    }
-
-    setRotation(joint, quaternion) {
-	const vector = new THREE.Vector3(...quaternion.vector);
-	joint.quaternion.setFromAxisAngle(vector, quaternion.scalar);
-	this.renderer.render(this.scene, this.camera);
-    }
-
     processRotation(rotation) {
 	const joint = this.humanoid[rotation.articulator][rotation.joint];
-	// this.setRotation(joint, rotation.rotation);
 	const jointName = rotation.articulator + "_" + rotation.joint;
 	this.moveJoint(jointName, joint, rotation.rotation);
     }
@@ -74,7 +45,6 @@ export default class animator {
 		this.mixers[joint].update(delta);
 		continue;
 	    }
-	    // delete this.mixers[joint];
 	}
 
 	this.renderer.render(this.scene, this.camera);
