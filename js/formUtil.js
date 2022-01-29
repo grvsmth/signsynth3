@@ -13,7 +13,10 @@ const formUtil = {
 
 	for(const option in options) {
 	    const defaultSelected = option === ascsto.defaultValue[name];
-	    select.add(new Option(options[option], option, defaultSelected));
+	    console.log(`${name}.${option} default?`, defaultSelected);
+	    const optionObject = new Option(options[option], option, defaultSelected, defaultSelected);
+	    console.log(optionObject);
+	    select.add(optionObject);
 	}
 
 	selectDiv.append(labelElement);
