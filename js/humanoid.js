@@ -244,7 +244,7 @@ export default class humanoid {
 	this[handedness].thumb1 = this
 	    .makeThumbJoint("joint1", this[handedness].thumb2);
 
-	this[handedness].thumb1.position.set(0, 0, 0.258);
+	this[handedness].thumb1.position.set(0, 0, -0.258);
 	this[handedness].wrist.add(this[handedness].thumb1);
     }
 

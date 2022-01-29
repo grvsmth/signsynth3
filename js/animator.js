@@ -1,15 +1,18 @@
 export default class animator {
-    constructor(scene, camera, renderer, humanoid, totalFrames) {
+    constructor(scene, camera, renderer, humanoid, clock, totalFrames) {
 	this.scene = scene;
 	this.camera = camera;
 	this.renderer = renderer;
 	this.humanoid = humanoid;
+	this.clock = clock;
 	this.totalFrames = totalFrames;
+	this.mixer = new THREE.AnimationMixer();
 
 	this.start = undefined;
 	this.previousTimestamp = undefined;
 
 	this.processRotation = this.processRotation.bind(this);
+	this.simpleAnimate = this.simpleAnimate.bind(this);
     }
 
     animate(timestamp) {
@@ -45,7 +48,53 @@ export default class animator {
     processRotation(rotation) {
 	console.log(rotation);
 	const joint = this.humanoid[rotation.articulator][rotation.joint];
-	this.setRotation(joint, rotation.rotation);
+	// this.setRotation(joint, rotation.rotation);
+	this.moveJoint(joint, rotation.rotation);
     }
 
+
+    render() {
+	if (this.mixer) {
+	    this.mixer.update(this.clock.getDelta());
+	}
+
+	this.renderer.render(this.scene, this.camera);
+    }
+
+    simpleAnimate(timestamp) {
+	requestAnimationFrame(this.simpleAnimate);
+	this.render();
+    }
+
+    makeQuaternion(vector, scalar) {
+	const vectorThree = new THREE.Vector3(...vector);
+	return new THREE.Quaternion().setFromAxisAngle(vectorThree, scalar);
+    }
+
+    makeQuaternionKeyFrameTrack(initialQuaternion, finalQuaternion) {
+	const values = initialQuaternion.toArray()
+	      .concat(finalQuaternion.toArray());
+
+	return new THREE.QuaternionKeyframeTrack('.quaternion',
+						 [0, 1],
+						 values);
+    }
+
+    moveJoint(joint, finalValue) {
+	const initialQuaternion = joint.quaternion;
+	const finalQuaternion = this.makeQuaternion(finalValue.vector,
+						    finalValue.scalar);
+
+	const keyFrameTrack = this
+	      .makeQuaternionKeyFrameTrack(initialQuaternion,
+					   finalQuaternion);
+
+	const clip = new THREE.AnimationClip("MoveJoint", 3, [keyFrameTrack]);
+	this.mixer = new THREE.AnimationMixer(joint);
+
+	const clipAction = this.mixer.clipAction(clip);
+
+	clipAction.play();
+	// this.simpleAnimate(performance.now());
+    }
 }
