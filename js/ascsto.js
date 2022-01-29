@@ -1417,7 +1417,7 @@ export default {
 		    "copy": "A"
 		},
 		"X": {
-		    "copy": "A"
+		    "copy": "C"
 		},
 		"Y": {
 		    "copy": "B"
