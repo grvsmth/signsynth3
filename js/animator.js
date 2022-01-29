@@ -10,6 +10,8 @@ export default class animator {
 
 	this.mixers = {};
 
+	this.clips = {};
+
 	this.playing = false;
 
 	this.startTime = undefined;
@@ -65,9 +67,14 @@ export default class animator {
         const delta = this.clock.getDelta();
 
 	for (const joint in this.mixers) {
-	    //console.log("isRunning?", this.mixers[joint].isRunning());
-	    console.log("Updating " + joint, delta);
-	    this.mixers[joint].update(delta);
+	    const clip = this.clips[joint];
+	    const action = this.mixers[joint].existingAction(clip);
+
+	    if (action.isRunning()) {
+		this.mixers[joint].update(delta);
+		continue;
+	    }
+	    // delete this.mixers[joint];
 	}
 
 	this.renderer.render(this.scene, this.camera);
@@ -121,5 +128,6 @@ export default class animator {
 	clipAction.play();
 
 	this.mixers[name] = mixer;
+	this.clips[name] = clip;
     }
 }
