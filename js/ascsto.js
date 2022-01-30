@@ -163,7 +163,7 @@ export default {
 		},
 		"Q": {
 		    "vector": [1, 0, 0],
-		    "scalar": -1.57,
+		    "scalar": -1.7,
 		},
 		"u": {
 		    "vector": [1, -0.1, 0],
@@ -249,8 +249,8 @@ export default {
 		    "scalar": -0.5
 		},
 		"B": {
-		    "vector": [1, 1, 0.5],
-		    "scalar": 1.57
+		    "vector": [0.5, -1, 0.25],
+		    "scalar": 2.5
 		},
 		"B5": {
 		    "vector": [1, 0, 0],
@@ -907,7 +907,8 @@ export default {
 		    "copy": "A"
 		},
 		"H": {
-		    "copy": "B"
+		    "vector": [0, 0, 1],
+		    "scalar": 0
 		},
 		"I": {
 		    "copy": "C"
