@@ -10,18 +10,18 @@ const position = {
     "left": {
 	"shoulder": [1.8, 1.14, 0],
 	"thumb": [0, 0, 0.258],
-	"index": [0.15, -0.72, .18],
+	"index": [0.05, -0.72, .18],
 	"middle": [0.1, -0.72, .06],
-	"ring": [0.1, -0.72, -.06],
-	"pinky": [0.15, -0.72, -.18]
+	"ring": [0.05, -0.72, -.06],
+	"pinky": [0.1, -0.72, -.18]
     },
     "right": {
 	"shoulder": [-1.8, 1.14, 0],
 	"thumb": [0.2, -0.1, 0.258],
-	"index": [0.15, -0.72, .18],
-	"middle": [0.1, -0.72, .06],
-	"ring": [0.1, -0.72, -.06],
-	"pinky": [0.15, -0.72, -.18]
+	"index": [0.1, -0.72, .18],
+	"middle": [0.05, -0.72, .06],
+	"ring": [0.05, -0.72, -.06],
+	"pinky": [0.1, -0.72, -.18]
     }
 };
 
@@ -196,7 +196,7 @@ export default class humanoid {
 	group.quaternion.setFromAxisAngle(new THREE.Vector3(0, 0, 1),
 					 finger.rotation[joint]);
 	if (extension !== undefined) {
-	    extension.position.set(0, - (finger.height[joint] - .1), 0);
+	    extension.position.set(0, - (finger.height[joint] - .15), 0);
 	    group.add(extension);
 	}
 
