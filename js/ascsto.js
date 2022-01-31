@@ -249,8 +249,8 @@ export default {
 		    "scalar": -0.5
 		},
 		"B": {
-		    "vector": [0.5, -1, 0.25],
-		    "scalar": 2.5
+		    "vector": [0.25, -1, 0],
+		    "scalar": 2.95
 		},
 		"B5": {
 		    "vector": [1, 0, 0],
@@ -261,7 +261,7 @@ export default {
 		    "scalar": 2
 		},
 		"C": {
-		    "vector": [0.5, -1, -0.25],
+		    "vector": [0.43, -0.87, -0.22],
 		    "scalar": 2.5
 		},
 		"E": {
@@ -281,7 +281,7 @@ export default {
 		    "copy": "B"
 		},
 		"K": {
-		    "copy": "E"
+		    "copy": "B"
 		},
 		"L": {
 		    "vector": [1, 0, 0],
@@ -1108,163 +1108,6 @@ export default {
 		    "copy": "C"
 		},
 		"Y": {
-		    "copy": "B"
-		},
-		"Y8": {
-		    "copy": "B"
-		}
-	    },
-	    "middle3": {
-		"A": {
-		    "vector": [0, 0, 1],
-		    "scalar": 1.57
-		},
-		"B": {
-		    "vector": [0, 0, 1],
-		    "scalar": 0
-		},
-		"B5": {
-		    "copy": "B"
-		},
-		"bentB5": {
-		    "vector": [0, 0, 1],
-		    "scalar": .5
-		},
-		"C": {
-		    "vector": [0, 0, 1],
-		    "scalar": .785
-		},
-		"E": {
-		    "copy": "A"
-		},
-		"F": {
-		    "copy": "B"
-		},
-		"G": {
-		    "copy": "A"
-		},
-		"H": {
-		    "vector": [0, 0, 1],
-		    "scalar": 0
-		},
-		"I": {
-		    "copy": "C"
-		},
-		"K": {
-		    "copy": "B"
-		},
-		"L": {
-		    "copy": "B"
-		},
-		"L3": {
-		    "copy": "B"
-		},
-		"M": {
-		    "copy": "B"
-		},
-		"N": {
-		    "copy": "B"
-		},
-		"O": {
-		    "copy": "C"
-		},
-		"R": {
-		    "copy": "B"
-		},
-		"S": {
-		    "copy": "A"
-		},
-		"T": {
-		    "copy": "A"
-		},
-		"V": {
-		    "copy": "B"
-		},
-		"W": {
-		    "copy": "B"
-		},
-		"X": {
-		    "copy": "C"
-		},
-		"Y": {
-		    "copy": "B"
-		},
-		"Y8": {
-		    "copy": "B"
-		}
-	    },
-	    "middle2": {
-		"A": {
-		    "vector": [0, 0, 1],
-		    "scalar": 2
-		},
-		"B": {
-		    "vector": [0, 0, 1],
-		    "scalar": 0
-		},
-		"B5": {
-		    "copy": "B"
-		},
-		"bentB5": {
-		    "vector": [0, 0, 1],
-		    "scalar": .5
-		},
-		"C": {
-		    "vector": [0, 0, 1],
-		    "scalar": .785
-		},
-		"E": {
-		    "copy": "A"
-		},
-		"F": {
-		    "copy": "C"
-		},
-		"G": {
-		    "copy": "A"
-		},
-		"H": {
-		    "copy": "B"
-		},
-		"I": {
-		    "copy": "C"
-		},
-		"K": {
-		    "copy": "B"
-		},
-		"L": {
-		    "copy": "A"
-		},
-		"L3": {
-		    "copy": "B"
-		},
-		"M": {
-		    "copy": "C"
-		},
-		"N": {
-		    "copy": "C"
-		},
-		"O": {
-		    "copy": "C"
-		},
-		"R": {
-		    "copy": "B"
-		},
-		"S": {
-		    "copy": "A"
-		},
-		"T": {
-		    "copy": "A"
-		},
-		"V": {
-		    "copy": "B"
-		},
-		"W": {
-		    "copy": "B"
-		},
-		"X": {
-		    "copy": "C"
-		},
-		"Y": {
 		    "copy": "A"
 		},
 		"Y8": {
@@ -1301,10 +1144,11 @@ export default {
 		    "copy": "A"
 		},
 		"H": {
-		    "copy": "A"
+		    "vector": [0, 0, 1],
+		    "scalar": 0
 		},
 		"I": {
-		    "copy": "B"
+		    "copy": "C"
 		},
 		"K": {
 		    "copy": "B"
@@ -1319,7 +1163,7 @@ export default {
 		    "copy": "B"
 		},
 		"N": {
-		    "copy": "A"
+		    "copy": "B"
 		},
 		"O": {
 		    "copy": "C"
@@ -1422,7 +1266,7 @@ export default {
 		    "copy": "A"
 		},
 		"Y": {
-		    "copy": "A"
+		    "copy": "B5"
 		},
 		"Y8": {
 		    "copy": "B5"

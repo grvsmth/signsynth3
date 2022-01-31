@@ -196,7 +196,7 @@ export default class humanoid {
 	group.quaternion.setFromAxisAngle(new THREE.Vector3(0, 0, 1),
 					 finger.rotation[joint]);
 	if (extension !== undefined) {
-	    extension.position.set(0, - (finger.height[joint] - .15), 0);
+	    extension.position.set(0.01, - (finger.height[joint] - 0.1), 0);
 	    group.add(extension);
 	}
 
