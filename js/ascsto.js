@@ -124,14 +124,15 @@ export default {
 		    "copy": "u"
 		},
 		"l": {
-		    "copy": "u"
+		    "vector": [-0.975, 0.1553, -0.155],
+		    "scalar": 1.5
 		},
 		"c": {
 		    "vector": [-0.975, 0.1553, -0.155],
 		    "scalar": 1.3
 		},
 		"k": {
-		    "copy": "c"
+		    "copy": "l"
 		},
 		"[": {
 		    "vector": [-0.887, -0.426, -.176],
@@ -140,12 +141,16 @@ export default {
 		"h": {
 		    "copy": "c"
 		},
+		"i": {
+		    "vector": [-0.5, 0.83, -0.25],
+		    "scalar": 1.5
+		},
 		"j": {
-		    "vector": [-0.6, 1, -0.3],
+		    "vector": [-0.5, 0.83, -0.25],
 		    "scalar": 1
 		},
 		"as": {
-		    "vector": [-0.8, 1, -0.3],
+		    "vector": [-0.6, 0.76, -0.23],
 		    "scalar": 1
 		},
 		"below": {
@@ -170,20 +175,20 @@ export default {
 		    "scalar": -2
 		},
 		"m": {
-		    "vector": [1, -0.35, 0],
+		    "vector": [0.9438583564, -0.3303504247, 0],
 		    "scalar": -2
 		},
 		"l": {
-		    "vector": [1, -.4, 0],
-		    "scalar": -2.6
+		    "vector": [0.93, -0.37, 0],
+		    "scalar": -2.35
 		},
 		"c": {
-		    "vector": [1, -0.2, 0],
+		    "vector": [0.98, -0.196, 0],
 		    "scalar": -2.3
 		},
 		"k": {
-		    "vector": [1, -0.4, 0],
-		    "scalar": -2.6
+		    "vector": [0.93, -0.37, 0],
+		    "scalar": -2.8
 		},
 		"[": {
 		    "vector": [1, 0, 0],
@@ -191,6 +196,10 @@ export default {
 		},
 		"h": {
 		    "copy": "c"
+		},
+		"i": {
+		    "vector": [1, -0.4, 0],
+		    "scalar": -1.5
 		},
 		"j": {
 		    "vector": [1, -0.4, 0],
