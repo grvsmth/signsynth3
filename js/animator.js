@@ -1,15 +1,15 @@
 export default class animator {
-    constructor(scene, camera, renderer, humanoid, clock, totalFrames) {
+    constructor(scene, camera, renderer, humanoid, clock, totalFrames, capturer, outputDiv) {
 	this.scene = scene;
 	this.camera = camera;
 	this.renderer = renderer;
 	this.humanoid = humanoid;
 	this.clock = clock;
 	this.totalFrames = totalFrames;
-	this.mixer = new THREE.AnimationMixer();
+	this.capturer = capturer;
+	this.outputDiv = outputDiv;
 
 	this.mixers = {};
-
 	this.clips = {};
 
 	this.playing = false;
@@ -48,6 +48,7 @@ export default class animator {
 	}
 
 	this.renderer.render(this.scene, this.camera);
+	this.capturer.capture(this.renderer.domElement);
     }
 
     simpleAnimate(timestamp) {
@@ -70,17 +71,26 @@ export default class animator {
     }
 
     start() {
-        console.log("mixers", this.mixers);
+	console.log("renderer", this.renderer);
+	this.capturer.start();
 	this.simpleAnimate(performance.now());
 	this.playing = true;
     }
 
     stop() {
 	this.playing = false;
+	this.capturer.stop();
+	this.capturer.save((blob) => {
+	    const blobUrl = URL.createObjectURL(blob);
+	    console.log(blobUrl);
+	    const link = document.createElement("a");
+	    link.href = blobUrl;
+	    link.innerText = "open sesame";
+	    this.outputDiv.appendChild(link);
+	});
     }
 
     moveJoint(name, joint, finalValue) {
-	console.log(`moveJoint(${name})`, joint);
 	const initialQuaternion = joint.quaternion;
 	const finalQuaternion = this.makeQuaternion(finalValue.vector,
 						    finalValue.scalar);

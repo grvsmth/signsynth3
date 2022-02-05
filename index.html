@@ -44,11 +44,14 @@
 	<button type="button" id="start-button">Start</button>
 	<button type="button" id="stop-button">Stop</button>
       </div>
+      <div id="output-div"></div>
     </div>
     <script src="lib/three.js"></script>
+    <script src="lib/CCapture.min.js"></script>
+    <script src="lib/gif.js"></script>
     <script type="module">
       import main from "./js/main.js";
-      // main.animator.animate(performance.now());
+      main.animator.start();
     </script>
   </body>
 </html>
