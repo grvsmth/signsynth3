@@ -80,14 +80,7 @@ export default class animator {
     stop() {
 	this.playing = false;
 	this.capturer.stop();
-	this.capturer.save((blob) => {
-	    const blobUrl = URL.createObjectURL(blob);
-	    console.log(blobUrl);
-	    const link = document.createElement("a");
-	    link.href = blobUrl;
-	    link.innerText = "open sesame";
-	    this.outputDiv.appendChild(link);
-	});
+	this.capturer.save();
     }
 
     moveJoint(name, joint, finalValue) {
