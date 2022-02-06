@@ -9,6 +9,7 @@ export default class animator {
 	this.start = undefined;
 	this.previousTimestamp = undefined;
 
+	this.processRotation = this.processRotation.bind(this);
     }
 
     animate(timestamp) {
@@ -31,6 +32,20 @@ export default class animator {
 	    this.previousTimestamp = timestamp;
 	    requestAnimationFrame(this.animate.bind(this));
 	}
+    }
+
+    setRotation(joint, quaternion) {
+	const vector = new THREE.Vector3(...quaternion.vector);
+	console.log("vector", vector);
+	console.log("scalar", quaternion.scalar);
+	joint.quaternion.setFromAxisAngle(vector, quaternion.scalar);
+	this.renderer.render(this.scene, this.camera);
+    }
+
+    processRotation(rotation) {
+	console.log(rotation);
+	const joint = this.humanoid[rotation.articulator][rotation.joint];
+	this.setRotation(joint, rotation.rotation);
     }
 
 }

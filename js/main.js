@@ -1,8 +1,15 @@
 import Humanoid from "./humanoid.js";
 import Animator from "./animator.js";
 
+import formUtil from "./formUtil.js";
+import ascsto from "./ascsto.js";
+
+
+const signer = new Humanoid();
+
 const threedDiv = document.querySelector("#threed-div");
 const startButton = document.querySelector("#start");
+const ascstoForm = document.querySelector("#ascsto-form");
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(50,
@@ -14,11 +21,9 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize( threedDiv.offsetWidth, threedDiv.offsetHeight );
 threedDiv.appendChild( renderer.domElement );
 
-const signer = new Humanoid();
-
 scene.add( signer.body );
 
-camera.position.z = 7;
+camera.position.z = 8;
 camera.position.y = 1.9;
 // camera.position.x = -1;
 
@@ -36,6 +41,38 @@ scene.add(lightHelper);
 
 
 const animator = new Animator(scene, camera, renderer, signer, 2000);
+
+const params = ["dominantLocation", "nondominantLocation"];
+
+const dominantLocationSelect = formUtil.makeSelect("dominantLocation",
+						   ascsto);
+const dominantOrientationSelect = formUtil.makeSelect("dominantOrientation",
+						      ascsto);
+const dominantHandshapeSelect = formUtil.makeSelect("dominantHandshape",
+						      ascsto);
+const nondominantLocationSelect = formUtil.makeSelect("nondominantLocation",
+						      ascsto);
+
+ascstoForm.append(dominantLocationSelect);
+ascstoForm.append(dominantOrientationSelect);
+ascstoForm.append(dominantHandshapeSelect);
+ascstoForm.append(nondominantLocationSelect);
+
+const handleForm = function(event) {
+    console.log(event.target.name, event.target.value);
+    console.log(ascsto);
+
+    const rotations = formUtil.findRotations(signer.handed,
+					     ascsto.rotation,
+					     event.target.name,
+					     event.target.value);
+
+    console.log("rotations", rotations);
+    rotations.forEach(animator.processRotation);
+};
+
+ascstoForm.addEventListener("change", handleForm);
+
 
 startButton.addEventListener("click", () => {
     animator.start = undefined;
