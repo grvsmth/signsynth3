@@ -37,7 +37,7 @@
 	<div id="threed-div"></div>
       </div>
       <div id="control-div">
-	<h2>Controls</h2>
+	<h2>ASCII-Stokoe poser</h2>
 	<div id="form-div">
 	  <form id="ascsto-form"></form>
 	</div>
@@ -52,8 +52,10 @@
     <script src="lib/download.js"></script>
     <script type="module">
       import main from "./js/main.js";
-      main.addCapturer();
-      main.animator.start();
+
+      window.addEventListener("load", () => {
+        main.animator.renderer.render(main.animator.scene, main.animator.camera);
+      });
     </script>
   </body>
 </html>

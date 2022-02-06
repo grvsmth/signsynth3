@@ -1,106 +1,119 @@
 export default class animator {
-    constructor(scene, camera, renderer, humanoid, clock, totalFrames, capturer, outputDiv) {
-	this.scene = scene;
-	this.camera = camera;
-	this.renderer = renderer;
-	this.humanoid = humanoid;
-	this.clock = clock;
-	this.totalFrames = totalFrames;
-	this.capturer = capturer;
-	this.outputDiv = outputDiv;
+    constructor(scene, camera, renderer, humanoid, clock, totalFrames) {
+        this.scene = scene;
+        this.camera = camera;
+        this.renderer = renderer;
+        this.humanoid = humanoid;
+        this.clock = clock;
+        this.totalFrames = totalFrames;
 
-	this.mixers = {};
-	this.clips = {};
+        this.capturer = null;
+        this.outputDiv = null;
 
-	this.playing = false;
+        this.mixers = {};
+        this.clips = {};
 
-	this.startTime = undefined;
-	this.previousTimestamp = undefined;
+        this.playing = false;
 
-	this.processRotation = this.processRotation.bind(this);
-	this.simpleAnimate = this.simpleAnimate.bind(this);
+        this.startTime = undefined;
+        this.previousTimestamp = undefined;
 
-	this.start = this.start.bind(this);
-	this.stop = this.stop.bind(this);
+        this.processRotation = this.processRotation.bind(this);
+        this.simpleAnimate = this.simpleAnimate.bind(this);
+
+        this.start = this.start.bind(this);
+        this.stop = this.stop.bind(this);
     }
 
-    processRotation(rotation) {
-	const joint = this.humanoid[rotation.articulator][rotation.joint];
-	const jointName = rotation.articulator + "_" + rotation.joint;
-	this.moveJoint(jointName, joint, rotation.rotation);
-    }
-
-
-    render() {
-	if (!this.playing) {
-	    return;
-	}
-        const delta = this.clock.getDelta();
-
-	for (const joint in this.mixers) {
-	    const clip = this.clips[joint];
-	    const action = this.mixers[joint].existingAction(clip);
-
-	    if (action.isRunning()) {
-		this.mixers[joint].update(delta);
-		continue;
-	    }
-	}
-
-	this.renderer.render(this.scene, this.camera);
-	this.capturer.capture(this.renderer.domElement);
-    }
-
-    simpleAnimate(timestamp) {
-	requestAnimationFrame(this.simpleAnimate);
-	this.render();
+    setCapturer(capturer, outputDiv) {
+        this.capturer = capturer;
+        this.outputDiv = outputDiv;     
     }
 
     makeQuaternion(vector, scalar) {
-	const vectorThree = new THREE.Vector3(...vector);
-	return new THREE.Quaternion().setFromAxisAngle(vectorThree, scalar);
+        const vectorThree = new THREE.Vector3(...vector);
+        return new THREE.Quaternion().setFromAxisAngle(vectorThree, scalar);
     }
 
     makeQuaternionKeyFrameTrack(initialQuaternion, finalQuaternion) {
-	const values = initialQuaternion.toArray()
-	      .concat(finalQuaternion.toArray());
+        const values = initialQuaternion.toArray()
+              .concat(finalQuaternion.toArray());
 
-	return new THREE.QuaternionKeyframeTrack('.quaternion',
-						 [0, 1],
-						 values);
-    }
-
-    start() {
-	console.log("renderer", this.renderer);
-	this.capturer.start();
-	this.simpleAnimate(performance.now());
-	this.playing = true;
-    }
-
-    stop() {
-	this.playing = false;
-	this.capturer.stop();
-	this.capturer.save();
+        return new THREE.QuaternionKeyframeTrack('.quaternion',
+                                                 [0, 1],
+                                                 values);
     }
 
     moveJoint(name, joint, finalValue) {
-	const initialQuaternion = joint.quaternion;
-	const finalQuaternion = this.makeQuaternion(finalValue.vector,
-						    finalValue.scalar);
+        const initialQuaternion = joint.quaternion;
+        const finalQuaternion = this.makeQuaternion(finalValue.vector,
+                                                    finalValue.scalar);
 
-	const keyFrameTrack = this
-	      .makeQuaternionKeyFrameTrack(initialQuaternion,
-					   finalQuaternion);
+        const keyFrameTrack = this
+              .makeQuaternionKeyFrameTrack(initialQuaternion,
+                                           finalQuaternion);
 
-	const clip = new THREE.AnimationClip(name, 3, [keyFrameTrack]);
-	const mixer = new THREE.AnimationMixer(joint);
+        const clip = new THREE.AnimationClip(name, 3, [keyFrameTrack]);
+        const mixer = new THREE.AnimationMixer(joint);
 
-	const clipAction = mixer.clipAction(clip);
-	clipAction.loop = THREE.LoopOnce;
-	clipAction.clampWhenFinished = true;
-	clipAction.play();
+        const clipAction = mixer.clipAction(clip);
+        clipAction.loop = THREE.LoopOnce;
+        clipAction.clampWhenFinished = true;
+        clipAction.play();
 
-	this.mixers[name] = mixer;
-	this.clips[name] = clip;
+        this.mixers[name] = mixer;
+        this.clips[name] = clip;
+    }
+
+    processRotation(rotation) {
+        const joint = this.humanoid[rotation.articulator][rotation.joint];
+        const jointName = rotation.articulator + "_" + rotation.joint;
+        this.moveJoint(jointName, joint, rotation.rotation);
+    }
+
+    render() {
+        if (!this.playing) {
+            return;
+        }
+        const delta = this.clock.getDelta();
+
+        for (const joint in this.mixers) {
+            const clip = this.clips[joint];
+            const action = this.mixers[joint].existingAction(clip);
+
+            if (action.isRunning()) {
+                this.mixers[joint].update(delta);
+                continue;
+            }
+        }
+
+        this.renderer.render(this.scene, this.camera);
+        if (this.capturer) {
+            this.capturer.capture(this.renderer.domElement);
+        }
+    }
+
+    simpleAnimate(timestamp) {
+        requestAnimationFrame(this.simpleAnimate);
+        this.render();
+    }
+
+    start(capture=false) {
+        console.log("renderer", this.renderer);
+        if (this.capturer) {
+            this.capturer.start();
+        }
+
+        this.simpleAnimate(performance.now());
+        this.playing = true;
+    }
+
+    stop() {
+        this.playing = false;
+
+        if (this.capturer) {
+            this.capturer.stop();
+            this.capturer.save();
+        }
     }
 }
