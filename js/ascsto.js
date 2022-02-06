@@ -29,14 +29,14 @@ export default {
 	    "t": "Towards signer (t)",
 	    "lt": "Towards non-dominant side (<)",
 	    "gt": "Towards dominant side (>)",
-	    "^": "Upwards (^)",
+	    "carat": "Upwards (^)",
 	    "v": "Downwards (v)"
 	},
 	"dominantHandshape": {
 	    "A": "A",
 	    "B": "B",
 	    "B5": "B5",
-	    "bent-B5": "Bent 5 (B5)",
+	    "bentB5": "Bent 5 (B5)",
 	    "C": "C",
 	    "E": "E",
 	    "F": "F",
@@ -73,14 +73,14 @@ export default {
 	    "t": "Towards signer (t)",
 	    "lt": "Towards non-dominant side (<)",
 	    "gt": "Towards dominant side (>)",
-	    "^": "Upwards (^)",
+	    "carat": "Upwards (^)",
 	    "v": "Downwards (v)"
 	},
 	"nondominantHanshape": {
 	    "A": "A",
 	    "B": "B",
 	    "B5": "B5",
-	    "bent-B5": "Bent 5 (B5\")*",
+	    "bentB5": "Bent 5 (B5\")",
 	    "C": "C",
 	    "E": "E",
 	    "F": "F",
@@ -102,7 +102,7 @@ export default {
     "defaultValue": {
 	"dominantLocation": "rest",
 	"dominantOrientation": "f",
-	"dominantHandshape": "B5",
+	"dominantHandshape": "bentB5",
 	"nondominantLocation": "rest"
     },
     "rotation": {
@@ -118,20 +118,21 @@ export default {
 		},
 		"u": {
 		    "vector": [-0.975, 0.1553, -0.155],
-		    "scalar": 1.8
+		    "scalar": 1.7
 		},
 		"m": {
 		    "copy": "u"
 		},
 		"l": {
-		    "copy": "u"
+		    "vector": [-0.975, 0.1553, -0.155],
+		    "scalar": 1.5
 		},
 		"c": {
 		    "vector": [-0.975, 0.1553, -0.155],
-		    "scalar": 1.4
+		    "scalar": 1.3
 		},
 		"k": {
-		    "copy": "c"
+		    "copy": "l"
 		},
 		"[": {
 		    "vector": [-0.887, -0.426, -.176],
@@ -140,12 +141,16 @@ export default {
 		"h": {
 		    "copy": "c"
 		},
+		"i": {
+		    "vector": [-0.5, 0.83, -0.25],
+		    "scalar": 1.5
+		},
 		"j": {
-		    "vector": [-0.6, 1, -0.3],
+		    "vector": [-0.5, 0.83, -0.25],
 		    "scalar": 1
 		},
 		"as": {
-		    "vector": [-0.8, 1, -0.3],
+		    "vector": [-0.6, 0.76, -0.23],
 		    "scalar": 1
 		},
 		"below": {
@@ -163,27 +168,27 @@ export default {
 		},
 		"Q": {
 		    "vector": [1, 0, 0],
-		    "scalar": -1.57,
+		    "scalar": -1.7,
 		},
 		"u": {
 		    "vector": [1, -0.1, 0],
 		    "scalar": -2
 		},
 		"m": {
-		    "vector": [1, -0.35, 0],
+		    "vector": [0.9438583564, -0.3303504247, 0],
 		    "scalar": -2
 		},
 		"l": {
-		    "vector": [1, -.4, 0],
-		    "scalar": -2.6
+		    "vector": [0.93, -0.37, 0],
+		    "scalar": -2.35
 		},
 		"c": {
-		    "vector": [1, -0.2, 0],
+		    "vector": [0.98, -0.196, 0],
 		    "scalar": -2.3
 		},
 		"k": {
-		    "vector": [1, -0.4, 0],
-		    "scalar": -2.6
+		    "vector": [0.93, -0.37, 0],
+		    "scalar": -2.8
 		},
 		"[": {
 		    "vector": [1, 0, 0],
@@ -191,6 +196,10 @@ export default {
 		},
 		"h": {
 		    "copy": "c"
+		},
+		"i": {
+		    "vector": [1, -0.4, 0],
+		    "scalar": -1.5
 		},
 		"j": {
 		    "vector": [1, -0.4, 0],
@@ -226,9 +235,9 @@ export default {
 		    "vector": [0, -1, 0.2],
 		    "scalar": 1.8
 		},
-		"*": {
-		    "vector": [0, 1.7, 0],
-		    "scalar": 3.14
+		"carat": {
+		    "vector": [0, 1, 0],
+		    "scalar": Math.PI
 		},
 		"v": {
 		    "vector": [0, 0.7, 1],
@@ -249,19 +258,19 @@ export default {
 		    "scalar": -0.5
 		},
 		"B": {
-		    "vector": [1, -1, 0.5],
-		    "scalar": 1.57
+		    "vector": [0.25, -1, 0],
+		    "scalar": 2.95
 		},
 		"B5": {
 		    "vector": [1, 0, 0],
 		    "scalar": -1.57
 		},
-		"bent-B5": {
+		"bentB5": {
 		    "vector": [0.5, -1, 0],
 		    "scalar": 2
 		},
 		"C": {
-		    "vector": [0.5, -1, -0.25],
+		    "vector": [0.43, -0.87, -0.22],
 		    "scalar": 2.5
 		},
 		"E": {
@@ -281,7 +290,7 @@ export default {
 		    "copy": "B"
 		},
 		"K": {
-		    "copy": "E"
+		    "copy": "B"
 		},
 		"L": {
 		    "vector": [1, 0, 0],
@@ -313,7 +322,7 @@ export default {
 		    "copy": "R"
 		},
 		"W": {
-		    "vector": [0.3, -1, -0.8],
+		    "vector": [0.03, -0.1, -0.08],
 		    "scalar": -3
 		},
 		"X": {
@@ -338,7 +347,7 @@ export default {
 		"B5": {
 		    "copy": "A"
 		},
-		"bent-B5": {
+		"bentB5": {
 		    "copy": "A"
 		},
 		"C": {
@@ -416,7 +425,7 @@ export default {
 		"B5": {
 		    "copy": "A"
 		},
-		"bent-B5": {
+		"bentB5": {
 		    "copy": "B"
 		},
 		"C": {
@@ -494,7 +503,7 @@ export default {
 		    "vector": [1, 0, 0],
 		    "scalar": -0.2
 		},
-		"bent-B5": {
+		"bentB5": {
 		    "vector": [-0.3, 0, 1],
 		    "scalar": 0.785
 		},
@@ -575,7 +584,7 @@ export default {
 		"B5": {
 		    "copy": "B"
 		},
-		"bent-B5": {
+		"bentB5": {
 		    "vector": [0, 0, 1],
 		    "scalar": .5
 		},
@@ -653,7 +662,7 @@ export default {
 		"B5": {
 		    "copy": "B"
 		},
-		"bent-B5": {
+		"bentB5": {
 		    "vector": [0, 0, 1],
 		    "scalar": .5
 		},
@@ -731,7 +740,7 @@ export default {
 		"B5": {
 		    "copy": "B"
 		},
-		"bent-B5": {
+		"bentB5": {
 		    "vector": [0, 0, 1],
 		    "scalar": .785
 		},
@@ -811,7 +820,7 @@ export default {
 		"B5": {
 		    "copy": "B"
 		},
-		"bent-B5": {
+		"bentB5": {
 		    "vector": [0, 0, 1],
 		    "scalar": .5
 		},
@@ -889,7 +898,7 @@ export default {
 		"B5": {
 		    "copy": "B"
 		},
-		"bent-B5": {
+		"bentB5": {
 		    "vector": [0, 0, 1],
 		    "scalar": .5
 		},
@@ -907,7 +916,8 @@ export default {
 		    "copy": "A"
 		},
 		"H": {
-		    "copy": "B"
+		    "vector": [0, 0, 1],
+		    "scalar": 0
 		},
 		"I": {
 		    "copy": "C"
@@ -968,7 +978,7 @@ export default {
 		    "vector": [1, 0, 0],
 		    "scalar": 0.2
 		},
-		"bent-B5": {
+		"bentB5": {
 		    "vector": [0.3, 0, 1],
 		    "scalar": 0.785
 		},
@@ -1047,7 +1057,7 @@ export default {
 		"B5": {
 		    "copy": "B"
 		},
-		"bent-B5": {
+		"bentB5": {
 		    "vector": [0, 0, 1],
 		    "scalar": .5
 		},
@@ -1107,91 +1117,13 @@ export default {
 		    "copy": "C"
 		},
 		"Y": {
-		    "copy": "B"
-		},
-		"Y8": {
-		    "copy": "B"
-		}
-	    },
-	    "middle2": {
-		"A": {
-		    "vector": [0, 0, 1],
-		    "scalar": 2
-		},
-		"B": {
-		    "vector": [0, 0, 1],
-		    "scalar": 0
-		},
-		"B5": {
-		    "copy": "B"
-		},
-		"bent-B5": {
-		    "vector": [0, 0, 1],
-		    "scalar": .5
-		},
-		"C": {
-		    "vector": [0, 0, 1],
-		    "scalar": .785
-		},
-		"E": {
-		    "copy": "A"
-		},
-		"F": {
-		    "copy": "C"
-		},
-		"G": {
-		    "copy": "A"
-		},
-		"H": {
-		    "copy": "B"
-		},
-		"I": {
-		    "copy": "C"
-		},
-		"K": {
-		    "copy": "B"
-		},
-		"L": {
-		    "copy": "A"
-		},
-		"L3": {
-		    "copy": "B"
-		},
-		"M": {
-		    "copy": "C"
-		},
-		"N": {
-		    "copy": "C"
-		},
-		"O": {
-		    "copy": "C"
-		},
-		"R": {
-		    "copy": "B"
-		},
-		"S": {
-		    "copy": "A"
-		},
-		"T": {
-		    "copy": "A"
-		},
-		"V": {
-		    "copy": "B"
-		},
-		"W": {
-		    "copy": "B"
-		},
-		"X": {
-		    "copy": "C"
-		},
-		"Y": {
 		    "copy": "A"
 		},
 		"Y8": {
 		    "copy": "B"
 		}
 	    },
-	    "middle3": {
+	    "ring3": {
 		"A": {
 		    "vector": [0, 0, 1],
 		    "scalar": 1.57
@@ -1203,7 +1135,7 @@ export default {
 		"B5": {
 		    "copy": "B"
 		},
-		"bent-B5": {
+		"bentB5": {
 		    "vector": [0, 0, 1],
 		    "scalar": .5
 		},
@@ -1221,10 +1153,11 @@ export default {
 		    "copy": "A"
 		},
 		"H": {
-		    "copy": "A"
+		    "vector": [0, 0, 1],
+		    "scalar": 0
 		},
 		"I": {
-		    "copy": "B"
+		    "copy": "C"
 		},
 		"K": {
 		    "copy": "B"
@@ -1239,7 +1172,7 @@ export default {
 		    "copy": "B"
 		},
 		"N": {
-		    "copy": "A"
+		    "copy": "B"
 		},
 		"O": {
 		    "copy": "C"
@@ -1282,8 +1215,8 @@ export default {
 		    "vector": [1, 0, 0],
 		    "scalar": 0.4
 		},
-		"bent-B5": {
-		    "vector": [-0.6, 0, 1],
+		"bentB5": {
+		    "vector": [0.6, 0, 1],
 		    "scalar": 0.785
 		},
 		"C": {
@@ -1342,7 +1275,7 @@ export default {
 		    "copy": "A"
 		},
 		"Y": {
-		    "copy": "A"
+		    "copy": "B5"
 		},
 		"Y8": {
 		    "copy": "B5"
@@ -1360,7 +1293,7 @@ export default {
 		"B5": {
 		    "copy": "B"
 		},
-		"bent-B5": {
+		"bentB5": {
 		    "vector": [0, 0, 1],
 		    "scalar": .5
 		},
@@ -1417,7 +1350,7 @@ export default {
 		    "copy": "A"
 		},
 		"X": {
-		    "copy": "A"
+		    "copy": "C"
 		},
 		"Y": {
 		    "copy": "B"
@@ -1438,7 +1371,7 @@ export default {
 		"B5": {
 		    "copy": "B"
 		},
-		"bent-B5": {
+		"bentB5": {
 		    "vector": [0, 0, 1],
 		    "scalar": .5
 		},
