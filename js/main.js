@@ -75,8 +75,10 @@ const addCapturer = function() {
     animator.setCapturer(capturer, outputDiv);
 };
 
-startButton.addEventListener("click", animator.start);
-stopButton.addEventListener("click", animator.stop);
+if (startButton) {
+  startButton.addEventListener("click", animator.start);
+  stopButton.addEventListener("click", animator.stop);
+}
 
 
 export default {
