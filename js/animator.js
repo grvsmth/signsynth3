@@ -9,6 +9,7 @@ export default class animator {
 
         this.capturer = null;
         this.outputDiv = null;
+        this.mode = "player";
 
         this.mixers = {};
         this.clips = {};
@@ -25,9 +26,17 @@ export default class animator {
         this.stop = this.stop.bind(this);
     }
 
+    isPlaying() {
+        return this.playing;
+    }
+
     setCapturer(capturer, outputDiv) {
         this.capturer = capturer;
         this.outputDiv = outputDiv;     
+    }
+
+    setMode(mode) {
+        this.mode = mode;
     }
 
     makeQuaternion(vector, scalar) {
@@ -72,9 +81,10 @@ export default class animator {
     }
 
     render() {
-        if (!this.playing) {
+        if (this.mode === "player" && !this.playing) {
             return;
         }
+
         const delta = this.clock.getDelta();
 
         for (const joint in this.mixers) {
@@ -104,8 +114,8 @@ export default class animator {
             this.capturer.start();
         }
 
-        this.simpleAnimate(performance.now());
         this.playing = true;
+        this.simpleAnimate(performance.now());
     }
 
     stop() {

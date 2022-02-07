@@ -54,7 +54,9 @@
       import main from "./js/main.js";
 
       window.addEventListener("load", () => {
+        main.animator.setMode("poser");
         main.animator.renderer.render(main.animator.scene, main.animator.camera);
+        main.animator.start();
       });
     </script>
   </body>

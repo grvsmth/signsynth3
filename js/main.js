@@ -52,6 +52,10 @@ ascstoForm.append(dominantHandshapeSelect);
 ascstoForm.append(nondominantLocationSelect);
 
 const handleForm = function(event) {
+    if (animator.mode === "player" && animator.isPlaying()) {
+        return;
+    }
+
     console.log(event.target.name, event.target.value);
     console.log(ascsto);
 
