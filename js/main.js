@@ -10,7 +10,6 @@ const signer = new Humanoid();
 const threedDiv = document.querySelector("#threed-div");
 const gifButton = document.querySelector("#gif-button");
 const playButton = document.querySelector("#play-button");
-const webmButton = document.querySelector("#webm-button");
 
 const ascstoForm = document.querySelector("#ascsto-form");
 const outputDiv = document.querySelector("#output-div");
@@ -75,8 +74,10 @@ ascstoForm.addEventListener("change", handleForm);
 const addCapturer = function(format) {
     const params = {"format": format};
     if (format === "gif") {
-        params.workersPath = "lib";
+        params.workersPath = "lib/";
     }
+    console.log("ccapture", params);
+
     const capturer = new CCapture(params);
     animator.setCapturer(capturer, outputDiv);
 };
@@ -85,10 +86,6 @@ if (playButton) {
   playButton.addEventListener("click", animator.start);
   gifButton.addEventListener("click", () => {
       addCapturer("gif");
-      animator.start();
-  });
-  webmButton.addEventListener("click", () => {
-      addCapturer("webm");
       animator.start();
   });
 }
