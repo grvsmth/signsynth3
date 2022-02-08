@@ -76,7 +76,9 @@ export default class animator {
                              initialQuaternion];
         const keyFrameTrack = this.makeQuaternionKeyFrameTrack(quaternions);
 
-        const clip = new THREE.AnimationClip(name, 3, [keyFrameTrack]);
+        const totalTime = keyFrameTrack.times.slice(-1);
+
+        const clip = new THREE.AnimationClip(name, totalTime, [keyFrameTrack]);
         const mixer = new THREE.AnimationMixer(joint);
 
         const clipAction = mixer.clipAction(clip);
