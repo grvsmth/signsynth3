@@ -8,8 +8,10 @@ import ascsto from "./ascsto.js";
 const signer = new Humanoid();
 
 const threedDiv = document.querySelector("#threed-div");
-const startButton = document.querySelector("#start-button");
-const stopButton = document.querySelector("#stop-button");
+const gifButton = document.querySelector("#gif-button");
+const playButton = document.querySelector("#play-button");
+const webmButton = document.querySelector("#webm-button");
+
 const ascstoForm = document.querySelector("#ascsto-form");
 const outputDiv = document.querySelector("#output-div");
 
@@ -70,18 +72,28 @@ const handleForm = function(event) {
 
 ascstoForm.addEventListener("change", handleForm);
 
-const addCapturer = function() {
-    const capturer = new CCapture( { format: 'gif', workersPath: 'lib/' } );
+const addCapturer = function(format) {
+    const params = {"format": format};
+    if (format === "gif") {
+        params.workersPath = "lib";
+    }
+    const capturer = new CCapture(params);
     animator.setCapturer(capturer, outputDiv);
 };
 
-if (startButton) {
-  startButton.addEventListener("click", animator.start);
-  stopButton.addEventListener("click", animator.stop);
+if (playButton) {
+  playButton.addEventListener("click", animator.start);
+  gifButton.addEventListener("click", () => {
+      addCapturer("gif");
+      animator.start();
+  });
+  webmButton.addEventListener("click", () => {
+      addCapturer("webm");
+      animator.start();
+  });
 }
 
 
 export default {
-    "animator": animator,
-    "addCapturer": addCapturer
+    "animator": animator
 };

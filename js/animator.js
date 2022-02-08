@@ -94,6 +94,8 @@ export default class animator {
             if (action.isRunning()) {
                 this.mixers[joint].update(delta);
                 continue;
+            } else {
+                this.stop();
             }
         }
 
@@ -108,7 +110,7 @@ export default class animator {
         this.render();
     }
 
-    start(capture=false) {
+    start() {
         console.log("renderer", this.renderer);
         if (this.capturer) {
             this.capturer.start();
