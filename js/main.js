@@ -60,6 +60,7 @@ const handleForm = function(event) {
     console.log(event.target.name, event.target.value);
     console.log(ascsto);
 
+    // TODO in the player, call this on submit instead
     const rotations = formUtil.findRotations(signer.handed,
                                              ascsto.rotation,
                                              event.target.name,
