@@ -39,17 +39,29 @@ export default class animator {
         this.mode = mode;
     }
 
+    makeTimes(length, interval=0.5) {
+        const times = [];
+        for (let index=0; index<length; index++) {
+            times.push(index * interval);
+        }
+        return times;
+    }
+
     makeQuaternion(vector, scalar) {
         const vectorThree = new THREE.Vector3(...vector);
         return new THREE.Quaternion().setFromAxisAngle(vectorThree, scalar);
     }
 
-    makeQuaternionKeyFrameTrack(initialQuaternion, finalQuaternion) {
-        const values = initialQuaternion.toArray()
-              .concat(finalQuaternion.toArray());
+    concatenateQuaternion(array, quaternion) {
+        return array.concat(quaternion.toArray());
+    }
+
+    makeQuaternionKeyFrameTrack(quaternions) {
+        const values = quaternions.reduce(this.concatenateQuaternion, []);
+        const times = this.makeTimes(quaternions.length, 0.75);
 
         return new THREE.QuaternionKeyframeTrack('.quaternion',
-                                                 [0, 1],
+                                                 times,
                                                  values);
     }
 
@@ -58,9 +70,11 @@ export default class animator {
         const finalQuaternion = this.makeQuaternion(finalValue.vector,
                                                     finalValue.scalar);
 
-        const keyFrameTrack = this
-              .makeQuaternionKeyFrameTrack(initialQuaternion,
-                                           finalQuaternion);
+        const quaternions = [initialQuaternion,
+                             finalQuaternion,
+                             finalQuaternion,
+                             initialQuaternion];
+        const keyFrameTrack = this.makeQuaternionKeyFrameTrack(quaternions);
 
         const clip = new THREE.AnimationClip(name, 3, [keyFrameTrack]);
         const mixer = new THREE.AnimationMixer(joint);
@@ -111,7 +125,6 @@ export default class animator {
     }
 
     start() {
-        console.log("renderer", this.renderer);
         if (this.capturer) {
             this.capturer.start();
         }
