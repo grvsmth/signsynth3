@@ -52,22 +52,25 @@ ascstoForm.append(dominantOrientationSelect);
 ascstoForm.append(dominantHandshapeSelect);
 ascstoForm.append(nondominantLocationSelect);
 
+const convertRotations = function(handedness, articulator, value) {
+    const rotations = formUtil.findRotations(handedness,
+                                             ascsto.rotation,
+                                             articulator,
+                                             value);
+
+    console.log("rotations", rotations);
+    rotations.forEach(animator.processRotation);
+};
+
 const handleForm = function(event) {
-    if (animator.mode === "player" && animator.isPlaying()) {
+    if (animator.mode === "player") {
         return;
     }
 
     console.log(event.target.name, event.target.value);
     console.log(ascsto);
 
-    // TODO in the player, call this on submit instead
-    const rotations = formUtil.findRotations(signer.handed,
-                                             ascsto.rotation,
-                                             event.target.name,
-                                             event.target.value);
-
-    console.log("rotations", rotations);
-    rotations.forEach(animator.processRotation);
+    convertRotations(signer.handed, event.target.name, event.target.value);
 };
 
 ascstoForm.addEventListener("change", handleForm);
@@ -83,11 +86,20 @@ const addCapturer = function(format) {
     animator.setCapturer(capturer, outputDiv);
 };
 
+const playAsciiStokoe = function(event) {
+    const elements = new FormData(event.target.form);
+    // TODO use fieldset to group hold fields
+    for (let input of elements) {
+        convertRotations(signer.handed, input[0], input[1]);
+    }
+    animator.start();
+};
+
 if (playButton) {
-  playButton.addEventListener("click", animator.start);
-  gifButton.addEventListener("click", () => {
+  playButton.addEventListener("click", playAsciiStokoe);
+  gifButton.addEventListener("click", (event) => {
       addCapturer("gif");
-      animator.start();
+      playAsciiStokoe(event);
   });
 }
 
