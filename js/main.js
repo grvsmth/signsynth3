@@ -89,6 +89,8 @@ const addCapturer = function(format) {
 const playAsciiStokoe = function(event) {
     const elements = new FormData(event.target.form);
     // TODO use fieldset to group hold fields
+
+    animator.clear();
     for (let input of elements) {
         convertRotations(signer.handed, input[0], input[1]);
     }

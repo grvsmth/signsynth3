@@ -143,4 +143,9 @@ export default class animator {
             this.capturer.save();
         }
     }
+
+    clear() {
+        this.clips = {};
+        this.mixers = {};
+    }
 }
