@@ -14,6 +14,13 @@ const playButton = document.querySelector("#play-button");
 const ascstoForm = document.querySelector("#ascsto-form");
 const outputDiv = document.querySelector("#output-div");
 
+const tabSpan = document.querySelector("#tab");
+const dezSpan = document.querySelector("#dez");
+const sigSpam = document.querySelector("#sig");
+
+const divider1 = document.querySelector("#divider1");
+const divider2 = document.querySelector("#divider2");
+
 const clock = new THREE.Clock();
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(50,
@@ -63,12 +70,28 @@ const convertRotations = function(handedness, articulator, value) {
 };
 
 const handleForm = function(event) {
+    console.log(event.target.name, event.target.value);
+    console.log(ascsto);
+
+    if (event.target.name === "dominantLocation") {
+        tabSpan.innerHTML = event.target.value;
+    }
+
+    if (event.target.name === "dominantHandshape") {
+        dezSpan.innerHTML = event.target.value;
+    }
+
+    if (event.target.name === "dominantMovement") {
+        sigSpan.innerHTML = event.target.value;
+    }
+
+    if (tabSpan.innerHTML && dezSpan.innerHTML) {
+        divider1.innerHTML = "/";
+    }
+
     if (animator.mode === "player") {
         return;
     }
-
-    console.log(event.target.name, event.target.value);
-    console.log(ascsto);
 
     convertRotations(signer.handed, event.target.name, event.target.value);
 };

@@ -65,15 +65,19 @@ export default class animator {
                                                  values);
     }
 
-    moveJoint(name, joint, finalValue) {
+    moveJoint(name, joint, targetValue) {
         const initialQuaternion = joint.quaternion;
-        const finalQuaternion = this.makeQuaternion(finalValue.vector,
-                                                    finalValue.scalar);
+        const targetQuaternion = this.makeQuaternion(targetValue.vector,
+                                                    targetValue.scalar);
 
-        const quaternions = [initialQuaternion,
-                             finalQuaternion,
-                             finalQuaternion,
-                             initialQuaternion];
+        let quaternions = [initialQuaternion,
+                             targetQuaternion];
+
+        if (this.mode === "player") {
+            quaternions = quaternions.concat([targetQuaternion,
+                                              initialQuaternion]);
+        }
+
         const keyFrameTrack = this.makeQuaternionKeyFrameTrack(quaternions);
 
         const totalTime = keyFrameTrack.times.slice(-1);
@@ -90,7 +94,7 @@ export default class animator {
         this.clips[name] = clip;
     }
 
-    processRotation(rotation) {
+    processRotation(rotation, restAfter) {
         const joint = this.humanoid[rotation.articulator][rotation.joint];
         const jointName = rotation.articulator + "_" + rotation.joint;
         this.moveJoint(jointName, joint, rotation.rotation);
