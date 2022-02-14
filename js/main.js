@@ -15,6 +15,7 @@ const ascstoForm = document.querySelector("#ascsto-form");
 const outputDiv = document.querySelector("#output-div");
 
 const tabSpan = document.querySelector("#tab");
+const orientationSpan = document.querySelector("#orientation");
 const dezSpan = document.querySelector("#dez");
 const sigSpam = document.querySelector("#sig");
 
@@ -73,16 +74,26 @@ const handleForm = function(event) {
     console.log(event.target.name, event.target.value);
     console.log(ascsto);
 
+    let symbol = event.target.value;
+    if (ascsto.symbol.hasOwnProperty(symbol)) {
+        symbol = ascsto.symbol[symbol];
+        console.log(symbol);
+    }
+
     if (event.target.name === "dominantLocation") {
-        tabSpan.innerHTML = event.target.value;
+        tabSpan.innerHTML = symbol;
     }
 
     if (event.target.name === "dominantHandshape") {
-        dezSpan.innerHTML = event.target.value;
+        dezSpan.innerHTML = symbol;
+    }
+
+    if (event.target.name === "dominantOrientation") {
+        orientationSpan.innerHTML = symbol;
     }
 
     if (event.target.name === "dominantMovement") {
-        sigSpan.innerHTML = event.target.value;
+        sigSpan.innerHTML = symbol;
     }
 
     if (tabSpan.innerHTML && dezSpan.innerHTML) {

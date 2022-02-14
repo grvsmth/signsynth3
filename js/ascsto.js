@@ -36,7 +36,7 @@ export default {
 	    "A": "A",
 	    "B": "B",
 	    "B5": "B5",
-	    "bentB5": "Bent 5 (B5)",
+	    "bentB5": "Bent 5 (B5\")",
 	    "C": "C",
 	    "E": "E",
 	    "F": "F",
@@ -104,6 +104,15 @@ export default {
 	"dominantOrientation": "f",
 	"dominantHandshape": "bentB5",
 	"nondominantLocation": "rest"
+    },
+    "symbol": {
+	"Q": "Q",
+	"rest": "0",
+	"as": "a",
+	"lt": "&lt;",
+	"gt": "&gt;",
+	"carat": "^",
+	"bentB5": "B5\""
     },
     "rotation": {
 	"right": {

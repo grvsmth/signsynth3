@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'Stokoe Tempo';
+    src: url('../fonts/stt_____-webfont.woff2') format('woff2'),
+         url('../fonts/stt_____-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
  margin: 0;
 }
@@ -33,4 +41,5 @@ body {
 
 #ascsto-output {
     text-align: center;
+    font-family: "Stokoe Tempo", serif;
 }
