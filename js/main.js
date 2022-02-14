@@ -15,8 +15,8 @@ const ascstoForm = document.querySelector("#ascsto-form");
 const outputDiv = document.querySelector("#output-div");
 
 const tabSpan = document.querySelector("#tab");
-const orientationSpan = document.querySelector("#orientation");
 const dezSpan = document.querySelector("#dez");
+const orientationSpan = document.querySelector("#orientation");
 const sigSpam = document.querySelector("#sig");
 
 const divider1 = document.querySelector("#divider1");
@@ -56,8 +56,8 @@ const nondominantLocationSelect = formUtil.makeSelect("nondominantLocation",
                                                       ascsto);
 
 ascstoForm.append(dominantLocationSelect);
-ascstoForm.append(dominantOrientationSelect);
 ascstoForm.append(dominantHandshapeSelect);
+ascstoForm.append(dominantOrientationSelect);
 ascstoForm.append(nondominantLocationSelect);
 
 const convertRotations = function(handedness, articulator, value) {
