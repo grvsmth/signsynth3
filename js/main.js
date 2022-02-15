@@ -71,6 +71,7 @@ const convertRotations = function(handedness, articulator, value) {
 };
 
 const handleForm = function(event) {
+    const hasFont = document.fonts.check("12px Stokoe Tempo");
     console.log(event.target.name, event.target.value);
     console.log(ascsto);
 
@@ -96,7 +97,7 @@ const handleForm = function(event) {
         sigSpan.innerHTML = symbol;
     }
 
-    if (tabSpan.innerHTML && dezSpan.innerHTML) {
+    if (!hasFont && tabSpan.innerHTML && dezSpan.innerHTML) {
         divider1.innerHTML = "/";
     }
 
