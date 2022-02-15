@@ -72,13 +72,10 @@ const convertRotations = function(handedness, articulator, value) {
 
 const handleForm = function(event) {
     const hasFont = document.fonts.check("12px Stokoe Tempo");
-    console.log(event.target.name, event.target.value);
-    console.log(ascsto);
 
     let symbol = event.target.value;
     if (ascsto.symbol.hasOwnProperty(symbol)) {
         symbol = ascsto.symbol[symbol];
-        console.log(symbol);
     }
 
     if (event.target.name === "dominantLocation") {
@@ -115,7 +112,6 @@ const addCapturer = function(format) {
     if (format === "gif") {
         params.workersPath = "lib/";
     }
-    console.log("ccapture", params);
 
     const capturer = new CCapture(params);
     animator.setCapturer(capturer, outputDiv);
@@ -129,7 +125,10 @@ const playAsciiStokoe = function(event) {
     for (let input of elements) {
         convertRotations(signer.handed, input[0], input[1]);
     }
-    animator.start();
+
+    if (!animator.isPlaying()) {
+        animator.start();
+    }
 };
 
 if (playButton) {

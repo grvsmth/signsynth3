@@ -14,11 +14,6 @@ export default class animator {
         this.mixers = {};
         this.clips = {};
 
-        this.playing = false;
-
-        this.startTime = undefined;
-        this.previousTimestamp = undefined;
-
         this.processRotation = this.processRotation.bind(this);
         this.simpleAnimate = this.simpleAnimate.bind(this);
 
@@ -27,7 +22,7 @@ export default class animator {
     }
 
     isPlaying() {
-        return this.playing;
+        return this.clock.running;
     }
 
     setCapturer(capturer, outputDiv) {
@@ -79,8 +74,7 @@ export default class animator {
         }
 
         const keyFrameTrack = this.makeQuaternionKeyFrameTrack(quaternions);
-
-        const totalTime = keyFrameTrack.times.slice(-1);
+        const totalTime = keyFrameTrack.times.slice(-1)[0];
 
         const clip = new THREE.AnimationClip(name, totalTime, [keyFrameTrack]);
         const mixer = new THREE.AnimationMixer(joint);
@@ -101,7 +95,9 @@ export default class animator {
     }
 
     render() {
-        if (this.mode === "player" && !this.playing) {
+        let runningActions = 0;
+
+        if (this.mode === "player" && !this.clock.running) {
             return;
         }
 
@@ -112,11 +108,16 @@ export default class animator {
             const action = this.mixers[joint].existingAction(clip);
 
             if (action.isRunning()) {
+                runningActions++;
+
                 this.mixers[joint].update(delta);
                 continue;
-            } else {
-                this.stop();
             }
+        }
+
+        if (this.playing && runningActions < 1) {
+            this.stop();
+            return;
         }
 
         this.renderer.render(this.scene, this.camera);
@@ -130,17 +131,22 @@ export default class animator {
         this.render();
     }
 
+    show() {
+        this.renderer.render(this.scene, this.camera);
+    }
+
     start() {
+        this.clock.start();
+
         if (this.capturer) {
             this.capturer.start();
         }
 
-        this.playing = true;
         this.simpleAnimate(performance.now());
     }
 
     stop() {
-        this.playing = false;
+        this.clock.stop();
 
         if (this.capturer) {
             this.capturer.stop();
