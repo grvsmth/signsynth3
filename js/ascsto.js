@@ -109,6 +109,15 @@ export default {
 	"Q": "Q",
 	"rest": "0",
 	"as": "a",
+	"lt": "<",
+	"gt": ">",
+	"carat": "^",
+	"bentB5": "B5\""
+    },
+    "escapedSymbol": {
+	"Q": "Q",
+	"rest": "0",
+	"as": "a",
 	"lt": "&lt;",
 	"gt": "&gt;",
 	"carat": "^",

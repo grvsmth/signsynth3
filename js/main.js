@@ -3,6 +3,7 @@ import Animator from "./animator.js";
 
 import formUtil from "./formUtil.js";
 import ascsto from "./ascsto.js";
+import TextShape from "./TextShape.js";
 
 
 const signer = new Humanoid();
@@ -44,6 +45,8 @@ scene.add(light);
 
 const animator = new Animator(scene, camera, renderer, signer, clock, 2000);
 
+const textShape = new TextShape();
+
 const params = ["dominantLocation", "nondominantLocation"];
 
 const dominantLocationSelect = formUtil.makeSelect("dominantLocation",
@@ -78,20 +81,27 @@ const handleForm = function(event) {
         symbol = ascsto.symbol[symbol];
     }
 
+    let escapedSymbol = symbol;
+    if (ascsto.escapedSymbol.hasOwnProperty(event.target.value)) {
+        escapedSymbol = ascsto.escapedSymbol[event.target.value];
+    }
+
     if (event.target.name === "dominantLocation") {
-        tabSpan.innerHTML = symbol;
+        tabSpan.innerHTML = escapedSymbol;
+        textShape.setTab(symbol);
     }
 
     if (event.target.name === "dominantHandshape") {
-        dezSpan.innerHTML = symbol;
+        dezSpan.innerHTML = escapedSymbol;
+        textShape.setHandshape(symbol);
     }
 
     if (event.target.name === "dominantOrientation") {
-        orientationSpan.innerHTML = symbol;
-    }
-
-    if (event.target.name === "dominantMovement") {
-        sigSpan.innerHTML = symbol;
+        orientationSpan.innerHTML = escapedSymbol;
+        textShape.setOrientation(symbol);
+    } else if (event.target.name === "dominantMovement") {
+        sigSpan.innerHTML = escapedSymbol;
+        textShape.setSig(symbol);
     }
 
     if (!hasFont && tabSpan.innerHTML && dezSpan.innerHTML) {
@@ -117,6 +127,30 @@ const addCapturer = function(format) {
     animator.setCapturer(capturer, outputDiv);
 };
 
+const addText = function(textShape) {
+    const matLite = new THREE.MeshBasicMaterial( {
+        color: 0x006699,
+        transparent: true,
+        opacity: 0.4,
+        side: THREE.DoubleSide
+    } );
+
+    const shapes = textShape.getShape();
+    const geometry = new THREE.ShapeGeometry(shapes);
+    geometry.computeBoundingBox();
+
+    const xMid = -0.5 *(geometry.boundingBox.max.x-geometry.boundingBox.min.x);
+
+    geometry.translate( xMid, 0, 0 );
+
+    const textMesh = new THREE.Mesh(geometry, matLite);
+    textMesh.position.y = 50;
+    textMesh.position.z = -150;
+
+    scene.add(textMesh);
+    
+};
+
 const playAsciiStokoe = function(event) {
     const elements = new FormData(event.target.form);
     // TODO use fieldset to group hold fields
@@ -125,6 +159,8 @@ const playAsciiStokoe = function(event) {
     for (let input of elements) {
         convertRotations(signer.handed, input[0], input[1]);
     }
+
+    addText(textShape);
 
     if (!animator.isPlaying()) {
         animator.start();
