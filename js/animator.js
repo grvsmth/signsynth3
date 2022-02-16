@@ -115,7 +115,7 @@ export default class animator {
             }
         }
 
-        if (this.playing && runningActions < 1) {
+        if (this.isPlaying() && runningActions < 1) {
             this.stop();
             return;
         }
@@ -146,12 +146,12 @@ export default class animator {
     }
 
     stop() {
-        this.clock.stop();
-
         if (this.capturer) {
             this.capturer.stop();
             this.capturer.save();
         }
+
+        this.clock.stop();
     }
 
     clear() {
