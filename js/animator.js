@@ -115,7 +115,7 @@ export default class animator {
             }
         }
 
-        if (this.isPlaying() && runningActions < 1) {
+        if (this.mode === "player" && this.isPlaying() && runningActions < 1) {
             this.stop();
             return;
         }
