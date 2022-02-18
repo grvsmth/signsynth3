@@ -1467,37 +1467,40 @@ export default {
 		    "scalar": -0.874,
 		},
 		"u": {
-		    "vector": [1.5, 0.2, -0.155],
-		    "scalar": 1.8
+		    "vector": [0.975, 0.1553, -0.155],
+		    "scalar": -1.7
 		},
 		"m": {
 		    "copy": "u"
 		},
 		"l": {
-		    "copy": "u"
+		    "vector": [0.975, 0.1553, -0.155],
+		    "scalar": -1.5
 		},
 		"c": {
-		    "vector": [1.5, 0.4, -0.155],
-		    "scalar": 1.4
+		    "vector": [0.975, 0.1553, -0.155],
+		    "scalar": -1.3
 		},
 		"k": {
-		    "vector": [0.975, 0.1553, -0.155],
-		    "scalar": -1.4
+                    "copy": "l"
 		},
 		"[": {
-		    "vector": [0.8, -0.4, -.1],
-		    "scalar": 0.4
+		    "vector": [0.887, -0.426, -.176],
+		    "scalar": -0.4
 		},
 		"h": {
-		    "vector": [1.5, 0.4, -0.155],
-		    "scalar": -1.4
+                    "copy": "c"
+		},
+		"i": {
+		    "vector": [0.5, 0.83, -0.25],
+		    "scalar": -0.5
 		},
 		"j": {
-		    "vector": [0.6, 1, -0.3],
-		    "scalar": 1
+		    "vector": [0.5, 0.83, -0.25],
+		    "scalar": -1
 		},
 		"as": {
-		    "vector": [0.8, 1, -0.3],
+		    "vector": [0.8, 0.76, -0.23],
 		    "scalar": -1
 		},
 		"below": {
@@ -1514,51 +1517,51 @@ export default {
 		    "scalar": 0,
 		},
 		"Q": {
-		    "vector": [1, 0, 0],
-		    "scalar": -1.57,
+		    "vector": [-1, 0, 0],
+		    "scalar": 1.7,
 		},
 		"u": {
 		    "vector": [-1, -0.1, 0],
 		    "scalar": 2
 		},
 		"m": {
-		    "vector": [1, 0.35, 0],
-		    "scalar": -2
+		    "vector": [-0.94, -0.33, 0],
+		    "scalar": 2
 		},
 		"l": {
-		    "vector": [1, 0.4, 0],
-		    "scalar": -2.6
+		    "vector": [-0.93, -0.37, 0],
+		    "scalar": 2.35
 		},
 		"c": {
-		    "vector": [1, -0.2, 0],
+		    "vector": [-0.98, -0.196, 0],
 		    "scalar": 2.3
 		},
 		"k": {
-		    "vector": [1, 0.4, 0],
-		    "scalar": -2.6
+		    "vector": [-0.93, -0.37, 0],
+		    "scalar": 2.8
 		},
 		"[": {
-		    "vector": [1, 0, 0],
-		    "scalar": -2.7
+		    "vector": [-1, 0, 0],
+		    "scalar": 2.7
 		},
 		"h": {
 		    "copy": "c"
 		},
 		"j": {
-		    "vector": [1, -0.4, 0],
-		    "scalar": -1.5
+		    "vector": [-1, -0.4, 0],
+		    "scalar": 1.5
 		},
 		"as": {
-		    "vector": [1, 0, 0],
-		    "scalar": -1.5
+		    "vector": [-1, 0, 0],
+		    "scalar": 1.5
 		},
 		"below": {
-		    "vector": [1, 0, 0],
-		    "scalar": -1.1
+		    "vector": [-1, 0, 0],
+		    "scalar": 1.1
 		},
 		"side": {
-		    "vector": [1, 0, 0],
-		    "scalar": 0
+		    "vector": [-1, 0, 0],
+		    "scalar": -1.57
 		}
 	    }
 	}
