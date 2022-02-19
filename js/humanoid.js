@@ -9,11 +9,11 @@ import head from "./head.js";
 const position = {
     "left": {
 	"shoulder": [1.8, 1.14, 0],
-	"thumb": [0, 0, 0.258],
-	"index": [0.05, -0.72, .18],
-	"middle": [0.1, -0.72, .06],
-	"ring": [0.05, -0.72, -.06],
-	"pinky": [0.1, -0.72, -.18]
+	"thumb": [-0.2, -0.1, 0.258],
+	"index": [-0.07, -0.61, .18],
+	"middle": [-0.04, -0.61, .06],
+	"ring": [-0.04, -0.61, -.06],
+	"pinky": [-0.07, -0.61, -.18]
     },
     "right": {
 	"shoulder": [-1.8, 1.14, 0],
@@ -184,7 +184,7 @@ export default class humanoid {
 	return shoulder;
     }
 
-    makeJoint(joint, extension) {
+    makeJoint(handedness, joint, extension) {
 	const group = new THREE.Group;
 
 	const geometry = new THREE.CylinderGeometry(0.072,
@@ -193,10 +193,14 @@ export default class humanoid {
 	const mesh = new THREE.Mesh(geometry, this.material.skin);
 	group.add(mesh);
 
+        const direction = handedness === "right" ? 1 : -1;
+
 	group.quaternion.setFromAxisAngle(new THREE.Vector3(0, 0, 1),
-					 finger.rotation[joint]);
+					  direction * finger.rotation[joint]);
 	if (extension !== undefined) {
-	    extension.position.set(0.01, - (finger.height[joint] - 0.1), 0);
+	    extension.position.set(0.01,
+                                   - (finger.height[joint] - 0.1),
+                                   0);
 	    group.add(extension);
 	}
 
@@ -206,11 +210,11 @@ export default class humanoid {
     addFinger(handedness, finger) {
 	this[handedness][finger] = {};
 
-	this[handedness][finger + "3"] = this.makeJoint("joint3");
-	this[handedness][finger + "2"] = this.makeJoint(
+	this[handedness][finger + "3"] = this.makeJoint(handedness, "joint3");
+	this[handedness][finger + "2"] = this.makeJoint(handedness,
 	    "joint2", this[handedness][finger + "3"]);
 	this[handedness][finger + "1"] = this
-	    .makeJoint("joint1", this[handedness][finger + "2"]);
+	    .makeJoint(handedness, "joint1", this[handedness][finger + "2"]);
 
 	const fingerPosition = position[handedness][finger];
 	this[handedness][finger + "1"].position.set(...fingerPosition);
