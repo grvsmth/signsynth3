@@ -97,13 +97,45 @@ export default {
 	    "X": "X",
 	    "Y": "Y",
 	    "Y8": "Y8"
+	},
+	"dominantOrientation": {
+	    "f": "Away from signer (f)",
+	    "t": "Towards signer (t)",
+	    "lt": "Towards non-dominant side (<)",
+	    "gt": "Towards dominant side (>)",
+	    "carat": "Upwards (^)",
+	    "v": "Downwards (v)"
+	},
+	"dominantHandshape": {
+	    "A": "A",
+	    "B": "B",
+	    "B5": "B5",
+	    "bentB5": "Bent 5 (B5\")",
+	    "C": "C",
+	    "E": "E",
+	    "F": "F",
+	    "G": "G",
+	    "H": "H",
+	    "I": "I",
+	    "K": "K",
+	    "L": "L",
+	    "L3": "L3",
+	    "O": "O",
+	    "R": "R",
+	    "V": "V",
+	    "W": "W",
+	    "X": "X",
+	    "Y": "Y",
+	    "Y8": "Y8"
 	}
     },
     "defaultValue": {
 	"dominantLocation": "rest",
 	"dominantOrientation": "f",
 	"dominantHandshape": "bentB5",
-	"nondominantLocation": "rest"
+	"nondominantLocation": "rest",
+        "nondominantOrientation": "gt",
+        "nondominantHandshape": "bentB5"
     },
     "symbol": {
 	"Q": "Q",
@@ -242,12 +274,12 @@ export default {
 		    "scalar": 1.2
 		},
 		"gt": {
-		    "vector": [0, -1, 0.3],
-		    "scalar": 3.14
+		    "vector": [0, 0.96, -0.29],
+		    "scalar": 2.5
 		},
 		"lt": {
-		    "vector": [-1, 0.3, -0.2],
-		    "scalar": -1.5
+		    "vector": [-0.84, -0.28, -0.39],
+		    "scalar": 0.9
 		},
 		"t": {
 		    "vector": [0, -1, 0.2],
@@ -1562,6 +1594,40 @@ export default {
 		"side": {
 		    "vector": [-1, 0, 0],
 		    "scalar": -1.57
+		}
+	    },
+	    "wrist": {
+		"f": {
+		    "vector": [0.5, 0.5, -0.3],
+		    "scalar": -1.2
+		},
+		"lt": {
+		    "vector": [0, -0.96, 0.29],
+		    "scalar": 2.5
+		},
+		"gt": {
+		    "vector": [-0.84, 0.28, 0.39],
+		    "scalar": 0.9
+		},
+		"t": {
+		    "vector": [0, -1, 0.2],
+		    "scalar": -1.8
+		},
+		"carat": {
+		    "vector": [0, 1, 0],
+		    "scalar": Math.PI
+		},
+		"v": {
+		    "vector": [0, 0.7, 1],
+		    "scalar": -1.5,
+		},
+		"n": {
+		    "vector": [0, 0, 1],
+		    "scalar": 0
+		},
+		"z1": {
+		    "vector": [-0.5, 1, 1],
+		    "scalar": -1
 		}
 	    }
 	}

@@ -37,6 +37,7 @@ const formUtil = {
     }
 };
 
+
 formUtil.processRotation = function(articulator, joint, targetName, rotation, rotations) {
     let actualRotation = rotation;
     if ("copy" in rotation) {

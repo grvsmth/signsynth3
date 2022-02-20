@@ -47,21 +47,16 @@ const animator = new Animator(scene, camera, renderer, signer, clock, 2000);
 
 const textShape = new TextShape();
 
-const params = ["dominantLocation", "nondominantLocation"];
+const params = ["dominantLocation",
+                "dominantOrientation",
+                "dominantHandshape",
+                "nondominantLocation",
+                "nondominantOrientation"];
 
-const dominantLocationSelect = formUtil.makeSelect("dominantLocation",
-                                                   ascsto);
-const dominantOrientationSelect = formUtil.makeSelect("dominantOrientation",
-                                                      ascsto);
-const dominantHandshapeSelect = formUtil.makeSelect("dominantHandshape",
-                                                      ascsto);
-const nondominantLocationSelect = formUtil.makeSelect("nondominantLocation",
-                                                      ascsto);
-
-ascstoForm.append(dominantLocationSelect);
-ascstoForm.append(dominantHandshapeSelect);
-ascstoForm.append(dominantOrientationSelect);
-ascstoForm.append(nondominantLocationSelect);
+const selects = params.map((param) => formUtil.makeSelect(param, ascsto));
+selects.forEach((select) => {
+    ascstoForm.append(select);
+});
 
 const convertRotations = function(handedness, articulator, value) {
     const rotations = formUtil.findRotations(handedness,
