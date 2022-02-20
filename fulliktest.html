@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content="@grvsmth" />
+    <meta property="og:title" content="SignSynth"></meta>
+    <meta property="og:description" content="SignSynth is a prototype articulatory sign synthesis application" />
+    <title>SignSynth ASCII-Stokoe poser</title>
+    <link rel="stylesheet" href="css/signsynth.css" />
+  </head>
+  <body>
+    <div id="container">
+      <div id="display-div">
+	<div id="threed-div"></div>
+      </div>
+      <div id="control-div">
+	<h2>ASCII-Stokoe poser</h2>
+	<div id="form-div">
+          <h2 id="ascsto-output">
+            <span id="tab"></span>
+            <span id="divider1"></span>
+            <span id="dez"></span><sub><span id="orientation"></span></sub>
+            <span id="divider2"></span>
+            <span id="sig"></span>
+          </h2>
+	  <form id="ascsto-form"></form>
+	</div>
+      </div>
+      <div id="output-div"></div>
+    </div>
+    <script src="lib/three.js"></script>
+    <script src="lib/fik.min.js"></script>
+    <script type="module">
+      import main from "./js/main.js";
+
+      window.addEventListener("load", () => {
+        main.animator.setMode("poser");
+        main.animator.renderer.render(main.animator.scene, main.animator.camera);
+        main.animator.start();
+      });
+    </script>
+  </body>
+</html>

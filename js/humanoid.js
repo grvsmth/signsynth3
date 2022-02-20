@@ -51,19 +51,32 @@ const thumb = {
     }
 };
 
+const skinColor = 0xFF9a66;
+
 export default class humanoid {
     constructor() {
 	this.body = new THREE.Group();
 	this.material = this.makeMaterials();
 	this.handed = "right";
 
+        this.solver = {};
+        this.targets = [];
+
 	this.right = {};
 	this.left = {};
 
 	this.addTrunk();
 
-	this.addArm("right");
 	this.addArm("left");
+    }
+
+    setSolver(solver) {
+        this.solver = solver;
+	this.addChain("right", this.targets[0]);
+    }
+
+    addTarget(target) {
+        this.targets.push(target);
     }
 
     colorMaterial(color) {
@@ -228,8 +241,29 @@ export default class humanoid {
 	});
     }
 
-    addArm(handedness) {
+    addChain(handedness, target) {
+        const startLoc = new FIK.V3(...position[handedness].shoulder);
+        const armChain = new FIK.Chain3D(skinColor);
 
+        const upperArmBone = new FIK.Bone3D(startLoc,
+                                            null,
+                                            FIK.Y_NEG,
+                                            2.28);
+                                            
+
+        armChain.addBone(upperArmBone);
+        armChain.addConsecutiveHingedBone(FIK.X_NEG,
+                                        2.28,
+                                        'global',
+                                        FIK.Y_AXE,
+                                        90,
+                                        120,
+                                        FIK.X_NEG);
+
+        this.solver.add(armChain, target.position, true);
+    }
+
+    addArm(handedness) {
 	this[handedness].wrist = this.makeWrist();
 	this.addHand(handedness);
 	this[handedness].elbow = this.makeElbow(this[handedness].wrist);
