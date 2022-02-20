@@ -34,48 +34,12 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize( threedDiv.offsetWidth, threedDiv.offsetHeight );
 threedDiv.appendChild( renderer.domElement );
 
-// From FullIK demos
-const solver = new FIK.Structure3D(scene);
-
-const updateSolver = function() {
-    solver.update();
-};
-
-const makeTarget = function(position) {
-    let target = {
-        "mesh": new THREE.Mesh(
-            new THREE.SphereBufferGeometry(0.1, 6, 4),
-            new THREE.MeshStandardMaterial(
-                {"color": 0xFFFF00, "wireframe": true})),
-        "control": new TransformControls(camera, renderer.domElement)
-    };
-
-    target.mesh.castShadow = true;
-    target.mesh.castShadow = false;
-
-    scene.add(target.mesh);
-    
-    target.mesh.position.copy(position);
-
-    target.control.addEventListener("change", updateSolver);
-    target.control.attach(target.mesh);
-    target.control.setSize(0.75);
-
-    scene.add(target.control);
-
-    target.position = target.mesh.position;
-
-    return target;
-};
-
-const target = makeTarget(new THREE.Vector3(-3, 1, 0));
-
-// End code from FullIK demos
 const signer = new Humanoid();
 
-signer.addTarget(target);
-signer.setSolver(solver);
 scene.add( signer.body );
+
+const target = signer.addTarget("right", "[");
+scene.add(target);
 
 camera.position.z = 8;
 camera.position.y = 1.9;

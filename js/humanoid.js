@@ -51,6 +51,54 @@ const thumb = {
     }
 };
 
+const arm = {
+    "height": {
+        "forearm": 1.92,
+        "upperarm": 2.28
+    }
+};
+
+const pointOfContact = {
+    "index1": {},
+    "middle1": {},
+    "middle2": {},
+    "middle3": {},
+    "pinky1": {},
+    "thumb1": {},
+    "thumb3": {},
+    "wrist": {}
+
+};
+
+const contactTarget = {
+    "right": {
+        "Q": [-1.8, 1.14, 2],
+        "h": [],
+        "u": [-1, 2, 2],
+        "m": [],
+        "l": [],
+        "c": [],
+        "k": [],
+        "[": [0, 0.75, 0.54],
+        "i": [],
+        "j": [],
+        "as": []
+    },
+    "left": {
+        "Q": [-1.8, 1.14, 2],
+        "h": [],
+        "u": [],
+        "m": [],
+        "l": [],
+        "c": [],
+        "k": [],
+        "[": [0, 0.75, 0.54],
+        "i": [],
+        "j": [],
+        "as": []
+    }
+};
+
 const skinColor = 0xFF9a66;
 
 export default class humanoid {
@@ -59,24 +107,13 @@ export default class humanoid {
 	this.material = this.makeMaterials();
 	this.handed = "right";
 
-        this.solver = {};
-        this.targets = [];
-
-	this.right = {};
-	this.left = {};
+	this.right = {"chain": {}};
+	this.left = {"chain": {}};
 
 	this.addTrunk();
 
+	this.addArm("right");
 	this.addArm("left");
-    }
-
-    setSolver(solver) {
-        this.solver = solver;
-	this.addChain("right", this.targets[0]);
-    }
-
-    addTarget(target) {
-        this.targets.push(target);
     }
 
     colorMaterial(color) {
@@ -92,8 +129,14 @@ export default class humanoid {
 	    "iris": this.colorMaterial(0x198055),
 	    "pupil": this.colorMaterial(0x191919),
 	    "lip": this.colorMaterial(0xC01414),
-	    "nostril": this.colorMaterial(0x101010)
+	    "nostril": this.colorMaterial(0x101010),
+            "target": this.colorMaterial(0xFF6666)
 	};
+    }
+
+    makeTarget() {
+        const targetGeometry = new THREE.SphereGeometry(0.1);
+        return new THREE.Mesh(targetGeometry, this.material.target);
     }
 
     makeTorso() {
@@ -164,31 +207,29 @@ export default class humanoid {
     makeElbow(wrist) {
 	const forearmGeometry = new THREE.CylinderGeometry(0.288,
 							   0.288,
-							   1.92,
+							   arm.height.forearm,
 							   32);
 	const forearmMesh = new THREE.Mesh(forearmGeometry,
 					   this.material.skin);
-	forearmMesh.position.set(0, -0.96, 0);
+	forearmMesh.position.set(0, - arm.height.forearm / 2, 0);
 
 	const elbow = new THREE.Group();
 	elbow.add(forearmMesh);
 
-	wrist.position.set(0, -1.92, 0);
+	wrist.position.set(0, - arm.height.forearm, 0);
 	elbow.add(wrist);
 
 	return elbow;
     }
 
     makeShoulder(elbow) {
-	elbow.position.set(0, -2.28, 0);
+	elbow.position.set(0, - arm.height.upperarm, 0);
 
-	const upperArmGeometry = new THREE.CylinderGeometry(0.288,
-                                                            0.288,
-                                                            2.28,
-                                                            32);
+	const upperArmGeometry = new THREE
+              .CylinderGeometry(0.288, 0.288, arm.height.upperarm, 32);
 	const upperArmMesh = new THREE.Mesh(upperArmGeometry,
 					    this.material.skin);
-	upperArmMesh.position.set(0, -1.14, 0);
+	upperArmMesh.position.set(0, - arm.height.upperarm/2, 0);
 
 	const shoulder = new THREE.Group();
 	shoulder.add(upperArmMesh);
@@ -241,26 +282,26 @@ export default class humanoid {
 	});
     }
 
-    addChain(handedness, target) {
+    addChain(handedness) {
         const startLoc = new FIK.V3(...position[handedness].shoulder);
-        const armChain = new FIK.Chain3D(skinColor);
+        const chain = new FIK.Chain3D();
 
         const upperArmBone = new FIK.Bone3D(startLoc,
                                             null,
                                             FIK.Y_NEG,
-                                            2.28);
+                                            arm.height.upperarm);
                                             
 
-        armChain.addBone(upperArmBone);
-        armChain.addConsecutiveHingedBone(FIK.X_NEG,
-                                        2.28,
-                                        'global',
-                                        FIK.Y_AXE,
-                                        90,
-                                        120,
-                                        FIK.X_NEG);
+        chain.addBone(upperArmBone);
+        chain.addConsecutiveHingedBone(FIK.X_NEG,
+                                       arm.height.forearm,
+                                       'global',
+                                       FIK.Y_AXE,
+                                       90,
+                                       120,
+                                       FIK.X_NEG);
 
-        this.solver.add(armChain, target.position, true);
+        this[handedness].chain["thumb3"] = chain;
     }
 
     addArm(handedness) {
@@ -271,5 +312,13 @@ export default class humanoid {
 	this[handedness].shoulder.position
 	    .set(...position[handedness].shoulder);
 	this.body.add(this[handedness].shoulder);
+
+        this.addChain(handedness);
+    }
+
+    addTarget(handedness, targetName) {
+        const target = this.makeTarget();
+        target.position.set(...contactTarget[handedness][targetName]);
+        return target;
     }
 }
