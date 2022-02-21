@@ -291,7 +291,7 @@ export default class humanoid {
                                             FIK.Y_NEG,
                                             arm.height.upperarm);
                                             
-
+        upperArmBone.name = "rightUpperArmBone";
         chain.addBone(upperArmBone);
         chain.addConsecutiveHingedBone(FIK.X_NEG,
                                        arm.height.forearm,
@@ -300,6 +300,15 @@ export default class humanoid {
                                        90,
                                        120,
                                        FIK.X_NEG);
+        chain.bones[chain.bones.length-1].name = "rightForeArmBone";
+
+        const thumbVector = new THREE
+              .Vector3(...position[handedness].thumb);
+        const thumbMetacarpal = new FIK
+              .Bone3D(chain.bones[chain.numBones-1].end,
+                      thumbVector);
+        thumbMetacarpal.name = "rightThumbMetacarpal";
+        chain.addBone(thumbMetacarpal);
 
         this[handedness].chain["thumb3"] = chain;
     }
