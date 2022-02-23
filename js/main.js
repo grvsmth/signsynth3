@@ -40,14 +40,17 @@ scene.add( signer.body );
 
 const target = signer.addTarget("right", "[");
 scene.add(target);
-signer["right"].chain["thumb3"].bones.forEach((bone) => {
-    console.log(bone.name, bone.getDirectionUV());
-});
 
-signer["right"].chain["thumb3"].solveForTarget(target.position);
-signer["right"].chain["thumb3"].bones.forEach((bone) => {
+if (typeof FIK !== "undefined") {
+    signer["right"].chain["thumb3"].bones.forEach((bone) => {
+        console.log(bone.name, bone.getDirectionUV());
+    });
+
+    signer["right"].chain["thumb3"].solveForTarget(target.position);
+    signer["right"].chain["thumb3"].bones.forEach((bone) => {
     console.log(bone.name, bone.getDirectionUV());
-});
+    });
+}
 /*
 signer["right"]["shoulder"].rotation
     .set(signer["right"].chain["thumb3"].bones[0].getDirectionUV());

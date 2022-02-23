@@ -322,7 +322,9 @@ export default class humanoid {
 	    .set(...position[handedness].shoulder);
 	this.body.add(this[handedness].shoulder);
 
-        this.addChain(handedness);
+        if (typeof FIK !== "undefined") {
+            this.addChain(handedness);
+        }
     }
 
     addTarget(handedness, targetName) {
