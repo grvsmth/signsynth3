@@ -42,14 +42,36 @@ const target = signer.addTarget("right", "[");
 scene.add(target);
 
 if (typeof FIK !== "undefined") {
-    signer["right"].chain["thumb3"].bones.forEach((bone) => {
-        console.log(bone.name, bone.getDirectionUV());
+    const chainInfo = [
+        {"jointName": "shoulder"},
+        {"jointName": "elbow"},
+        {"jointName": "wrist"}
+    ];
+
+    signer["right"].chain["thumb3"].bones.forEach((bone, index) => {
+        chainInfo[index].boneName = bone.name;
+        chainInfo[index].previousDirection = bone.getDirectionUV();
     });
 
+    console.log(JSON.stringify(chainInfo));
     signer["right"].chain["thumb3"].solveForTarget(target.position);
-    signer["right"].chain["thumb3"].bones.forEach((bone) => {
-    console.log(bone.name, bone.getDirectionUV());
+    signer["right"].chain["thumb3"].bones.forEach((bone, index) => {
+        const targetDirection = bone.getDirectionUV();
+        const jointName = chainInfo[index].jointName;
+
+        const jointPosition = signer["right"][jointName].position;
+
+        chainInfo[index].targetDirection = targetDirection;
+        chainInfo[index].jointPosition = jointPosition;
+
+        const rotationMatrix = new THREE.Matrix4().lookAt(jointPosition,
+                                              targetDirection,
+                                              chainInfo[index].previousDirection);
+        chainInfo[index].rotationMatrix = rotationMatrix;
+        signer["right"][jointName].quaternion.setFromRotationMatrix(rotationMatrix);
+
     });
+    console.log(chainInfo);
 }
 /*
 signer["right"]["shoulder"].rotation
