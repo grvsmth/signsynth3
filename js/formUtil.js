@@ -13,9 +13,7 @@ const formUtil = {
 
 	for(const option in options) {
 	    const defaultSelected = option === ascsto.defaultValue[name];
-	    console.log(`${name}.${option} default?`, defaultSelected);
 	    const optionObject = new Option(options[option], option, defaultSelected, defaultSelected);
-	    console.log(optionObject);
 	    select.add(optionObject);
 	}
 
@@ -39,6 +37,7 @@ const formUtil = {
     }
 };
 
+
 formUtil.processRotation = function(articulator, joint, targetName, rotation, rotations) {
     let actualRotation = rotation;
     if ("copy" in rotation) {
@@ -58,7 +57,6 @@ formUtil.findRotations = function(signerHanded, rotations, param, value) {
 
     const articulator = formUtil.articulator(signerHanded, param);
 
-    console.log("rotations", rotations);
     for (const joint in rotations[articulator]) {
 	for (const targetName in rotations[articulator][joint]) {
 	    if (targetName === value) {
