@@ -51,7 +51,8 @@ const params = ["dominantLocation",
                 "dominantOrientation",
                 "dominantHandshape",
                 "nondominantLocation",
-                "nondominantOrientation"];
+                "nondominantOrientation",
+                "nondominantHandshape"];
 
 const selects = params.map((param) => formUtil.makeSelect(param, ascsto));
 selects.forEach((select) => {
