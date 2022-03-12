@@ -4,6 +4,7 @@ import {FontLoader, Font} from "../lib/FontLoader.js";
 export default class TextShape {
     constructor() {
         this.font;
+        this.size = 0.5;
 
         this.tab = "";
         this.handshape = "";
@@ -45,7 +46,7 @@ export default class TextShape {
             return {};
         }
 
-        return this.font.generateShapes(this.getText(), 25);
+        return this.font.generateShapes(this.getText(), this.size);
     }
 
     hasFont() {

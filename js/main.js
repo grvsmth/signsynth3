@@ -48,11 +48,11 @@ const animator = new Animator(scene, camera, renderer, signer, clock, 2000);
 const textShape = new TextShape();
 
 const params = ["dominantLocation",
-                "dominantOrientation",
                 "dominantHandshape",
+                "dominantOrientation",
                 "nondominantLocation",
-                "nondominantOrientation",
-                "nondominantHandshape"];
+                "nondominantHandshape",
+                "nondominantOrientation"];
 
 const selects = params.map((param) => formUtil.makeSelect(param, ascsto));
 selects.forEach((select) => {
@@ -125,9 +125,9 @@ const addCapturer = function(format) {
 
 const addText = function(textShape) {
     const matLite = new THREE.MeshBasicMaterial( {
-        color: 0x006699,
+        color: 0xffffff,
         transparent: true,
-        opacity: 0.4,
+        opacity: 0.6,
         side: THREE.DoubleSide
     } );
 
@@ -140,8 +140,8 @@ const addText = function(textShape) {
     geometry.translate( xMid, 0, 0 );
 
     const textMesh = new THREE.Mesh(geometry, matLite);
-    textMesh.position.y = 50;
-    textMesh.position.z = -150;
+    textMesh.position.y = 0;
+    textMesh.position.z = 2;
 
     scene.add(textMesh);
     
