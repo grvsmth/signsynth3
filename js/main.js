@@ -46,6 +46,19 @@ scene.add(light);
 const animator = new Animator(scene, camera, renderer, signer, clock, 2000);
 
 const textShape = new TextShape();
+const matLite = new THREE.MeshBasicMaterial( {
+    color: 0xffffff,
+    transparent: true,
+    opacity: 0.8,
+    side: THREE.DoubleSide
+} );
+
+const textMesh = new THREE.Mesh(new THREE.BufferGeometry(), matLite);
+textMesh.position.y = 0;
+textMesh.position.z = 2;
+
+scene.add(textMesh);
+
 
 const params = ["dominantLocation",
                 "dominantHandshape",
@@ -124,13 +137,6 @@ const addCapturer = function(format) {
 };
 
 const addText = function(textShape) {
-    const matLite = new THREE.MeshBasicMaterial( {
-        color: 0xffffff,
-        transparent: true,
-        opacity: 0.6,
-        side: THREE.DoubleSide
-    } );
-
     const shapes = textShape.getShape();
     const geometry = new THREE.ShapeGeometry(shapes);
     geometry.computeBoundingBox();
@@ -139,12 +145,8 @@ const addText = function(textShape) {
 
     geometry.translate( xMid, 0, 0 );
 
-    const textMesh = new THREE.Mesh(geometry, matLite);
-    textMesh.position.y = 0;
-    textMesh.position.z = 2;
-
-    scene.add(textMesh);
-    
+    textMesh.geometry.dispose();
+    textMesh.geometry = geometry;
 };
 
 const playAsciiStokoe = function(event) {
