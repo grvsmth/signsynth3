@@ -4,8 +4,10 @@ import Animator from "./animator.js";
 import formUtil from "./formUtil.js";
 import ascsto from "./ascsto.js";
 import TextShape from "./TextShape.js";
+import Hold from "./Hold.js";
 
 
+const phrase = [];
 const signer = new Humanoid();
 
 const threedDiv = document.querySelector("#threed-div");
@@ -85,6 +87,8 @@ const convertRotations = function(handedness, articulator, value) {
 const handleForm = function(event) {
     const hasFont = document.fonts.check("12px Stokoe Tempo");
 
+    const hold = new Hold();
+
     let symbol = event.target.value;
     if (ascsto.symbol.hasOwnProperty(symbol)) {
         symbol = ascsto.symbol[symbol];
@@ -98,16 +102,19 @@ const handleForm = function(event) {
     if (event.target.name === "dominantLocation") {
         tabSpan.innerHTML = escapedSymbol;
         textShape.setTab(symbol);
+        hold.setLocation(symbol);
     }
 
     if (event.target.name === "dominantHandshape") {
         dezSpan.innerHTML = escapedSymbol;
         textShape.setHandshape(symbol);
+        hold.setHandshape(symbol);
     }
 
     if (event.target.name === "dominantOrientation") {
         orientationSpan.innerHTML = escapedSymbol;
         textShape.setOrientation(symbol);
+        hold.setOrientation(symbol);
     } else if (event.target.name === "dominantMovement") {
         sigSpan.innerHTML = escapedSymbol;
         textShape.setSig(symbol);
