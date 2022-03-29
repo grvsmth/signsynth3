@@ -54,10 +54,12 @@ body {
 }
 
 .c {
+    font-size: 18px;
     width: 1em;
+    margin: 0.75em;
     padding: 0.5em;
 }
 
 .c:hover {
-    background-color: #FF0000;
+    background-color: #FF7F10;
 }
