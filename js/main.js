@@ -62,18 +62,6 @@ textMesh.position.z = 2;
 scene.add(textMesh);
 
 
-const params = ["dominantLocation",
-                "dominantHandshape",
-                "dominantOrientation",
-                "nondominantLocation",
-                "nondominantHandshape",
-                "nondominantOrientation"];
-
-const selects = params.map((param) => formUtil.makeSelect(param, ascsto));
-selects.forEach((select) => {
-    ascstoForm.append(select);
-});
-
 const convertRotations = function(handedness, articulator, value) {
     const rotations = formUtil.findRotations(handedness,
                                              ascsto.rotation,
@@ -84,54 +72,70 @@ const convertRotations = function(handedness, articulator, value) {
     rotations.forEach(animator.processRotation);
 };
 
-const handleForm = function(event) {
-    const hasFont = document.fonts.check("12px Stokoe Tempo");
+if (ascstoForm) {
+    const params = ["dominantLocation",
+                "dominantHandshape",
+                "dominantOrientation",
+                "nondominantLocation",
+                "nondominantHandshape",
+                "nondominantOrientation"];
 
-    const hold = new Hold();
+    const selects = params.map((param) => formUtil.makeSelect(param, ascsto));
+    selects.forEach((select) => {
+        ascstoForm.append(select);
+    });
 
-    let symbol = event.target.value;
-    if (ascsto.symbol.hasOwnProperty(symbol)) {
-        symbol = ascsto.symbol[symbol];
-    }
 
-    let escapedSymbol = symbol;
-    if (ascsto.escapedSymbol.hasOwnProperty(event.target.value)) {
-        escapedSymbol = ascsto.escapedSymbol[event.target.value];
-    }
+    const handleForm = function(event) {
+        const hasFont = document.fonts.check("12px Stokoe Tempo");
 
-    if (event.target.name === "dominantLocation") {
-        tabSpan.innerHTML = escapedSymbol;
-        textShape.setTab(symbol);
-        hold.setLocation(symbol);
-    }
+        const hold = new Hold();
 
-    if (event.target.name === "dominantHandshape") {
-        dezSpan.innerHTML = escapedSymbol;
-        textShape.setHandshape(symbol);
-        hold.setHandshape(symbol);
-    }
+        let symbol = event.target.value;
+        if (ascsto.symbol.hasOwnProperty(symbol)) {
+            symbol = ascsto.symbol[symbol];
+        }
 
-    if (event.target.name === "dominantOrientation") {
-        orientationSpan.innerHTML = escapedSymbol;
-        textShape.setOrientation(symbol);
-        hold.setOrientation(symbol);
-    } else if (event.target.name === "dominantMovement") {
-        sigSpan.innerHTML = escapedSymbol;
-        textShape.setSig(symbol);
-    }
+        let escapedSymbol = symbol;
+        if (ascsto.escapedSymbol.hasOwnProperty(event.target.value)) {
+            escapedSymbol = ascsto.escapedSymbol[event.target.value];
+        }
 
-    if (!hasFont && tabSpan.innerHTML && dezSpan.innerHTML) {
-        divider1.innerHTML = "/";
-    }
+        if (event.target.name === "dominantLocation") {
+            tabSpan.innerHTML = escapedSymbol;
+            textShape.setTab(symbol);
+            hold.setLocation(symbol);
+        }
 
-    if (animator.mode === "player") {
-        return;
-    }
+        if (event.target.name === "dominantHandshape") {
+            dezSpan.innerHTML = escapedSymbol;
+            textShape.setHandshape(symbol);
+            hold.setHandshape(symbol);
+        }
 
-    convertRotations(signer.handed, event.target.name, event.target.value);
-};
+        if (event.target.name === "dominantOrientation") {
+            orientationSpan.innerHTML = escapedSymbol;
+            textShape.setOrientation(symbol);
+            hold.setOrientation(symbol);
+        } else if (event.target.name === "dominantMovement") {
+            sigSpan.innerHTML = escapedSymbol;
+            textShape.setSig(symbol);
+        }
 
-ascstoForm.addEventListener("change", handleForm);
+        if (!hasFont && tabSpan.innerHTML && dezSpan.innerHTML) {
+            divider1.innerHTML = "/";
+        }
+
+        if (animator.mode === "player") {
+            return;
+        }
+
+        convertRotations(signer.handed, event.target.name, event.target.value);
+    };
+
+
+    ascstoForm.addEventListener("change", handleForm);
+}
 
 const addCapturer = function(format) {
     const params = {"format": format};
