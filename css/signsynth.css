@@ -55,11 +55,11 @@ body {
 
 .picker-letter {
     font-size: 20px;
-    width: 1em;
-    margin: 0.5em;
-    padding: 0.5em;
-    min-width: 0.6em;
     line-height: 1.4em;
+    margin: 0.5em 0.25em;
+    min-width: 0.6em;
+    padding: 0.5em 0.25em;
+    width: 1em;
 }
 
 .picker-letter:hover {
