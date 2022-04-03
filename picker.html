@@ -8,16 +8,17 @@
     <meta property="og:title" content="SignSynth"></meta>
     <meta property="og:description" content="SignSynth is a prototype articulatory sign synthesis application" />
     <title>SignSynth ASCII-Stokoe picker</title>
+    <link href="lib/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/signsynth.css" />
   </head>
   <body>
-    <div id="container">
+    <div class="container">
+      <h2>ASCII-Stokoe Picker</h2>
       <div id="display-div">
 	<div id="threed-div"></div>
       </div>
       <div id="control-div">
-	<h2>ASCII-Stokoe Picker</h2>
-	<div id="form-div">
+	<div id="form-div" class="row">
           <h2 id="ascsto-output">
             <span id="tab"></span>
             <span id="divider1"></span>
@@ -26,14 +27,18 @@
             <span id="sig"></span>
           </h2>
 	</div>
+        <div id="button-div" class="row">
+          <div class="btn-group">
 	<button type="button" id="gif-button" form="ascsto-form">
           Export GIF
         </button>
-	<button type="button" id="play-button" form="ascsto-form">
+	<button type="button" id="play-button" form="ascsto-form" class="">
           No export
         </button>
-      </div>
-      <div id="picker-div">
+        </div>
+        </div>
+      <div id="picker-div" class="row">
+        <div class="col">
         <table id="location-table">
           <tbody>
             <tr>
@@ -42,8 +47,12 @@
               </td>
             </tr>
             <tr>
-              <td><span class="picker-letter stokoe" title="cheek, temple, ear">c</span></td>
-              <td><span class="picker-letter stokoe" title="mid-face">m</span></td>
+              <td>
+                <span class="picker-letter stokoe" title="cheek, temple, ear">
+                  c
+                </span>
+              </td>
+              <td>x<span class="picker-letter stokoe" title="mid-face">m</span></td>
               <td>
                 <span class="picker-letter stokoe" title="face or whole head">h</span>
               </td>
@@ -84,14 +93,36 @@
             </tr>
           </tbody>
         </table>
+        </div>
+        <div class="col">
+        <table id="handshape-table">
+          <tbody>
+            <tr>
+              <td><span class="picker-letter stokoe" title="3">3</span></td>
+              <td><span class="picker-letter stokoe" title="5">5</span></td>
+              <td><span class="picker-letter stokoe" title="8">8</span></td>
+            </tr>
+            <tr>
+              <td><span class="picker-letter stokoe" title="W">W</span></td>
+              <td><span class="picker-letter stokoe" title="E">E</span></td>
+              <td><span class="picker-letter stokoe" title="R">R</span></td>
+              <td><span class="picker-letter stokoe" title="Y">Y</span></td>
+              <td><span class="picker-letter stokoe" title="I">I</span></td>
+              <td><span class="picker-letter stokoe" title="O">O</span></td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
       </div>
       <div id="output-div">
       </div>
     </div>
-    <script src="lib/three.js"></script>
-    <script src="lib/CCapture.min.js"></script>
-    <script src="lib/gif.js"></script>
-    <script src="lib/download.js"></script>
+    <script src="lib/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/js/three.js"></script>
+    <script src="lib/js/CCapture.min.js"></script>
+    <script src="lib/js/gif.js"></script>
+    <script src="lib/js/download.js"></script>
     <script type="module">
       import main from "./js/main.js";
       main.animator.show();
