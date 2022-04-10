@@ -7,10 +7,11 @@
 }
 
 body {
- margin: 0;
+    margin: 0;
 }
 
 #threed-div {
+    display: block;
     background-color: #000;
     height: 400px;
     width: 600px;
@@ -57,10 +58,24 @@ body {
     line-height: 1.4em;
     margin: 0.5em auto;
     min-width: 0.6em;
-    padding: 0.5em 0.25em;
+    padding: 0.5em 0.3em;
     width: 1em;
 }
 
 .picker-letter:hover {
     background-color: #FF7F10;
+}
+
+@media(max-width: 999px) {
+    #threed-div {
+        width: 100vw;
+        margin: 1em 0;
+    }
+    #control-div {
+        width: 100vw;
+    }
+
+    .picker-letter {
+        padding: 0.5em 0.2em;
+    }
 }

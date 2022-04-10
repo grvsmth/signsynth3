@@ -101,6 +101,8 @@ export default class animator {
             return;
         }
 
+        this.resizeCanvasToDisplaySize();
+
         const delta = this.clock.getDelta();
 
         for (const joint in this.mixers) {
@@ -157,5 +159,22 @@ export default class animator {
     clear() {
         this.clips = {};
         this.mixers = {};
+    }
+
+    resizeCanvasToDisplaySize(force) {
+        const canvas = this.renderer.domElement;
+        // look up the size the canvas is being displayed
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+
+        // adjust displayBuffer size to match
+        if (force || canvas.width !== width || canvas.height !== height) {
+            // you must pass false here or three.js sadly fights the browser
+            this.renderer.setSize(width, height, false);
+            this.camera.aspect = width / height;
+            this.camera.updateProjectionMatrix();
+
+            // update any render target sizes here
+        }
     }
 }
