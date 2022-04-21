@@ -66,6 +66,10 @@ body {
     background-color: #FF7F10;
 }
 
+.orientation-output.stokoe {
+    font-variant-position: sub;
+}
+
 @media(max-width: 999px) {
     #threed-div {
         width: 100vw;

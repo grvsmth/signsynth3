@@ -6,6 +6,8 @@ const param = {
 
 const exports = {
     "listener": function(event) {
+        const outputElement = document.querySelector("#ascsto-output");
+
         let letterParam = "location";
         for (let className in param) {
             if (event.target.classList.contains(className)) {
@@ -13,7 +15,20 @@ const exports = {
                 break;
             }
         }
-        console.log("picker click: " + letterParam, event.target.innerText);
+        const outputSpan = document.createElement("span");
+
+        const outputClass = letterParam + "-output";
+        outputSpan.classList.add(outputClass, "stokoe");
+
+        if (letterParam === "orientation") {
+            const outputSub = document.createElement("sub");
+            outputSub.innerText = event.target.innerText;
+            outputSpan.appendChild(outputSub);
+        } else {
+            outputSpan.innerText = event.target.innerText;
+        }
+
+        outputElement.appendChild(outputSpan);
     }
 };
 
