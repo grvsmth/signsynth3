@@ -29,6 +29,10 @@ const exports = {
         }
 
         outputElement.appendChild(outputSpan);
+    },
+    "copyListener": function(event) {
+        const outputElement = document.querySelector("#ascsto-output");
+        navigator.clipboard.writeText(outputElement.innerText);
     }
 };
 
