@@ -251,7 +251,7 @@
                     <span class="picker-letter movement-letter stokoe" title="crossing action (+)">+</span>
                   </td>
                   <td>
-                    <span class="picker-letter movement-letter stokoe" title="interchanging action (()">(</span>
+                    <span class="picker-letter movement-letter stokoe" title="interchanging action (&lpar;)">(</span>
                   </td>
                 </tr>
               </tbody>
@@ -266,8 +266,14 @@
     <script type="module">
       import pickerUtil from "./js/picker.js";
 
-      const copyButton = document.querySelector("#copy-button");
-      copyButton.addEventListener("click", pickerUtil.copyListener);
+      document.querySelector("#copy-button")
+        .addEventListener("click", pickerUtil.copyListener);
+
+      document.querySelector("#backspace-button")
+        .addEventListener("click", pickerUtil.backspaceListener);
+
+      document.querySelector("#clear-button")
+        .addEventListener("click", pickerUtil.clearListener);
 
       const pickerLetters = document.querySelectorAll(".picker-letter");
       pickerLetters.forEach(pickerUtil.addListener);

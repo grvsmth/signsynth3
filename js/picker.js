@@ -30,9 +30,17 @@ const exports = {
 
         outputElement.appendChild(outputSpan);
     },
-    "copyListener": function(event) {
+    "copyListener": function() {
         const outputElement = document.querySelector("#ascsto-output");
         navigator.clipboard.writeText(outputElement.innerText);
+    },
+    "clearListener": function() {
+        const outputElement = document.querySelector("#ascsto-output");
+        outputElement.innerHTML = "";
+    },
+    "backspaceListener": function() {
+        const outputElement = document.querySelector("#ascsto-output");
+        outputElement.removeChild(outputElement.lastChild);
     }
 };
 
