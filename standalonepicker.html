@@ -34,11 +34,13 @@
         </div>
         <div id="button-div" class="row">
           <div class="btn-group">
-            <button type="button" id="backspace-button">Backspace</button>
-            <button type="clear" id="clear-button">Clear</button>
-	    <button type="button" id="copy-button">
-              Copy to clipboard 📋
-            </button>
+            <button type="button" class="btn btn-light" id="space-button">space</button>
+            <button type="button" class="btn btn-light" data-bs-toggle="button" id="superscript-button">superscript</button>
+            <button type="button" class="btn btn-light" data-bs-toggle="button" id="subscript-button">subscript</button>
+            <button type="button" class="btn btn-light" data-bs-toggle="button" id="supersubscript-button">superscript-subscript</button>
+            <button type="button" class="btn btn-light" id="backspace-button">backspace</button>
+            <button type="button" class="btn btn-light" id="clear-button">clear</button>
+	    <button type="button" class="btn btn-light" id="copy-button">copy 📋 </button>
           </div>
         </div>
         <div id="picker-div" class="row">
@@ -265,6 +267,15 @@
     <script src="lib/js/bootstrap.bundle.min.js"></script>
     <script type="module">
       import pickerUtil from "./js/picker.js";
+
+      document.querySelector("#space-button")
+        .addEventListener("click", pickerUtil.spaceListener);
+
+      document.querySelector("#superscript-button")
+        .addEventListener("click", pickerUtil.superListener);
+
+      document.querySelector("#subscript-button")
+        .addEventListener("click", pickerUtil.subListener);
 
       document.querySelector("#copy-button")
         .addEventListener("click", pickerUtil.copyListener);

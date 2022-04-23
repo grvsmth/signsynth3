@@ -5,38 +5,15 @@ const param = {
 };
 
 const exports = {
-    "listener": function(event) {
-        const outputElement = document.querySelector("#ascsto-output");
-
-        let letterParam = "location";
-        for (let className in param) {
-            if (event.target.classList.contains(className)) {
-                letterParam = param[className];
-                break;
-            }
-        }
-        const outputSpan = document.createElement("span");
-
-        const outputClass = letterParam + "-output";
-        outputSpan.classList.add(outputClass, "stokoe");
-
-        if (letterParam === "orientation") {
-            const outputSub = document.createElement("sub");
-            outputSub.innerText = event.target.innerText;
-            outputSpan.appendChild(outputSub);
-        } else {
-            outputSpan.innerText = event.target.innerText;
-        }
-
-        outputElement.appendChild(outputSpan);
+    "append": function(addition) {
+        document.querySelector("#ascsto-output").append(addition);
     },
     "copyListener": function() {
         const outputElement = document.querySelector("#ascsto-output");
         navigator.clipboard.writeText(outputElement.innerText);
     },
     "clearListener": function() {
-        const outputElement = document.querySelector("#ascsto-output");
-        outputElement.innerHTML = "";
+        document.querySelector("#ascsto-output").innerHTML = "";
     },
     "backspaceListener": function() {
         const outputElement = document.querySelector("#ascsto-output");
@@ -44,8 +21,16 @@ const exports = {
     }
 };
 
+exports.spaceListener = function() {
+    exports.append(" ");
+};
+
+exports.letterListener = function(event) {
+    exports.append(event.target.innerText);
+};
+
 exports.addListener = function(pickerLetter) {
-    pickerLetter.addEventListener("click", exports.listener);
+    pickerLetter.addEventListener("click", exports.letterListener);
 }
 
 export default exports;

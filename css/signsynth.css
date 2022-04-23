@@ -41,7 +41,7 @@ body {
 }
 
 #ascsto-output {
-    text-align: center;
+    min-height: 1em;
     font-family: "Stokoe Tempo", serif;
 }
 
