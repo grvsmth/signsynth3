@@ -8,6 +8,13 @@ const exports = {
     "append": function(addition) {
         document.querySelector("#ascsto-output").append(addition);
     },
+    "appendElement": function(element, addition) {
+        const additionalElement = document.createElement(element);
+        additionalElement.innerText = addition;
+
+        document.querySelector("#ascsto-output").appendChild(additionalElement
+                                                            );
+    },
     "copyListener": function() {
         const outputElement = document.querySelector("#ascsto-output");
         navigator.clipboard.writeText(outputElement.innerText);
@@ -26,6 +33,21 @@ exports.spaceListener = function() {
 };
 
 exports.letterListener = function(event) {
+    const charFormatElement = document.forms["format-form"]
+          .elements["char-format"];
+
+    if (charFormatElement.value === "superscript") {
+        exports.appendElement("sup", event.target.innerText);
+        charFormatElement.value = "none";
+        return;
+    }
+
+    if (charFormatElement.value === "subscript") {
+        exports.appendElement("sub", event.target.innerText);
+        charFormatElement.value = "none";
+        return;
+    }
+
     exports.append(event.target.innerText);
 };
 
