@@ -146,7 +146,7 @@ if (pickerDiv) {
 const addCapturer = function(format) {
     const params = {"format": format};
     if (format === "gif") {
-        params.workersPath = "lib/";
+        params.workersPath = "lib/js/";
     }
 
     const capturer = new CCapture(params);
