@@ -17,7 +17,22 @@ const exports = {
     },
     "copyListener": function() {
         const outputElement = document.querySelector("#ascsto-output");
-        navigator.clipboard.writeText(outputElement.innerText);
+        const outputHtml = outputElement.innerHTML;
+
+        let htmlItem;
+
+        try {
+            const htmlBlob = new Blob([outputHtml], {"type": "text/html"});
+            htmlItem = new ClipboardItem({"text/html": htmlBlob});
+        } catch(error) {
+            console.log("Can't create clipboardItem!", error);
+        }
+
+        navigator.clipboard.write([htmlItem]).then(() => {
+            console.log("Successfully copied HTML");
+        }, (error) => {
+            console.log("Failed to copy HTML", error);
+        });
     },
     "clearListener": function() {
         document.querySelector("#ascsto-output").innerHTML = "";
