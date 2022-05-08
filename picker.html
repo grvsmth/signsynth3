@@ -8,90 +8,201 @@
     <meta property="og:title" content="SignSynth"></meta>
     <meta property="og:description" content="SignSynth is a prototype articulatory sign synthesis application" />
     <title>SignSynth ASCII-Stokoe picker</title>
+    <link href="lib/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/signsynth.css" />
   </head>
   <body>
-    <div id="container">
-      <div id="display-div">
-	<div id="threed-div"></div>
-      </div>
+    <div id="display-div">
+      <div id="threed-div"></div>
+    </div>
       <div id="control-div">
-	<h2>ASCII-Stokoe Picker</h2>
-	<div id="form-div">
-          <h2 id="ascsto-output">
-            <span id="tab"></span>
-            <span id="divider1"></span>
-            <span id="dez"></span><sub><span id="orientation"></span></sub>
-            <span id="divider2"></span>
-            <span id="sig"></span>
-          </h2>
-	</div>
-	<button type="button" id="gif-button" form="ascsto-form">
-          Export GIF
-        </button>
-	<button type="button" id="play-button" form="ascsto-form">
-          No export
-        </button>
-      </div>
-      <div id="picker-div">
-        <table id="location-table">
-          <tbody>
+        <div class="container">
+          <div class="row">
+            <h2>ASCII-Stokoe Picker</h2>
+          </div>
+          <div id="form-div" class="row">
+            <h2 id="ascsto-output">
+              <span id="tab"></span>
+              <span id="divider1"></span>
+              <span id="dez"></span><sub><span id="orientation"></span></sub>
+              <span id="divider2"></span>
+              <span id="sig"></span>
+            </h2>
+          </div>
+          <div id="button-div" class="row">
+            <div class="btn-group">
+	      <button type="button" id="gif-button" form="ascsto-form">
+                Export GIF
+              </button>
+	      <button type="button" id="play-button" form="ascsto-form" class="">
+                No export
+              </button>
+            </div>
+          </div>
+          <div id="picker-div" class="row">
+            <div class="col">
+              <table id="location-table">
+                <tbody>
+                  <tr>
+                    <td colspan="3">
+                      <span class="picker-letter stokoe" title="forehead (u)">
+                        u
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="picker-letter stokoe" title="cheek, temple, ear (c)">
+                  c
+                </span>
+              </td>
+              <td>
+                <span class="picker-letter stokoe" title="mid-face (m)">
+                  m
+                </span>
+              </td>
+              <td>
+                <span class="picker-letter stokoe" title="face or whole head (h)">
+                  h
+                </span>
+              </td>
+            </tr>
             <tr>
               <td colspan="3">
-                <span class="picker-letter stokoe" title="forehead">u</span>
-              </td>
-            </tr>
-            <tr>
-              <td><span class="picker-letter stokoe" title="cheek, temple, ear">c</span></td>
-              <td><span class="picker-letter stokoe" title="mid-face">m</span></td>
-              <td>
-                <span class="picker-letter stokoe" title="face or whole head">h</span>
+                <span class="picker-letter stokoe" title="lower face, chin (l)">
+                  l
+                </span>
               </td>
             </tr>
             <tr>
               <td colspan="3">
-                <span class="picker-letter stokoe" title="lower face, chin">l</span>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="3">
-                <span class="picker-letter stokoe" title="neck">k</span>
-              </td>
-            </tr>
-            <tr>
-              <td><span class="picker-letter stokoe" title="neutral space">Q</span></td>
-              <td><span class="picker-letter stokoe" title="trunk, torso">[</span></td>
-              <td>
-                <span class="picker-letter stokoe" title="opposite upper arm">i</span>
+                <span class="picker-letter stokoe" title="neck (k)">k</span>
               </td>
             </tr>
             <tr>
               <td>
-                <span class="picker-letter stokoe" title="opposite lower arm">j</span>
+                <span class="picker-letter stokoe" title="neutral space (Q)">
+                  Q
+                </span>
               </td>
               <td>
-                <span class="picker-letter stokoe" title="opposite wrist (arm supine)">
+                <span class="picker-letter stokoe" title="trunk, torso ([)">
+                  [
+                </span>
+              </td>
+              <td>
+                <span class="picker-letter stokoe" title="opposite upper arm (i)">
+                  i
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <span class="picker-letter stokoe" title="opposite lower arm (j)">
+                  j
+                </span>
+              </td>
+              <td>
+                <span class="picker-letter stokoe" title="opposite wrist, arm supine (a)">
                   a
                 </span>
               </td>
             </tr>
             <tr>
-              <td colspan="3">
-                <span class="picker-letter stokoe" title="opposite wrist (arm prone)">
+              <td></td>
+              <td></td>
+              <td>
+                <span class="picker-letter stokoe" title="opposite wrist, arm prone (s)">
                   s
                 </span>
               </td>
             </tr>
           </tbody>
+              </table>
+            </div>
+            <div class="col">
+              <table id="handshape-table">
+                <tbody>
+                  <tr><td>&nbsp;</td></tr>
+                  <tr>
+                    <td></td>
+                    <td><span class="picker-letter stokoe" title="3">3</span></td>
+              <td><span class="picker-letter stokoe" title="5">5</span></td>
+              <td><span class="picker-letter stokoe" title="8">8</span></td>
+            </tr>
+            <tr>
+              <td><span class="picker-letter stokoe" title="W">W</span></td>
+              <td><span class="picker-letter stokoe" title="E">E</span></td>
+              <td><span class="picker-letter stokoe" title="R">R</span></td>
+              <td><span class="picker-letter stokoe" title="Y">Y</span></td>
+              <td><span class="picker-letter stokoe" title="I">I</span></td>
+              <td><span class="picker-letter stokoe" title="O">O</span></td>
+            </tr>
+            <tr>
+              <td><span class="picker-letter stokoe" title="A">A</span></td>
+              <td><span class="picker-letter stokoe" title="F">F</span></td>
+              <td><span class="picker-letter stokoe" title="G">G</span></td>
+              <td><span class="picker-letter stokoe" title="H">H</span></td>
+              <td><span class="picker-letter stokoe" title="K">K</span></td>
+              <td><span class="picker-letter stokoe" title="L">L</span></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span class="picker-letter stokoe" title="X">X</span></td>
+              <td><span class="picker-letter stokoe" title="C">C</span></td>
+              <td><span class="picker-letter stokoe" title="V">V</span></td>
+              <td><span class="picker-letter stokoe" title="B">B</span></td>
+            </tr>
+          </tbody>
+</table>
+</div>
+        <div class="col">
+        <table id="orientation-table">
+          <tbody>
+            <tr><td>&nbsp;</td></tr>
+            <tr>
+              <td colspan="3">
+                <span class="picker-letter stokoe" title="upwards (^)">^</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class="picker-letter stokoe" title="towards the non-dominant side (<)">&lt;</span>
+              </td>
+              <td>
+                <span class="picker-letter stokoe" title="downwards (v)">
+                  v
+                </span>
+              </td>
+              <td>
+                <span class="picker-letter stokoe" title="towards the dominant side (>)">&gt;</span>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <span class="picker-letter stokoe" title="away from the signer (f)">f</span>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <span class="picker-letter stokoe" title="towards the signer (t)">t</span>
+              </td>
+            </tr>
+          </tbody>
         </table>
+        </div>
+          </div>
+        </div>
       </div>
       <div id="output-div">
       </div>
     </div>
-    <script src="lib/three.js"></script>
-    <script src="lib/CCapture.min.js"></script>
-    <script src="lib/gif.js"></script>
-    <script src="lib/download.js"></script>
+    <script src="lib/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/js/three.js"></script>
+    <script src="lib/js/CCapture.min.js"></script>
+    <script src="lib/js/gif.js"></script>
+    <script src="lib/js/download.js"></script>
     <script type="module">
       import main from "./js/main.js";
       main.animator.show();

@@ -1,4 +1,4 @@
-import {FontLoader, Font} from "../lib/FontLoader.js";
+import {FontLoader, Font} from "../lib/js/FontLoader.js";
 
 
 export default class TextShape {
