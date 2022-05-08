@@ -17,6 +17,10 @@ const exports = {
     },
     "copyListener": function() {
         const outputElement = document.querySelector("#ascsto-output");
+        navigator.clipboard.writeText(outputElement.innerText);
+    },
+    "copyHtmlListener": function() {
+        const outputElement = document.querySelector("#ascsto-output");
         const outputHtml = outputElement.innerHTML;
 
         let htmlItem;

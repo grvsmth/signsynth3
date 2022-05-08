@@ -38,6 +38,7 @@
             <button type="button" class="btn btn-light" id="backspace-button">backspace</button>
             <button type="button" class="btn btn-light" id="clear-button">clear</button>
 	    <button type="button" class="btn btn-light" id="copy-button">copy text 📋 </button>
+	    <button type="button" class="btn btn-light" id="copy-html-button">copy HTML 📋 </button>
           </div>
         </div>
         <div class="format-div" class="row">
@@ -285,6 +286,9 @@
 
       document.querySelector("#copy-button")
         .addEventListener("click", pickerUtil.copyListener);
+
+      document.querySelector("#copy-html-button")
+        .addEventListener("click", pickerUtil.copyHtmlListener);
 
       document.querySelector("#backspace-button")
         .addEventListener("click", pickerUtil.backspaceListener);
