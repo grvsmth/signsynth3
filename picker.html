@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content="@grvsmth" />
+    <meta property="og:title" content="SignSynth"></meta>
+    <meta property="og:description" content="SignSynth is a prototype articulatory sign synthesis application" />
+    <title>SignSynth ASCII-Stokoe picker</title>
+    <link rel="stylesheet" href="css/signsynth.css" />
+  </head>
+  <body>
+    <div id="container">
+      <div id="display-div">
+	<div id="threed-div"></div>
+      </div>
+      <div id="control-div">
+	<h2>ASCII-Stokoe Picker</h2>
+	<div id="form-div">
+          <h2 id="ascsto-output">
+            <span id="tab"></span>
+            <span id="divider1"></span>
+            <span id="dez"></span><sub><span id="orientation"></span></sub>
+            <span id="divider2"></span>
+            <span id="sig"></span>
+          </h2>
+	</div>
+	<button type="button" id="gif-button" form="ascsto-form">
+          Export GIF
+        </button>
+	<button type="button" id="play-button" form="ascsto-form">
+          No export
+        </button>
+      </div>
+      <div id="picker-div">
+        <table id="location-table">
+          <tbody>
+            <tr>
+              <td colspan="3">
+                <span class="picker-letter stokoe" title="forehead">u</span>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="picker-letter stokoe" title="cheek, temple, ear">c</span></td>
+              <td><span class="picker-letter stokoe" title="mid-face">m</span></td>
+              <td>
+                <span class="picker-letter stokoe" title="face or whole head">h</span>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <span class="picker-letter stokoe" title="lower face, chin">l</span>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <span class="picker-letter stokoe" title="neck">k</span>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="picker-letter stokoe" title="neutral space">Q</span></td>
+              <td><span class="picker-letter stokoe" title="trunk, torso">[</span></td>
+              <td>
+                <span class="picker-letter stokoe" title="opposite upper arm">i</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class="picker-letter stokoe" title="opposite lower arm">j</span>
+              </td>
+              <td>
+                <span class="picker-letter stokoe" title="opposite wrist (arm supine)">
+                  a
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <span class="picker-letter stokoe" title="opposite wrist (arm prone)">
+                  s
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="output-div">
+      </div>
+    </div>
+    <script src="lib/three.js"></script>
+    <script src="lib/CCapture.min.js"></script>
+    <script src="lib/gif.js"></script>
+    <script src="lib/download.js"></script>
+    <script type="module">
+      import main from "./js/main.js";
+      main.animator.show();
+    </script>
+  </body>
+</html>

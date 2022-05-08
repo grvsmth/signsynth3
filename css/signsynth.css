@@ -44,3 +44,24 @@ body {
     text-align: center;
     font-family: "Stokoe Tempo", serif;
 }
+
+#picker-div td {
+    text-align: center;
+}
+
+.stokoe {
+    font-family: "Stokoe Tempo", serif;
+}
+
+.picker-letter {
+    font-size: 20px;
+    width: 1em;
+    margin: 0.5em;
+    padding: 0.5em;
+    min-width: 0.6em;
+    line-height: 1.4em;
+}
+
+.picker-letter:hover {
+    background-color: #FF7F10;
+}

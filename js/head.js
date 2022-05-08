@@ -206,7 +206,7 @@ const exports = {
 	return noseGroup;
     },
 
-    makeHair(material) {
+    "makeHair": function(material) {
 	const geometry = new THREE.BufferGeometry();
 	const vertices = new THREE.Float32BufferAttribute([.7, .7, .7,
 							   .9, -.8, .6,
@@ -262,9 +262,61 @@ const exports = {
 	geometry.computeVertexNormals();
 
 	return new THREE.Mesh(geometry, material);
+    },
+
+    "makeRightEyebrow": function(material) {
+	const geometry = new THREE.BufferGeometry();
+	const vertices = new THREE.Float32BufferAttribute([-0.2, 0.15, 0.02,
+                                                           -0.2, 0.13, 0.02,
+                                                           -0.15, 0.2, 0.06,
+                                                           -0.15, 0.16, 0.07,
+                                                           0.2, 0.15, 0.06,
+                                                           0.2, 0.13, 0.06,
+                                                           0.13, 0.16, 0.06,
+                                                           0.13, 0.2, 0.06
+							  ], 3);
+
+	const indices = [0, 1, 2,
+                         1, 3, 2,
+                         2, 3, 4,
+                         3, 5, 4,
+                         4, 5, 6,
+                         5, 6, 7
+			];
+
+	geometry.setIndex(indices);
+	geometry.setAttribute("position", vertices);
+	geometry.computeVertexNormals();
+
+	return new THREE.Mesh(geometry, material);
+    },
+
+    "makeLeftEyebrow": function(material) {
+	const geometry = new THREE.BufferGeometry();
+	const vertices = new THREE.Float32BufferAttribute([0.2, 0.15, 0.02,
+                                                           0.2, 0.13, 0.02,
+                                                           0.15, 0.2, 0.06,
+                                                           0.15, 0.16, 0.07,
+                                                           -0.2, 0.15, 0.06,
+                                                           -0.2, 0.13, 0.06,
+                                                           -0.13, 0.16, 0.06,
+                                                           -0.13, 0.2, 0.06
+							  ], 3);
+
+	const indices = [0, 2, 1,
+                         1, 2, 3,
+                         2, 4, 3,
+                         3, 4, 5,
+                         4, 6, 5,
+                         5, 7, 6
+			];
+
+	geometry.setIndex(indices);
+	geometry.setAttribute("position", vertices);
+	geometry.computeVertexNormals();
+
+	return new THREE.Mesh(geometry, material);
     }
-
-
 };
 
 export default exports;

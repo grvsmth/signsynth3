@@ -79,7 +79,8 @@ export default class humanoid {
 	    "iris": this.colorMaterial(0x198055),
 	    "pupil": this.colorMaterial(0x191919),
 	    "lip": this.colorMaterial(0xC01414),
-	    "nostril": this.colorMaterial(0x101010)
+	    "nostril": this.colorMaterial(0x101010),
+            "eyebrow": this.colorMaterial(0x7F3F15)
 	};
     }
 
@@ -124,9 +125,17 @@ export default class humanoid {
 	this.right.eye.position.set(-0.35, .08, 1.07);
 	skullBase.add(this.right.eye);
 
+        this.right.eyebrow = head.makeRightEyebrow(this.material.eyebrow);
+        this.right.eyebrow.position.set(-0.35, 0.08, 1.07);
+        skullBase.add(this.right.eyebrow);
+
 	this.left.eye = head.makeLeftEye(this.material);
 	this.left.eye.position.set(0.35, .08, 1.07);
 	skullBase.add(this.left.eye);
+
+        this.left.eyebrow = head.makeLeftEyebrow(this.material.eyebrow);
+        this.left.eyebrow.position.set(0.35, 0.08, 1.07);
+        skullBase.add(this.left.eyebrow);
 
 	// left and right
 	// eye, eyebrow, eyebrowwrinkle, topeyeline, toplid, bottomlid, 
