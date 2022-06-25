@@ -114,7 +114,9 @@
                   </td>
                 </tr>
                 <tr>
-                  <td></td>
+                  <td>
+                    <span class="picker-letter location-letter stokoe" title="above other hand (—)">—</span>
+                  </td>
                   <td>
                     <span class="picker-letter location-letter stokoe" title="opposite lower arm (j)">
                       j
@@ -127,8 +129,12 @@
                   </td>
                 </tr>
                 <tr>
-                  <td></td>
-                  <td></td>
+                  <td>
+                    <span class="picker-letter location-letter stokoe" title="below other hand (_)">_</span>
+                  </td>
+                  <td>
+                    <span class="picker-letter location-letter stokoe" title="alongside other hand (|)">|</span>
+                  </td>
                   <td>
                     <span class="picker-letter location-letter stokoe" title="opposite wrist, arm prone (p)">
                       p
@@ -171,6 +177,10 @@
                   <td><span class="picker-letter handshape-letter stokoe" title="C">C</span></td>
                   <td><span class="picker-letter handshape-letter stokoe" title="V">V</span></td>
                   <td><span class="picker-letter handshape-letter stokoe" title="B">B</span></td>
+                </tr>
+                <tr>
+                  <td><span class="picker-letter handshape-letter stokoe" title="finger/thumb extended (`)">`</span></td>
+                  <td><span class="picker-letter handshape-letter stokoe" title="finger/thumb bent (&quot;)">&quot;</span></td>
                 </tr>
               </tbody>
             </table>
@@ -218,6 +228,17 @@
                 <tr><td>&nbsp;</td></tr>
                 <tr>
                   <td>
+                    <span class="picker-letter movement-letter stokoe" title="up-and-down movement (r)">r</span>
+                  </td>
+                  <td>
+                    <span class="picker-letter movement-letter stokoe" title="side to side movement (z)">z</span>
+                  </td>
+                  <td>
+                    <span class="picker-letter movement-letter stokoe" title="to and fro movement (=)">=</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
                     <span class="picker-letter movement-letter stokoe" title="supinating rotation (palm up, a)">a</span>
                   </td>
                   <td>
@@ -252,10 +273,10 @@
                     <span class="picker-letter movement-letter stokoe" title="linking action, grasp (g)">g</span>
                   </td>
                   <td>
-                    <span class="picker-letter movement-letter stokoe" title="divergent action (:)">:</span>
+                    <span class="picker-letter movement-letter stokoe" title="entering action(o)">o</span>
                   </td>
                   <td>
-                    <span class="picker-letter movement-letter stokoe" title="repetition (.)">.</span>
+                    <span class="picker-letter movement-letter stokoe" title="interchanging action (&lpar;)">(</span>
                   </td>
                 </tr>
                 <tr>
@@ -266,7 +287,18 @@
                     <span class="picker-letter movement-letter stokoe" title="crossing action (+)">+</span>
                   </td>
                   <td>
-                    <span class="picker-letter movement-letter stokoe" title="interchanging action (&lpar;)">(</span>
+                    <span class="picker-letter movement-letter stokoe" title="divergent action (:)">:</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="picker-letter movement-letter stokoe" title="repetition (.)">.</span>
+                  </td>
+                  <td>
+                    <span class="picker-letter movement-letter stokoe" title="alternation (~)">~</span>
+                  </td>
+                  <td>
+                    <span class="picker-letter movement-letter stokoe" title="compounding (‖)">‖</span>
                   </td>
                 </tr>
               </tbody>
@@ -275,6 +307,7 @@
         </div>
       </div>
     </div>
+&nbsp;
     <div id="output-div">
     </div>
     <script src="lib/js/bootstrap.bundle.min.js"></script>
@@ -298,6 +331,8 @@
 
       const pickerLetters = document.querySelectorAll(".picker-letter");
       pickerLetters.forEach(pickerUtil.addListener);
+
+      document.addEventListener("keydown", pickerUtil.letterListener);
     </script>
   </body>
 </html>
