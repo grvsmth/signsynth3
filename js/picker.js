@@ -148,6 +148,11 @@ exports.letterListener = function(event) {
         }
 
         // Paste is a big deal because we have to sanitize it
+        return;
+    }
+
+    if (event.altKey) {
+        return;
     }
 
     exports.addLetter(event.key);
