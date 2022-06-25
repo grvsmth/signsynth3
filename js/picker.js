@@ -100,7 +100,7 @@ exports.letterListener = function(event) {
             return;
         }
 
-        if (event.key === "Backspace") {
+        if (event.key === "Backspace" || event.key === "Delete") {
             exports.backspaceListener();
             return;
         }
