@@ -21,6 +21,8 @@ const ignoreKeys = ["Alt",
                     "Shift",
                     "Tab"];
 
+const endFragment = "<!--EndFragment-->\n\n";
+
 const exports = {
     "append": function(addition) {
         document.querySelector("#ascsto-output").append(addition);
@@ -59,6 +61,11 @@ const exports = {
     "backspaceListener": function() {
         const outputElement = document.querySelector("#ascsto-output");
         outputElement.removeChild(outputElement.lastChild);
+    },
+    "htmlToText": function(html) {
+        const tempElement = document.createElement("div");
+        tempElement.innerHTML = html;
+        return tempElement.innerText;
     }
 };
 
@@ -83,6 +90,39 @@ exports.addLetter = function(letter) {
     }
 
     exports.append(letter);
+};
+
+exports.handlePasteHtml = function(pasteHtml) {
+    const outputElement = document.querySelector("#ascsto-output");
+    let targetHtml = pasteHtml;
+
+    if (this.plain) {
+        targetHtml = exports.htmlToText(pasteHtml);
+    } else if (pasteHtml.includes(endFragment)) {
+        targetHtml = pasteHtml.replaceAll(endFragment, "");
+    }
+
+    outputElement.innerHTML = targetHtml;
+};
+
+exports.pasteListener = async function(contents) {
+    for (let item of contents) {
+        if (item.types.includes("text/html")) {
+            let blob = await item.getType("text/html");
+            blob.text().then(exports.handlePasteHtml.bind(this));
+        }
+    }
+};
+
+exports.pasteTextListener = function(clipboardText, plain=false) {
+    const outputElement = document.querySelector("#ascsto-output");
+    const options = {"plain": plain};
+
+    if (clipboardText === "") {
+        navigator.clipboard.read().then(exports.pasteListener.bind(options));
+    }
+
+    outputElement.innerText = clipboardText;
 };
 
 exports.letterListener = function(event) {
@@ -126,6 +166,12 @@ exports.letterListener = function(event) {
                 charFormatElement.value = "superscript";
                 return;
             }
+
+            if (event.key === "V") {
+                navigator.clipboard.readText().then((contents) => {
+                    exports.pasteTextListener(contents, true)
+                });
+            }
         }
 
         if (event.key === "x") {
@@ -147,7 +193,10 @@ exports.letterListener = function(event) {
             return;
         }
 
-        // Paste is a big deal because we have to sanitize it
+        if (event.key === "v") {
+            navigator.clipboard.readText().then(exports.pasteTextListener);
+        }
+
         return;
     }
 
