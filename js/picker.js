@@ -112,6 +112,7 @@ exports.pasteListener = async function(contents, plain) {
         if (item.types.includes("text/html")) {
             let blob = await item.getType("text/html");
             blob.text().then(exports.handlePasteHtml.bind(options));
+            return;
         }
     }
 
