@@ -105,7 +105,9 @@ exports.handlePasteHtml = function(pasteHtml) {
     outputElement.innerHTML = targetHtml;
 };
 
-exports.pasteListener = async function(contents) {
+exports.pasteListener = async function(contents, plain) {
+    const options = {"plain": plain};
+
     for (let item of contents) {
         if (item.types.includes("text/html")) {
             let blob = await item.getType("text/html");
@@ -114,15 +116,15 @@ exports.pasteListener = async function(contents) {
     }
 };
 
-exports.pasteTextListener = function(clipboardText, plain=false) {
-    const outputElement = document.querySelector("#ascsto-output");
-    const options = {"plain": plain};
+exports.pasteTextListener = async function(plain=false) {
+    const clipboardText = await navigator.clipboard.readText();
 
     if (clipboardText === "") {
-        navigator.clipboard.read().then(exports.pasteListener.bind(options));
+        const contents = await navigator.clipboard.read();
+        exports.pasteListener(contents, plain);
     }
 
-    outputElement.innerText = clipboardText;
+    document.querySelector("#ascsto-output").innerText = clipboardText;
 };
 
 exports.letterListener = function(event) {
@@ -168,9 +170,7 @@ exports.letterListener = function(event) {
             }
 
             if (event.key === "V") {
-                navigator.clipboard.readText().then((contents) => {
-                    exports.pasteTextListener(contents, true)
-                });
+                exports.pasteTextListener(true);
             }
         }
 
@@ -194,7 +194,7 @@ exports.letterListener = function(event) {
         }
 
         if (event.key === "v") {
-            navigator.clipboard.readText().then(exports.pasteTextListener);
+            exports.pasteTextListener();
         }
 
         return;
