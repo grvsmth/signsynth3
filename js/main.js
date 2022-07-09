@@ -2,9 +2,11 @@ import Humanoid from "./humanoid.js";
 import Animator from "./animator.js";
 import TextShape from "./TextShape.js";
 import Hold from "./Hold.js";
+import StokoeWord from "./StokoeWord.js";
 
-import formUtil from "./formUtil.js";
 import ascsto from "./ascsto.js";
+import formUtil from "./formUtil.js";
+import nlp from "./nlp.js";
 import pickerUtil from "./picker.js";
 
 const phrase = [];
@@ -17,6 +19,7 @@ const playButton = document.querySelector("#play-button");
 const ascstoForm = document.querySelector("#ascsto-form");
 const outputDiv = document.querySelector("#output-div");
 const pickerDiv = document.querySelector("#picker-div");
+const stoOutput = document.querySelector("#ascsto-output");
 
 const tabSpan = document.querySelector("#tab");
 const dezSpan = document.querySelector("#dez");
@@ -166,7 +169,19 @@ const addText = function(textShape) {
     textMesh.geometry = geometry;
 };
 
+const playStokoeText = function() {
+    const stokoeText = stoOutput.innerText;
+    console.log("playStokoeText", stokoeText);
+
+    const stokoeWords = nlp.extractStokoeWords(stokoeText);
+};
+
 const playAsciiStokoe = function(event) {
+    if (pickerDiv) {
+        playStokoeText();
+        return;
+    }
+
     const elements = new FormData(event.target.form);
     // TODO use fieldset to group hold fields
 
