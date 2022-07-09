@@ -2,7 +2,7 @@ export default class StokoeWord {
     constructor() {
         this.dominantHandshape = "";
         this.nonDominantHandshape = "";
-        this.location = "";
+        this.location = "Q";
         this.dominantOrientation = "";
         this.nonDominantOrientation = "";
         this.movement = "";
@@ -41,7 +41,7 @@ export default class StokoeWord {
         this.dominantHandshape = handshape;
     }
 
-    setNonDomainantHandshape(handshape) {
+    setNonDominantHandshape(handshape) {
         this.nonDominantHandshape = handshape;
     }
 
