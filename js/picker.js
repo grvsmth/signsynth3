@@ -94,15 +94,13 @@ exports.addLetter = function(letter) {
 
 exports.handlePasteHtml = function(pasteHtml) {
     const outputElement = document.querySelector("#ascsto-output");
-    let targetHtml = pasteHtml;
 
     if (this.plain) {
-        targetHtml = exports.htmlToText(pasteHtml);
-    } else if (pasteHtml.includes(endFragment)) {
-        targetHtml = pasteHtml.replaceAll(endFragment, "");
+        outputElement.innerText = exports.htmlToText(pasteHtml);
+        return;
     }
 
-    outputElement.innerHTML = targetHtml;
+    outputElement.innerHTML = pasteHtml.replace(endFragment, "");
 };
 
 exports.pasteListener = async function(contents, plain) {
@@ -111,20 +109,18 @@ exports.pasteListener = async function(contents, plain) {
     for (let item of contents) {
         if (item.types.includes("text/html")) {
             let blob = await item.getType("text/html");
-            blob.text().then(exports.handlePasteHtml.bind(this));
+            blob.text().then(exports.handlePasteHtml.bind(options));
+            return;
         }
     }
+
+    const clipboardText = await navigator.clipboard.readText();
+    document.querySelector("#ascsto-output").innerText = clipboardText;
 };
 
 exports.pasteTextListener = async function(plain=false) {
-    const clipboardText = await navigator.clipboard.readText();
-
-    if (clipboardText === "") {
-        const contents = await navigator.clipboard.read();
-        exports.pasteListener(contents, plain);
-    }
-
-    document.querySelector("#ascsto-output").innerText = clipboardText;
+    const contents = await navigator.clipboard.read();
+    exports.pasteListener(contents, plain);
 };
 
 exports.letterListener = function(event) {
