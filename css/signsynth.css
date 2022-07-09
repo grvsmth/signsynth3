@@ -41,7 +41,7 @@ body {
 }
 
 #ascsto-output {
-    text-align: center;
+    min-height: 1.5em;
     font-family: "Stokoe Tempo", serif;
 }
 
@@ -64,6 +64,10 @@ body {
 
 .picker-letter:hover {
     background-color: #FF7F10;
+}
+
+.orientation-output.stokoe {
+    font-variant-position: sub;
 }
 
 @media(max-width: 999px) {

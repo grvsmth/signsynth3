@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content="@grvsmth" />
+    <meta property="og:title" content="SignSynth"></meta>
+    <meta property="og:description" content="SignSynth is a prototype articulatory sign synthesis application" />
+    <title>SignSynth ASCII-Stokoe picker</title>
+    <link href="lib/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/signsynth.css" />
+  </head>
+  <body>
+    <div id="control-div">
+      <div class="container">
+        <div class="row">
+          <h2>Stokoe Notation Picker</h2>
+        </div>
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" target="_blank" href="https://en.wikipedia.org/wiki/Stokoe_notation">Stokoe notation</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" target="_blank" href="https://grieve-smith.com/Academic/signsynth/">the SignSynth project</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://grieve-smith.com" target="_blank">by Angus Grieve-Smith</a>
+          </li>
+        </ul>
+        <div id="form-div" class="row">
+          <h2 id="ascsto-output">
+          </h2>
+        </div>
+        <div id="button-div" class="row">
+          <div class="btn-group">
+            <button type="button" class="btn btn-light" id="space-button">space</button>
+            <button type="button" class="btn btn-light" id="backspace-button">backspace</button>
+            <button type="button" class="btn btn-light" id="clear-button">clear</button>
+	    <button type="button" class="btn btn-light" id="copy-button" title="ctrl-c">copy text 📋 </button>
+	    <button type="button" class="btn btn-light" id="copy-html-button" title="ctrl-shift-C">copy HTML 📋 </button>
+	    <button type="button" class="btn btn-light" id="paste-button" title="ctrl-p">paste</button>
+          </div>
+        </div>
+        <div class="format-div" class="row">
+          <form id="format-form" name="format-form">
+            <div class="btn-group mt-1">
+              <input type="radio" name="char-format" class="btn-check" id="superscript-button" autocomplete="off" value="superscript">
+              <label class="btn btn-secondary" for="superscript-button">superscript</label>
+              <input type="radio" name="char-format" class="btn-check" id="subscript-button" autocomplete="off" value="subscript">
+              <label class="btn btn-secondary" for="subscript-button">subscript</label>
+              <input type="radio" name="char-format" class="btn-check" disabled="true" id="superscript-subscript-button" autocomplete="off" value="superscript-subscript">
+              <label class="btn btn-secondary" for="superscript-subscript-button">superscript-subscript</label>
+              <input type="radio" name="char-format" class="btn-check" id="none-button" autocomplete="off" value="none" checked>
+              <label class="btn btn-secondary" for="none-button">none</label>
+            </div>
+          </form>
+        </div>
+        <div id="picker-div" class="row">
+          <div class="col">
+            <h4>Location</h4>
+            <table id="location-table">
+              <tbody>
+                <tr>
+                  <td colspan="3">
+                    <span class="picker-letter location-letter stokoe" title="forehead (u)">
+                      u
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="picker-letter location-letter stokoe" title="cheek, temple, ear (c)">
+                      c
+                    </span>
+                  </td>
+                  <td>
+                    <span class="picker-letter location-letter stokoe" title="mid-face (m)">
+                      m
+                    </span>
+                  </td>
+                  <td>
+                    <span class="picker-letter location-letter stokoe" title="face or whole head (h)">
+                      h
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3">
+                    <span class="picker-letter location-letter stokoe" title="lower face, chin (l)">
+                      l
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3">
+                    <span class="picker-letter location-letter stokoe" title="neck (k)">k</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="picker-letter location-letter stokoe" title="neutral space (Q)">
+                      Q
+                    </span>
+                  </td>
+                  <td>
+                    <span class="picker-letter location-letter stokoe" title="trunk, torso ([)">
+                      [
+                    </span>
+                  </td>
+                  <td>
+                    <span class="picker-letter location-letter stokoe" title="opposite upper arm (i)">
+                      i
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="picker-letter location-letter stokoe" title="above other hand (—)">—</span>
+                  </td>
+                  <td>
+                    <span class="picker-letter location-letter stokoe" title="opposite lower arm (j)">
+                      j
+                    </span>
+                  </td>
+                  <td>
+                    <span class="picker-letter location-letter stokoe" title="opposite wrist, arm supine (s)">
+                      s
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="picker-letter location-letter stokoe" title="below other hand (_)">_</span>
+                  </td>
+                  <td>
+                    <span class="picker-letter location-letter stokoe" title="alongside other hand (|)">|</span>
+                  </td>
+                  <td>
+                    <span class="picker-letter location-letter stokoe" title="opposite wrist, arm prone (p)">
+                      p
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col">
+            <h4>Handshape</h4>
+            <table id="handshape-table">
+              <tbody>
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                  <td></td>
+                  <td><span class="picker-letter handshape-letter stokoe" title="3">3</span></td>
+                  <td><span class="picker-letter handshape-letter stokoe" title="5">5</span></td>
+                  <td><span class="picker-letter handshape-letter stokoe" title="8">8</span></td>
+                </tr>
+                <tr>
+                  <td><span class="picker-letter handshape-letter stokoe" title="W">W</span></td>
+                  <td><span class="picker-letter handshape-letter stokoe" title="E">E</span></td>
+                  <td><span class="picker-letter handshape-letter stokoe" title="R">R</span></td>
+                  <td><span class="picker-letter handshape-letter stokoe" title="Y">Y</span></td>
+                  <td><span class="picker-letter handshape-letter stokoe" title="I">I</span></td>
+                  <td><span class="picker-letter handshape-letter stokoe" title="O">O</span></td>
+                </tr>
+                <tr>
+                  <td><span class="picker-letter handshape-letter stokoe" title="A">A</span></td>
+                  <td><span class="picker-letter handshape-letter stokoe" title="F">F</span></td>
+                  <td><span class="picker-letter handshape-letter stokoe" title="G">G</span></td>
+                  <td><span class="picker-letter handshape-letter stokoe" title="H">H</span></td>
+                  <td><span class="picker-letter handshape-letter stokoe" title="K">K</span></td>
+                  <td><span class="picker-letter handshape-letter stokoe" title="L">L</span></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td><span class="picker-letter handshape-letter stokoe" title="X">X</span></td>
+                  <td><span class="picker-letter handshape-letter stokoe" title="C">C</span></td>
+                  <td><span class="picker-letter handshape-letter stokoe" title="V">V</span></td>
+                  <td><span class="picker-letter handshape-letter stokoe" title="B">B</span></td>
+                </tr>
+                <tr>
+                  <td><span class="picker-letter handshape-letter stokoe" title="finger/thumb extended (`)">`</span></td>
+                  <td><span class="picker-letter handshape-letter stokoe" title="finger/thumb bent (&quot;)">&quot;</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col">
+            <h4>Orientation</h4>
+            <table id="orientation-table">
+              <tbody>
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                  <td colspan="3">
+                    <span class="picker-letter orientation-letter stokoe" title="upwards (^)">^</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="picker-letter orientation-letter stokoe" title="towards the non-dominant side (<)">&lt;</span>
+                  </td>
+                  <td>
+                    <span class="picker-letter orientation-letter stokoe" title="downwards (v)">
+                      v
+                    </span>
+                  </td>
+                  <td>
+                    <span class="picker-letter orientation-letter stokoe" title="towards the dominant side (>)">&gt;</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3">
+                    <span class="picker-letter orientation-letter stokoe" title="away from the signer (f)">f</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3">
+                    <span class="picker-letter orientation-letter stokoe" title="towards the signer (t)">t</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col">
+            <h4>Movement</h4>
+            <table id="movement-table">
+              <tbody>
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                  <td>
+                    <span class="picker-letter movement-letter stokoe" title="up-and-down movement (r)">r</span>
+                  </td>
+                  <td>
+                    <span class="picker-letter movement-letter stokoe" title="side to side movement (z)">z</span>
+                  </td>
+                  <td>
+                    <span class="picker-letter movement-letter stokoe" title="to and fro movement (=)">=</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="picker-letter movement-letter stokoe" title="supinating rotation (palm up, a)">a</span>
+                  </td>
+                  <td>
+                    <span class="picker-letter movement-letter stokoe" title="twisting movement (w)">w</span>
+                  </td>
+                  <td>
+                    <span class="picker-letter movement-letter stokoe" title="opening action (])">]</span>
+                  </td>
+                  <td>
+                    <span class="picker-letter movement-letter stokoe" title="wiggling action of fingers (e)">e</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="picker-letter movement-letter stokoe" title="pronating rotation (palm down, b)">b</span>
+                  </td>
+                  <td>
+                    <span class="picker-letter movement-letter stokoe" title="nodding or bending action (n)">n</span>
+                  </td>
+                  <td>
+                    <span class="picker-letter movement-letter stokoe" title="closing action (#)">#</span>
+                  </td>
+                  <td>
+                    <span class="picker-letter movement-letter stokoe" title="circular action (@)">@</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="picker-letter movement-letter stokoe" title="convergent action, approach ())">)</span>
+                  </td>
+                  <td>
+                    <span class="picker-letter movement-letter stokoe" title="linking action, grasp (g)">g</span>
+                  </td>
+                  <td>
+                    <span class="picker-letter movement-letter stokoe" title="entering action(o)">o</span>
+                  </td>
+                  <td>
+                    <span class="picker-letter movement-letter stokoe" title="interchanging action (&lpar;)">(</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="picker-letter movement-letter stokoe" title="contactual action, touch (x)">x</span>
+                  </td>
+                  <td>
+                    <span class="picker-letter movement-letter stokoe" title="crossing action (+)">+</span>
+                  </td>
+                  <td>
+                    <span class="picker-letter movement-letter stokoe" title="divergent action (:)">:</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="picker-letter movement-letter stokoe" title="repetition (.)">.</span>
+                  </td>
+                  <td>
+                    <span class="picker-letter movement-letter stokoe" title="alternation (~)">~</span>
+                  </td>
+                  <td>
+                    <span class="picker-letter movement-letter stokoe" title="compounding (‖)">‖</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+&nbsp;
+    <div id="output-div">
+    </div>
+    <script src="lib/js/bootstrap.bundle.min.js"></script>
+    <script type="module">
+      import pickerUtil from "./js/picker.js";
+
+      document.querySelector("#space-button")
+        .addEventListener("click", pickerUtil.spaceListener);
+
+      document.querySelector("#copy-button")
+        .addEventListener("click", pickerUtil.copyListener);
+
+      document.querySelector("#copy-html-button")
+        .addEventListener("click", pickerUtil.copyHtmlListener);
+
+      document.querySelector("#paste-button")
+        .addEventListener("click", pickerUtil.pasteTextListener);
+
+      document.querySelector("#backspace-button")
+        .addEventListener("click", pickerUtil.backspaceListener);
+
+      document.querySelector("#clear-button")
+        .addEventListener("click", pickerUtil.clearListener);
+
+      const pickerLetters = document.querySelectorAll(".picker-letter");
+      pickerLetters.forEach(pickerUtil.addListener);
+
+      document.addEventListener("keydown", pickerUtil.letterListener);
+    </script>
+  </body>
+</html>

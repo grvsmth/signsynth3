@@ -1,11 +1,11 @@
 import Humanoid from "./humanoid.js";
 import Animator from "./animator.js";
-
-import formUtil from "./formUtil.js";
-import ascsto from "./ascsto.js";
 import TextShape from "./TextShape.js";
 import Hold from "./Hold.js";
 
+import formUtil from "./formUtil.js";
+import ascsto from "./ascsto.js";
+import pickerUtil from "./picker.js";
 
 const phrase = [];
 const signer = new Humanoid();
@@ -16,6 +16,7 @@ const playButton = document.querySelector("#play-button");
 
 const ascstoForm = document.querySelector("#ascsto-form");
 const outputDiv = document.querySelector("#output-div");
+const pickerDiv = document.querySelector("#picker-div");
 
 const tabSpan = document.querySelector("#tab");
 const dezSpan = document.querySelector("#dez");
@@ -137,10 +138,15 @@ if (ascstoForm) {
     ascstoForm.addEventListener("change", handleForm);
 }
 
+if (pickerDiv) {
+    const pickerLetters = document.querySelectorAll(".picker-letter");
+    pickerLetters.forEach(pickerUtil.addListener);
+}
+
 const addCapturer = function(format) {
     const params = {"format": format};
     if (format === "gif") {
-        params.workersPath = "lib/";
+        params.workersPath = "lib/js/";
     }
 
     const capturer = new CCapture(params);
