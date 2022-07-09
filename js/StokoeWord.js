@@ -6,6 +6,7 @@ export default class StokoeWord {
         this.dominantOrientation = "";
         this.nonDominantOrientation = "";
         this.movement = "";
+        this.modifier = "";
     }
 
     getDominantHandshape() {
@@ -32,12 +33,24 @@ export default class StokoeWord {
         return this.nonDominantOrientation;
     }
 
-    setDomainantHandshape(handshape) {
+    getModifier() {
+        return this.modifier;
+    }
+
+    setDominantHandshape(handshape) {
         this.dominantHandshape = handshape;
     }
 
     setNonDomainantHandshape(handshape) {
         this.nonDominantHandshape = handshape;
+    }
+
+    setHandshape(handshape) {
+        if (this.dominantHandshape === "") {
+            this.setDominantHandshape(handshape);
+            return;
+        }
+        this.setNonDominantHandshape(handshape);
     }
 
     setLocation(location) {
@@ -54,5 +67,18 @@ export default class StokoeWord {
 
     setNonDominantOrientation(orientation) {
         this.nonDominantOrientation = orientation;
+    }
+
+    setOrientation(orientation) {
+        if (this.nonDominantHandshape === "") {
+            this.setDominantOrientation(orientation);
+            return;
+        }
+
+        this.setNonDominantOrientation(orientation);
+    }
+
+    setModifier(modifier) {
+        this.modifier = modifier;
     }
 };

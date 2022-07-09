@@ -142,8 +142,28 @@ if (ascstoForm) {
 }
 
 if (pickerDiv) {
+    document.querySelector("#space-button")
+        .addEventListener("click", pickerUtil.spaceListener);
+
+    document.querySelector("#copy-button")
+        .addEventListener("click", pickerUtil.copyListener);
+
+    document.querySelector("#copy-html-button")
+        .addEventListener("click", pickerUtil.copyHtmlListener);
+
+    document.querySelector("#paste-button")
+        .addEventListener("click", pickerUtil.pasteTextListener);
+
+    document.querySelector("#backspace-button")
+        .addEventListener("click", pickerUtil.backspaceListener);
+
+    document.querySelector("#clear-button")
+        .addEventListener("click", pickerUtil.clearListener);
+
     const pickerLetters = document.querySelectorAll(".picker-letter");
     pickerLetters.forEach(pickerUtil.addListener);
+
+    document.addEventListener("keydown", pickerUtil.letterListener);
 }
 
 const addCapturer = function(format) {
@@ -174,6 +194,8 @@ const playStokoeText = function() {
     console.log("playStokoeText", stokoeText);
 
     const stokoeWords = nlp.extractStokoeWords(stokoeText);
+
+    console.log("stokoeWords", stokoeWords);
 };
 
 const playAsciiStokoe = function(event) {
