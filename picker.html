@@ -12,26 +12,34 @@
     <link rel="stylesheet" href="css/signsynth.css" />
   </head>
   <body>
-    <div id="display-div">
-      <div id="threed-div"></div>
-    </div>
-      <div id="control-div">
+    <div class="container">
+      <div class="row">
+      <h2>ASCII-Stokoe Picker</h2>
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link" target="_blank" href="https://en.wikipedia.org/wiki/Stokoe_notation">Stokoe notation</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" target="_blank" href="https://grieve-smith.com/Academic/signsynth/">the SignSynth project</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://grieve-smith.com" target="_blank">by Angus Grieve-Smith</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/grvsmth/signsynth3" target="_blank"><img src="images/GitHub-Mark-32px.png" alt="GitHub" /></a>
+        </li>
+      </ul>
+      </div>
+      <div class="row">
+      <div class="col">
+        <div id="threed-div"></div>
+      </div>
+      <div class="col">
         <div class="container">
-          <div class="row">
-            <h2>ASCII-Stokoe Picker</h2>
+          <div id="form-div" class="row">
+            <h2 id="ascsto-output">
+            </h2>
           </div>
-        <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" target="_blank" href="https://en.wikipedia.org/wiki/Stokoe_notation">Stokoe notation</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" target="_blank" href="https://grieve-smith.com/Academic/signsynth/">the SignSynth project</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://grieve-smith.com" target="_blank">by Angus Grieve-Smith</a>
-          </li>
-        </ul>
-        <div id="form-div" class="row">
           <div id="button-div" class="row">
             <div class="btn-group">
 	      <button type="button" id="gif-button" form="ascsto-form">
@@ -42,9 +50,6 @@
               </button>
             </div>
           </div>
-          <h2 id="ascsto-output">
-          </h2>
-        </div>
         <div id="button-div" class="row">
           <div class="btn-group">
             <button type="button" class="btn btn-light" id="space-button">space</button>
@@ -316,6 +321,7 @@
                 </tr>
               </tbody>
             </table>
+          </div>
           </div>
         </div>
       </div>
