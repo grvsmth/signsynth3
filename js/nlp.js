@@ -4,7 +4,7 @@ const lexer = moo.compile({
     "WS":      /[ \t]+/,
     "handshape": /[358ABCEFGHIKLORVWXY]/,
     "location": /[cuhijmlspQ\[\-_\|]/,
-    "movement": /[abegnorwxz=+:.~‖\]#@\(\)]/,
+    "movement": /[abegnorwxz=+:.~‖\]#@\(\)]+/,
     "orientation": /[\^fvt<>]|&gt;|&lt;/,
     "modifier": ["`", "&quot;", "\""],
     "NL":      { "match": /\n/, "lineBreaks": true },
