@@ -97,12 +97,13 @@ exports.handlePasteHtml = function(pasteHtml) {
     let targetHtml = pasteHtml;
 
     if (this.plain) {
-        outputElement.innerText = exports.htmlToText(pasteHtml);
+        outputElement.insertAdjacentText("beforeend",
+                                         exports.htmlToText(pasteHtml));
         return;
     }
     targetHtml = pasteHtml.replace(endFragment, "");
 
-    outputElement.innerHTML = targetHtml;
+    outputElement.insertAdjacentHTML("beforeend", targetHtml);
 };
 
 exports.pasteListener = async function(contents, plain) {
