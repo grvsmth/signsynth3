@@ -1,3 +1,4 @@
+import Hold from "./Hold.js";
 import StokoeWord from "./StokoeWord.js";
 
 const lexer = moo.compile({
@@ -10,6 +11,30 @@ const lexer = moo.compile({
     "NL":      { "match": /\n/, "lineBreaks": true },
     "unidentified": /./
 });
+
+const holdsPerMovement = {
+    "r": 5,
+    "z": 5,
+    "=": 5,
+    "a": 2,
+    "w": 5,
+    "]": 2,
+    "e": 5,
+    "b": 2,
+    "n": 5,
+    "#": 2,
+    "@": 5,
+    ")": 2,
+    "g": 2,
+    "o": 2,
+    "(": 2,
+    "x": 1,
+    "+": 1,
+    ":": 2,
+    ".": 1,
+    "~": 5,
+    "‖": 1
+};
 
 const exports = {
     "extractStokoeWords": function(text) {
@@ -55,7 +80,24 @@ const exports = {
         }
 
         return words;
+    },
+    "wordToHolds": function(word, index, words) {
+        const hold = new Hold();
+
+        const movements = word.getMovement();
+
+        if (holdsPerMovement[movements] === 1) {
+            hold.setDominantHandshape(word.getDominantHandshape());
+            hold.setLocation(word.getLocation());
+            hold.setDominantOrientation(word.getDominantOrientation());
+        }
+
+        return hold;
     }
+};
+
+exports.wordsToHolds = function(words) {
+    return words.map(exports.wordToHolds);
 };
 
 export default exports;

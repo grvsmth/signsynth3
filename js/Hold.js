@@ -1,31 +1,45 @@
 export default class Hold {
     constructor() {
-        this.handshape = "";
+        this.dominanthandshape = "";
+        this.nonDominantHandshape = "";
         this.location = "";
-        this.orientation = "";
+        this.dominantOrientation = "";
+        this.nonDominantOrientation = "";
     }
 
-    getHandshape() {
-        return this.handshape;
+    getDominantHandshape() {
+        return this.dominantHandshape;
+    }
+
+    getNonDominantHandshape() {
+        return this.nonDominantHandshape;
     }
 
     getLocation() {
         return this.location;
     }
 
-    getOrientation() {
-        return this.orientation;
+    getNonDominantOrientation() {
+        return this.nonDominantOrientation;
     }
 
-    setHandshape(handshape) {
-        this.handshape = handshape;
+    setDominantHandshape(handshape) {
+        this.dominantHandshape = handshape;
+    }
+
+    setNonDominantHandshape(handshape) {
+        this.nonDominantHandshape = handshape;
     }
 
     setLocation(location) {
         this.location = location;
     }
 
-    setOrientation(orientation) {
-        this.orientation = orientation;
+    setDominantOrientation(orientation) {
+        this.dominantOrientation = orientation;
+    }
+
+    setNonDominantOrientation(orientation) {
+        this.nonDominantOrientation = orientation;
     }
 };

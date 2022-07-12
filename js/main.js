@@ -1,7 +1,6 @@
 import Humanoid from "./humanoid.js";
 import Animator from "./animator.js";
 import TextShape from "./TextShape.js";
-import Hold from "./Hold.js";
 import StokoeWord from "./StokoeWord.js";
 
 import ascsto from "./ascsto.js";
@@ -93,8 +92,6 @@ if (ascstoForm) {
     const handleForm = function(event) {
         const hasFont = document.fonts.check("12px Stokoe Tempo");
 
-        const hold = new Hold();
-
         let symbol = event.target.value;
         if (ascsto.symbol.hasOwnProperty(symbol)) {
             symbol = ascsto.symbol[symbol];
@@ -108,19 +105,16 @@ if (ascstoForm) {
         if (event.target.name === "dominantLocation") {
             tabSpan.innerHTML = escapedSymbol;
             textShape.setTab(symbol);
-            hold.setLocation(symbol);
         }
 
         if (event.target.name === "dominantHandshape") {
             dezSpan.innerHTML = escapedSymbol;
             textShape.setHandshape(symbol);
-            hold.setHandshape(symbol);
         }
 
         if (event.target.name === "dominantOrientation") {
             orientationSpan.innerHTML = escapedSymbol;
             textShape.setOrientation(symbol);
-            hold.setOrientation(symbol);
         } else if (event.target.name === "dominantMovement") {
             sigSpan.innerHTML = escapedSymbol;
             textShape.setSig(symbol);
@@ -194,8 +188,10 @@ const playStokoeText = function() {
     console.log("playStokoeText", stokoeText);
 
     const stokoeWords = nlp.extractStokoeWords(stokoeText);
-
     console.log("stokoeWords", stokoeWords);
+
+    const holds = nlp.wordsToHolds(stokoeWords);
+    console.log("holds", holds);
 };
 
 const playAsciiStokoe = function(event) {
