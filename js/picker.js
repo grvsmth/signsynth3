@@ -96,11 +96,13 @@ exports.handlePasteHtml = function(pasteHtml) {
     const outputElement = document.querySelector("#ascsto-output");
 
     if (this.plain) {
-        outputElement.innerText = exports.htmlToText(pasteHtml);
+        outputElement.insertAdjacentText("beforeend",
+                                         exports.htmlToText(pasteHtml));
         return;
     }
 
-    outputElement.innerHTML = pasteHtml.replace(endFragment, "");
+    outputElement.insertAdjacentHTML("beforeend",
+                                     pasteHtml.replace(endFragment, ""));
 };
 
 exports.pasteListener = async function(contents, plain) {
