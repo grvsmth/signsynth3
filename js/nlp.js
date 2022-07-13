@@ -81,23 +81,62 @@ const exports = {
 
         return words;
     },
-    "wordToHolds": function(word, index, words) {
+    "wordToHold": function(word) {
         const hold = new Hold();
 
-        const movements = word.getMovement();
+        const dominantHandshape = word.getDominantHandshape();
+        if (dominantHandshape && dominantHandshape !== "") {
+            hold.setDominantHandshape(dominantHandshape);
+        }
 
-        if (holdsPerMovement[movements] === 1) {
-            hold.setDominantHandshape(word.getDominantHandshape());
-            hold.setLocation(word.getLocation());
-            hold.setDominantOrientation(word.getDominantOrientation());
+        const nonDominantHandshape = word.getNonDominantHandshape();
+        if (nonDominantHandshape && nonDominantHandshape !== "") {
+            hold.setNonDominantHandshape(nonDominantHandshape);
+        }
+
+        const location = word.getLocation();
+        if (location && location !== "") {
+            hold.setDominantLocation(location);
+
+            if (nonDominantHandshape && nonDominantHandshape !== "") {
+                hold.setNonDominantLocation(location);
+            }
+        }
+
+        const dominantOrientation = word.getDominantOrientation();
+        if (dominantOrientation && dominantOrientation !== "") {
+            hold.setDominantOrientation(dominantOrientation);
+        }
+
+        const nonDominantOrientation = word.getNonDominantOrientation();
+        if (nonDominantOrientation && nonDominantOrientation !== "") {
+            hold.setNonDominantOrientation(nonDominantOrientation);
         }
 
         return hold;
     }
 };
 
+exports.wordToHolds = function(holds, word) {
+    const movements = word.getMovement();
+
+    if (movements.length > 1) {
+        console.log(`Complex movement: ${movements.length} components`);
+    } else {
+        const currentHolds = holdsPerMovement[movements];
+        if (currentHolds > 1) {
+            console.log(`This movement has ${currentHolds} holds`);
+        }
+    }
+    holds.push(exports.wordToHold(word));
+
+    return holds;
+};
+
+
 exports.wordsToHolds = function(words) {
-    return words.map(exports.wordToHolds);
+    const holds = [];
+    return words.reduce(exports.wordToHolds, holds);
 };
 
 export default exports;

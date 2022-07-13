@@ -14,7 +14,7 @@ export default class StokoeWord {
     }
 
     getNonDominantHandshape() {
-        return this.nonDomainantHandshape;
+        return this.nonDominantHandshape;
     }
 
     getLocation() {
