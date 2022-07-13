@@ -1,16 +1,20 @@
 import Hold from "./Hold.js";
 import StokoeWord from "./StokoeWord.js";
 
-const lexer = moo.compile({
-    "WS":      /[ \t]+/,
-    "handshape": /[358ABCEFGHIKLORVWXY]/,
-    "location": /[cuhijmlspQ\[\-_\|]/,
-    "movement": /[abegnorwxz=+:.~‖\]#@\(\)]+/,
-    "orientation": /[\^fvt<>]|&gt;|&lt;/,
-    "modifier": ["`", "&quot;", "\""],
-    "NL":      { "match": /\n/, "lineBreaks": true },
-    "unidentified": /./
-});
+let lexer;
+
+if (typeof moo !== "undefined") {
+    lexer = moo.compile({
+        "WS":      /[ \t]+/,
+        "handshape": /[358ABCEFGHIKLORVWXY]/,
+        "location": /[cuhijmlspQ\[\-_\|]/,
+        "movement": /[abegnorwxz=+:.~‖\]#@\(\)]+/,
+        "orientation": /[\^fvt<>]|&gt;|&lt;/,
+        "modifier": ["`", "&quot;", "\""],
+        "NL":      { "match": /\n/, "lineBreaks": true },
+        "unidentified": /./
+    });
+}
 
 const holdsPerMovement = {
     "r": 5,
@@ -40,6 +44,10 @@ const exports = {
     "extractStokoeWords": function(text) {
         let words = [];
         let word = new StokoeWord();
+
+        if (!lexer) {
+            return words;
+        }
 
         lexer.reset(text);
         for (let token of lexer) {

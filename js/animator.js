@@ -42,9 +42,9 @@ export default class animator {
         return times;
     }
 
-    makeQuaternion(vector, scalar) {
-        const vectorThree = new THREE.Vector3(...vector);
-        return new THREE.Quaternion().setFromAxisAngle(vectorThree, scalar);
+    makeQuaternion(value) {
+        const vectorThree = new THREE.Vector3(...value.vector);
+        return new THREE.Quaternion().setFromAxisAngle(vectorThree, value.scalar);
     }
 
     concatenateQuaternion(array, quaternion) {
@@ -60,17 +60,14 @@ export default class animator {
                                                  values);
     }
 
-    moveJoint(name, joint, targetValue) {
+    moveJoint(name, joint, targetValues) {
         const initialQuaternion = joint.quaternion;
-        const targetQuaternion = this.makeQuaternion(targetValue.vector,
-                                                    targetValue.scalar);
+        let quaternions = targetValues.map(this.makeQuaternion);
 
-        let quaternions = [initialQuaternion,
-                             targetQuaternion];
+        quaternions.unshift(initialQuaternion);
 
         if (this.mode === "player") {
-            quaternions = quaternions.concat([targetQuaternion,
-                                              initialQuaternion]);
+            quaternions.push(initialQuaternion);
         }
 
         const keyFrameTrack = this.makeQuaternionKeyFrameTrack(quaternions);
@@ -91,7 +88,7 @@ export default class animator {
     processRotation(rotation, restAfter) {
         const joint = this.humanoid[rotation.articulator][rotation.joint];
         const jointName = rotation.articulator + "_" + rotation.joint;
-        this.moveJoint(jointName, joint, rotation.rotation);
+        this.moveJoint(jointName, joint, [rotation.rotation]);
     }
 
     render() {
