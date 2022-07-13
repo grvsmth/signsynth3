@@ -51,7 +51,6 @@ const exports = {
 
         lexer.reset(text);
         for (let token of lexer) {
-            console.log(token);
             if (token.type === "handshape") {
                 word.setHandshape(token.text);
                 continue;

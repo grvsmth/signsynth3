@@ -38,7 +38,7 @@ const formUtil = {
 };
 
 
-formUtil.processRotation = function(articulator, joint, targetName, rotation, rotations) {
+formUtil.findRotation = function(articulator, joint, targetName, rotation, rotations) {
     let actualRotation = rotation;
     if ("copy" in rotation) {
 	actualRotation = rotations[rotation.copy];
@@ -62,11 +62,11 @@ formUtil.findRotations = function(signerHanded, rotations, param, value) {
 	    if (targetName === value) {
 		const rotation = rotations[articulator][joint][targetName];
 		const target = formUtil
-		      .processRotation(articulator,
-				       joint,
-				       targetName,
-				       rotation,
-				       rotations[articulator][joint]);
+                      .findRotation(articulator,
+				    joint,
+				    targetName,
+				    rotation,
+				    rotations[articulator][joint]);
 		targetRotations.push(target);
 	    }
 	}
@@ -75,10 +75,35 @@ formUtil.findRotations = function(signerHanded, rotations, param, value) {
     return targetRotations;
 };
 
+formUtil.rotationsForHold = function(signerHanded, rotations, output, hold) {
+    for (const param in hold) {
+        const articulator = formUtil.articulator(signerHanded, param);
+        for (const joint in rotations[articulator]) {
+            for (const targetName in rotations[articulator][joint]) {
+                if (targetName === hold[param]) {
+                    const rotation = rotations[articulator][joint][targetName];
+                    const target = formUtil
+                          .findRotation(articulator,
+                                        joint,
+                                        targetName,
+                                        rotation,
+                                        rotations[articulator][joint]);
+                    if (!output.hasOwnProperty(joint)) {
+                        output[joint] = [];
+                    }
+                    output[joint].push(target);
+                }
+            }
+        }
+    }
+};
+
 formUtil.holdsToRotations = function(signerHanded, rotations, holds) {
-    const rotations = {};
-    // TODO populate rotation structure 
-    return rotations;
+    const output = {};
+    for (const hold of holds) {
+        formUtil.rotationsForHold(signerHanded, rotations, output, hold);
+    }
+    return output;
 };
 
 export default formUtil;
