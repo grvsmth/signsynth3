@@ -75,4 +75,10 @@ formUtil.findRotations = function(signerHanded, rotations, param, value) {
     return targetRotations;
 };
 
+formUtil.holdsToRotations = function(signerHanded, rotations, holds) {
+    const rotations = {};
+    // TODO populate rotation structure 
+    return rotations;
+};
+
 export default formUtil;

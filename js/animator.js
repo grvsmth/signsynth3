@@ -15,6 +15,7 @@ export default class animator {
         this.clips = {};
 
         this.processRotation = this.processRotation.bind(this);
+        this.processRotations = this.processRotations.bind(this);
         this.simpleAnimate = this.simpleAnimate.bind(this);
 
         this.start = this.start.bind(this);
@@ -85,10 +86,19 @@ export default class animator {
         this.clips[name] = clip;
     }
 
-    processRotation(rotation, restAfter) {
+    processRotation(rotation) {
         const joint = this.humanoid[rotation.articulator][rotation.joint];
         const jointName = rotation.articulator + "_" + rotation.joint;
         this.moveJoint(jointName, joint, [rotation.rotation]);
+    }
+
+    processJointRotations(rotations) {
+        const rotation0 = rotations[0];
+        const joint = this.humanoid[rotation0.articulator][rotation0.joint];
+        const jointName = rotation0.articulator + "_" + rotation0.joint;
+
+        const jointRotations = rotation.rotation for rotation in rotations;
+        this.moveJoint(jointName, joint, jointRotations);
     }
 
     render() {

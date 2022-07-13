@@ -192,6 +192,9 @@ const playStokoeText = function() {
 
     const holds = nlp.wordsToHolds(stokoeWords);
     console.log("holds", holds);
+
+    const rotations = formUtil.holdsToRotations(holds);
+    console.log("rotations", rotations);
 };
 
 const playAsciiStokoe = function(event) {
