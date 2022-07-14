@@ -101,13 +101,14 @@ const exports = {
             hold.setNonDominantHandshape(nonDominantHandshape);
         }
 
-        const location = word.getLocation();
-        if (location && location !== "") {
-            hold.setDominantLocation(location);
+        const dominantLocation = word.getDominantLocation();
+        if (dominantLocation && dominantLocation !== "") {
+            hold.setDominantLocation(dominantLocation);
+        }
 
-            if (nonDominantHandshape && nonDominantHandshape !== "") {
-                hold.setNonDominantLocation(location);
-            }
+        const nonDominantLocation = word.getNonDominantLocation();
+        if (nonDominantHandshape && nonDominantHandshape !== "") {
+            hold.setNonDominantLocation(nonDominantLocation);
         }
 
         const dominantOrientation = word.getDominantOrientation();

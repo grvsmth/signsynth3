@@ -173,6 +173,12 @@ export default {
 		    "vector": [-0.6, 0.76, -0.23],
 		    "scalar": 1
 		},
+                "s": {
+                    "copy": "as"
+                },
+                "p": {
+                    "copy": "as"
+                },
 		"below": {
 		    "vector": [0.3, 0.6, -0.3],
 		    "scalar": 2
@@ -229,6 +235,12 @@ export default {
 		    "vector": [1, 0, 0],
 		    "scalar": -1.5
 		},
+                "s": {
+                    "copy": "as"
+                },
+                "p": {
+                    "copy": "as"
+                },
 		"below": {
 		    "vector": [1, 0, 0],
 		    "scalar": -1.1
@@ -1505,6 +1517,12 @@ export default {
 		    "vector": [0.8, 0.76, -0.23],
 		    "scalar": -1
 		},
+                "s": {
+                    "copy": "as"
+                },
+                "p": {
+                    "copy": "as"
+                },
 		"below": {
 		    "vector": [0.3, 0.6, -0.3],
 		    "scalar": -2
@@ -1556,6 +1574,12 @@ export default {
 		"as": {
 		    "vector": [-1, 0, 0],
 		    "scalar": 1.5
+		},
+                "s": {
+                    "copy": "as"
+                },
+                "p": {
+                    "copy": "as"
 		},
 		"below": {
 		    "vector": [-1, 0, 0],

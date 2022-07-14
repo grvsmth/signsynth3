@@ -197,8 +197,10 @@ const playStokoeText = function() {
                                                 ascsto.rotation,
                                                 holds);
     console.log("rotations", rotations);
-    for (const joint in rotations) {
-        animator.processJointRotations(rotations[joint]);
+    for (const articulator in rotations) {
+        for (const joint in rotations[articulator]) {
+            animator.processJointRotations(rotations[articulator][joint]);
+        }
     }
 
     addText(textShape);

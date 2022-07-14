@@ -88,10 +88,10 @@ formUtil.rotationsForHold = function(signerHanded, rotations, output, hold) {
                                         targetName,
                                         rotation,
                                         rotations[articulator][joint]);
-                    if (!output.hasOwnProperty(joint)) {
-                        output[joint] = [];
+                    if (!output[articulator].hasOwnProperty(joint)) {
+                        output[articulator][joint] = [];
                     }
-                    output[joint].push(target);
+                    output[articulator][joint].push(target);
                 }
             }
         }
@@ -99,7 +99,7 @@ formUtil.rotationsForHold = function(signerHanded, rotations, output, hold) {
 };
 
 formUtil.holdsToRotations = function(signerHanded, rotations, holds) {
-    const output = {};
+    const output = {"left": {}, "right": {}};
     for (const hold of holds) {
         formUtil.rotationsForHold(signerHanded, rotations, output, hold);
     }

@@ -2,7 +2,8 @@ export default class StokoeWord {
     constructor() {
         this.dominantHandshape = "";
         this.nonDominantHandshape = "";
-        this.location = "Q";
+        this.dominantLocation = "";
+        this.nonDominantLocation = "";
         this.dominantOrientation = "";
         this.nonDominantOrientation = "";
         this.movement = "";
@@ -17,8 +18,12 @@ export default class StokoeWord {
         return this.nonDominantHandshape;
     }
 
-    getLocation() {
-        return this.location;
+    getDominantLocation() {
+        return this.dominantLocation;
+    }
+
+    getNonDominantLocation() {
+        return this.nonDominantLocation;
     }
 
     getMovement() {
@@ -53,8 +58,20 @@ export default class StokoeWord {
         this.setNonDominantHandshape(handshape);
     }
 
-    setLocation(location) {
-        this.location = location;
+    setDominantLocation(dominantLocation) {
+        this.dominantLocation = dominantLocation;
+    }
+
+    setNonDominantLocation(nonDominantLocation) {
+        this.nonDominantLocation = nonDominantLocation;
+    }
+
+    setLocation(locationString) {
+        if (this.dominantLocation === "") {
+            this.setDominantLocation(locationString);
+            return;
+        }
+        this.setNonDominantLocation(locationString);
     }
 
     setMovement(movement) {
