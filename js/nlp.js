@@ -41,6 +41,7 @@ const holdsPerMovement = {
 };
 
 const exports = {
+    "defaultDominantLocation": "Q",
     "extractStokoeWords": function(text) {
         let words = [];
         let word = new StokoeWord();
@@ -104,11 +105,15 @@ const exports = {
         const dominantLocation = word.getDominantLocation();
         if (dominantLocation && dominantLocation !== "") {
             hold.setDominantLocation(dominantLocation);
+        } else {
+            hold.setDominantLocation(exports.defaultDominantLocation);
         }
 
         const nonDominantLocation = word.getNonDominantLocation();
-        if (nonDominantHandshape && nonDominantHandshape !== "") {
+        if (nonDominantLocation && nonDominantLocation !== "") {
             hold.setNonDominantLocation(nonDominantLocation);
+        } else if (nonDominantHandshape && nonDominantHandshape !== "") {
+            hold.setNonDominantLocation(dominantLocation);
         }
 
         const dominantOrientation = word.getDominantOrientation();

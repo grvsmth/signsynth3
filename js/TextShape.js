@@ -10,6 +10,7 @@ export default class TextShape {
         this.handshape = "";
         this.orientation = "";
         this.sig = "";
+        this.text = "";
 
         this.divider = " ";
 
@@ -37,8 +38,16 @@ export default class TextShape {
     }
 
     getText() {
+        if (this.text) {
+            return this.text;
+        }
+
         const dez = this.handshape + this.orientation;
         return [this.tab, dez, this.sig].join(this.divider);
+    }
+
+    setText(text) {
+        this.text = text;
     }
 
     getShape() {

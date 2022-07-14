@@ -185,7 +185,6 @@ const addText = function(textShape) {
 
 const playStokoeText = function() {
     const stokoeText = stoOutput.innerText;
-    console.log("playStokoeText", stokoeText);
 
     const stokoeWords = nlp.extractStokoeWords(stokoeText);
     console.log("stokoeWords", stokoeWords);
@@ -203,6 +202,7 @@ const playStokoeText = function() {
         }
     }
 
+    textShape.setText(stokoeText);
     addText(textShape);
 
     if (!animator.isPlaying()) {
@@ -217,7 +217,6 @@ const playAsciiStokoe = function(event) {
     }
 
     const elements = new FormData(event.target.form);
-    // TODO use fieldset to group hold fields
 
     animator.clear();
     for (let input of elements) {
